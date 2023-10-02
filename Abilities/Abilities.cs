@@ -329,11 +329,11 @@ namespace Abilities {
 
         public static void EmpressOfLight(TSPlayer caster, int cooldown, int abilityLevel = 1) {
             #region Properties
-            int lanceDmg = 50 + (abilityLevel - 1) * 15;
-            int dashDmg = 100 + (abilityLevel - 1) * 30;
-            int boltDmg = 10 + (abilityLevel - 1) * 10;
+            int lanceDmg = (int)((50 + (abilityLevel - 1) * 15) * (1 + abilityLevel / 10f));
+            int dashDmg = (int)((100 + (abilityLevel - 1) * 30) * (1 + abilityLevel / 10f));
+            int boltDmg = (int)((10 + (abilityLevel - 1) * 10) * (1 + abilityLevel / 10));
             int boltSpawnInterval = 400 * (10 - abilityLevel) / 10;
-            int danceDmg = 55 + (abilityLevel - 1) * 20;
+            int danceDmg = (int)((55 + (abilityLevel - 1) * 20) * (1 + abilityLevel / 10f));
             cooldown -= (int)(cooldown * (abilityLevel - 1) * 0.1);
             #endregion
 
@@ -453,12 +453,12 @@ namespace Abilities {
 
         public static void Twilight(TSPlayer caster, int cooldown, int abilityLevel = 1) {
             #region Properties
-            int eyesDmg = 16 + (abilityLevel - 1) * 16;
+            int eyesDmg = (int)((16 + (abilityLevel - 1) * 16) * (1 + abilityLevel / 10f));
             int eyesBuffDuration = 720 + (abilityLevel - 1) * 120;
-            int judgeBaseDmg = 15 + (abilityLevel - 1) * 15;
+            int judgeBaseDmg = (int)((15 + (abilityLevel - 1) * 15) * (1 + abilityLevel / 10f));
             int judgeRange = 30 + (abilityLevel - 1) * 10;
             int judgeDuration = 420 + (abilityLevel - 1) * 60;
-            int punishDmg = 50 + (abilityLevel - 1) * 35;
+            int punishDmg = (int)((50 + (abilityLevel - 1) * 35) * (1 + abilityLevel / 10f));
             int punishBuffDuration = 300 + (abilityLevel - 1) * 60;
             int punishKB = 20 + (abilityLevel - 1) * 5;
             cooldown -= (int)(cooldown * (abilityLevel - 1) * 0.1);
@@ -659,7 +659,7 @@ namespace Abilities {
 
         public static void Harvest(TSPlayer caster, int cooldown, int abilityLevel = 1) {
             #region Properties
-            int damage = 20 + abilityLevel * 15;
+            int damage = (int)((20 + abilityLevel * 15) * (1 + abilityLevel / 10f));
             int projSpawnInterval = (int)(1000 / Math.Sqrt(abilityLevel));
             cooldown -= (int)(cooldown * (abilityLevel - 1) * 0.1);
             #endregion

@@ -85,35 +85,35 @@ Level | Cooldown
 
 Sub-Ability Name: Ethereal Lance
 Level | Damage
-1     | 50
-2     | 65
-3     | 80
-4     | 95
-5     | 110
+1     | 55
+2     | 78
+3     | 104
+4     | 133
+5     | 165
 
 Sub-Ability name: Prismatic Bolts
 Level | Damage | Spawn Interval
-1     | 10     | 0.36 seconds
-2     | 20     | 0.32 seconds
-3     | 30     | 0.28 seconds
-4     | 40     | 0.24 seconds
-5     | 50     | 0.20 seconds
+1     | 11     | 0.36 seconds
+2     | 24     | 0.32 seconds
+3     | 39     | 0.28 seconds
+4     | 56     | 0.24 seconds
+5     | 75     | 0.20 seconds
 
 Sub-Ability name: Dash
 Level | Damage
-1     | 100
-2     | 130
-3     | 160
-4     | 190
-5     | 220
+1     | 110
+2     | 156
+3     | 208
+4     | 266
+5     | 330
 
 Sub-Ability name: Sun Dance
 Level | Damage
-1     | 55
-2     | 75
-3     | 95
-4     | 115
-5     | 135
+1     | 60
+2     | 90
+3     | 123
+4     | 161
+5     | 202
 
 
 Ability Name: Twilight
@@ -126,34 +126,34 @@ Level | Cooldown
 
 Sub-Ability Name: Brilliant Eyes
 Level | Damage | Buff Duration
-1     | 16     | 12 seconds
-2     | 32     | 14 seconds
-3     | 48     | 16 seconds
-4     | 64     | 18 seconds
-5     | 80     | 20 seconds
+1     | 17     | 12 seconds
+2     | 38     | 14 seconds
+3     | 62     | 16 seconds
+4     | 89     | 18 seconds
+5     | 120    | 20 seconds
 
 Sub-Ability Name: Judgement
-Level | Damage           | Range     | Debuff Duration
-1     | 15 + enemy_hp/20 | 30 blocks | 7 seconds
-2     | 30 + enemy_hp/20 | 40 blocks | 8 seconds
-3     | 45 + enemy_hp/20 | 50 blocks | 9 seconds
-4     | 60 + enemy_hp/20 | 60 blocks | 10 seconds
-5     | 75 + enemy_hp/20 | 70 blocks | 11 seconds
+Level | Damage            | Range     | Debuff Duration
+1     | 16 + enemy_hp/20  | 30 blocks | 7 seconds
+2     | 36 + enemy_hp/20  | 40 blocks | 8 seconds
+3     | 58 + enemy_hp/20  | 50 blocks | 9 seconds
+4     | 84 + enemy_hp/20  | 60 blocks | 10 seconds
+5     | 112 + enemy_hp/20 | 70 blocks | 11 seconds
 Note: Judgement damage has various extra calculations but the formula above should give a rough estimation.
 
 Sub-Ability Name: Punishment
 Level | Damage | Buff Duration | Knockback
-1     | 50     | 5 seconds       | 20
-2     | 85     | 6 seconds       | 25
-3     | 120    | 7 seconds       | 30
-4     | 155    | 8 seconds       | 35
-5     | 190    | 9 seconds       | 40
+1     | 55     | 5 seconds       | 20
+2     | 102    | 6 seconds       | 25
+3     | 156    | 7 seconds       | 30
+4     | 217    | 8 seconds       | 35
+5     | 285    | 9 seconds       | 40
 
 
 Ability Name: Harvest
 Level | Damage | Spawn Interval | Cooldown
-1     | 35     | 1 second       | 90 seconds
-2     | 50     | 0.70 seconds   | 81 seconds
-3     | 65     | 0.57 seconds   | 72 seconds
-4     | 80     | 0.5 seconds    | 63 seconds
-5     | 95     | 0.44 seconds   | 54 seconds
+1     | 38     | 1 second       | 90 seconds
+2     | 60     | 0.70 seconds   | 81 seconds
+3     | 84     | 0.57 seconds   | 72 seconds
+4     | 112    | 0.5 seconds    | 63 seconds
+5     | 142    | 0.44 seconds   | 54 seconds
