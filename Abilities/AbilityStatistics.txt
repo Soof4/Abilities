@@ -1,0 +1,159 @@
+ABILITY STATISTICS
+
+Levels
+Level 1: Pre boss
+Level 2: Post BoC/EoW
+Level 3: Post WoF
+Level 4: Post all mechs
+Level 5: Post Golem
+
+
+Ability Name: Healing
+Level | Buff Duration | Heal Percentage | Cooldown
+1     | 7 seconds     | 5%              | 90 seconds
+2     | 7.3 seconds   | 6%              | 81 seconds
+3     | 7.6 seconds   | 7%              | 72 seconds
+4     | 8 seconds     | 8%              | 63 seconds
+5     | 8.3 seconds   | 9%              | 54 seconds
+
+
+Ability Name: Vampire
+Level | Stolen HP per Enemy    | Cooldown
+1     | 0.20 * enemy_hp^(9/17) | 90 seconds
+2     | 0.21 * enemy_hp^(9/17) | 81 seconds
+3     | 0.22 * enemy_hp^(9/17) | 72 seconds
+4     | 0.23 * enemy_hp^(9/17) | 63 seconds
+5     | 0.24 * enemy_hp^(9/17) | 54 seconds
+Note: This ability will get a rework, soon.
+
+
+Ability Name: Sand
+Level | I-Frame Duration | Cooldown
+1     | 3.2 seconds      | 90 seconds
+2     | 3.4 seconds      | 81 seconds
+3     | 3.6 seconds      | 72 seconds
+4     | 3.8 seconds      | 63 seconds
+5     | 4 seconds        | 54 seconds
+Note: I-Frame duration can be increased with Cross Necklace and its upgrades, adding extra 0.67 seconds.
+
+
+Ability Name: Adrenaline
+Level | Buffs' Duration | Cooldown
+1     | 10 seconds      | 90 seconds
+2     | 15 seconds      | 81 seconds
+3     | 20 seconds      | 72 seconds
+4     | 25 seconds      | 63 seconds
+5     | 30 seconds      | 54 seconds
+
+
+Ability Name: Witch
+Level | Debuff Type | Range     | Cooldown
+1     | Frostburn   | 16 blocks | 90 seconds
+2     | Frostburn   | 18 blocks | 81 seconds
+3     | Shadowflame | 20 blocks | 72 seconds
+4     | Shadowflame | 22 blocks | 63 seconds
+5     | Venom       | 24 blocks | 54 seconds
+
+
+Ability Name: Marthymr
+Level | Speed   | Damage | Cooldown
+1     | 10 mph? | 350    | 90 seconds
+2     | 11 mph? | 450    | 81 seconds
+3     | 12 mph? | 550    | 72 seconds
+4     | 13 mph? | 650    | 63 seconds
+5     | 14 mph? | 750    | 54 seconds
+Note: Speed's unit is an assumption, might be different.
+
+
+Ability Name: RandomTP
+Level | Range         | Cooldown
+1     | 10-60 blocks  | 90 seconds
+2     | 10-70 blocks  | 81 seconds
+3     | 10-80 blocks  | 72 seconds
+4     | 10-90 blocks  | 63 seconds
+5     | 10-100 blocks | 54 seconds
+Note: Range is inclusive.
+
+
+Ability Name: EoL
+Level | Cooldown
+1     | 90 seconds
+2     | 81 seconds
+3     | 72 seconds
+4     | 63 seconds
+5     | 54 seconds
+
+Sub-Ability Name: Ethereal Lance
+Level | Damage
+1     | 55
+2     | 78
+3     | 104
+4     | 133
+5     | 165
+
+Sub-Ability name: Prismatic Bolts
+Level | Damage | Spawn Interval
+1     | 11     | 0.36 seconds
+2     | 24     | 0.32 seconds
+3     | 39     | 0.28 seconds
+4     | 56     | 0.24 seconds
+5     | 75     | 0.20 seconds
+
+Sub-Ability name: Dash
+Level | Damage
+1     | 110
+2     | 156
+3     | 208
+4     | 266
+5     | 330
+
+Sub-Ability name: Sun Dance
+Level | Damage
+1     | 60
+2     | 90
+3     | 123
+4     | 161
+5     | 202
+
+
+Ability Name: Twilight
+Level | Cooldown
+1     | 90 seconds
+2     | 81 seconds
+3     | 72 seconds
+4     | 63 seconds
+5     | 54 seconds
+
+Sub-Ability Name: Brilliant Eyes
+Level | Damage | Buff Duration
+1     | 17     | 12 seconds
+2     | 38     | 14 seconds
+3     | 62     | 16 seconds
+4     | 89     | 18 seconds
+5     | 120    | 20 seconds
+
+Sub-Ability Name: Judgement
+Level | Damage            | Range     | Debuff Duration
+1     | 16 + enemy_hp/20  | 30 blocks | 7 seconds
+2     | 36 + enemy_hp/20  | 40 blocks | 8 seconds
+3     | 58 + enemy_hp/20  | 50 blocks | 9 seconds
+4     | 84 + enemy_hp/20  | 60 blocks | 10 seconds
+5     | 112 + enemy_hp/20 | 70 blocks | 11 seconds
+Note: Judgement damage has various extra calculations but the formula above should give a rough estimation.
+
+Sub-Ability Name: Punishment
+Level | Damage | Buff Duration | Knockback
+1     | 55     | 5 seconds       | 20
+2     | 102    | 6 seconds       | 25
+3     | 156    | 7 seconds       | 30
+4     | 217    | 8 seconds       | 35
+5     | 285    | 9 seconds       | 40
+
+
+Ability Name: Harvest
+Level | Damage | Spawn Interval | Cooldown
+1     | 38     | 1 second       | 90 seconds
+2     | 60     | 0.70 seconds   | 81 seconds
+3     | 84     | 0.57 seconds   | 72 seconds
+4     | 112    | 0.5 seconds    | 63 seconds
+5     | 142    | 0.44 seconds   | 54 seconds

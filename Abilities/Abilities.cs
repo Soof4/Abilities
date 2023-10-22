@@ -76,7 +76,6 @@ namespace Abilities {
 
         public static void RingOfDracula(TSPlayer caster, int cooldown, int abilityLevel = 1) {
             #region Properties
-            double healFactorIncrease = (abilityLevel - 1) * 0.01;
             cooldown -= (int)(cooldown * (abilityLevel - 1) * 0.1);
             #endregion
 
@@ -104,16 +103,29 @@ namespace Abilities {
 
             #region Functionality
             int healAmount = 0;
+            int targetIndex = -1;
 
             foreach (NPC npc in Main.npc) {
                 if (npc != null && npc.active && npc.type != 0 && npc.type != NPCID.TargetDummy && npc.position.WithinRange(caster.TPlayer.position, 384)) {
-                    int stolenHealth = (int)((0.2 + healFactorIncrease) * Math.Pow(npc.life, 9 / 17f));
-                    healAmount += stolenHealth;
-                    npc.life -= stolenHealth;
-                    NetMessage.SendData((int)PacketTypes.NpcUpdate, -1, -1, null, npc.whoAmI);
+
+                    int stolenHealth = (int)(600 / (1 + Math.Pow(1.0001, -npc.life)) - 300);
+
+                    if (stolenHealth > healAmount) {
+                        targetIndex = npc.whoAmI;
+                        healAmount = stolenHealth;
+                    }
                 }
             }
-            caster.Heal((int)healAmount);
+
+            if (targetIndex != -1) {
+                NPC npc = Main.npc[targetIndex];
+                npc.life -= healAmount;
+                NetMessage.SendData((int)PacketTypes.NpcUpdate, -1, -1, null, targetIndex);
+                caster.Heal((int)healAmount);
+
+                settings.PositionInWorld = new Vector2(npc.position.X + npc.width / 2 + 8, npc.position.Y - 8);
+                dw.ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ItemTransfer, settings);
+            }
             #endregion
         }
 
@@ -312,19 +324,40 @@ namespace Abilities {
                 return;
             }
             #endregion
-            
+
             #region Visuals
+            dw.ParticleOrchestraSettings settings = new() {
+                IndexOfPlayerWhoInvokedThis = (byte)caster.Index,
+                MovementVector = new(0, 0),
+                PositionInWorld = new(caster.X + 16, caster.Y + 16),
+                UniqueInfoPiece = 1
+            };
+
+            dw.ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ShimmerTownNPCSend, settings);
             #endregion
-            
+
             #region Functionality
-            int d = WorldGen.genRand.Next(160, rangeInBlocks * 16);
-            double tetha = WorldGen.genRand.NextDouble() * Math.Tau;
-            float x = d * (float)Math.Cos(tetha);
-            float y = d * (float)Math.Sin(tetha);
-            
+            float x = 0;
+            float y = 0;
+
+            for (int i = 0; i < 100; i++) {
+                int d = WorldGen.genRand.Next(160, rangeInBlocks * 16);
+                double tetha = WorldGen.genRand.NextDouble() * Math.Tau;
+                x = d * (float)Math.Cos(tetha);
+                y = d * (float)Math.Sin(tetha);
+
+                if (AbilityExtentions.IsPosTeleportable((int)((x + caster.X) / 16), (int)((y + caster.Y) / 16))) {
+                    break;
+                }
+            }
+
+            settings.PositionInWorld.X = x + caster.X + 16;
+            settings.PositionInWorld.Y = y + caster.Y + 16;
+
             caster.Teleport(x + caster.X, y + caster.Y);
+
+            dw.ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ShimmerTownNPCSend, settings);
             #endregion
-        
         }
 
         public static void EmpressOfLight(TSPlayer caster, int cooldown, int abilityLevel = 1) {
@@ -705,6 +738,15 @@ namespace Abilities {
         internal static Dictionary<string, int> TwilightCycles = new();
         internal static float HallowedWeaponColor = 0;
 
+        internal static bool IsPosTeleportable(int x, int y) {
+            return x + 1 < Main.maxTilesX && y + 2 < Main.maxTilesY &&
+                   Main.tile[x, y].collisionType == 0 &&
+                   Main.tile[x, y + 1].collisionType == 0 &&
+                   Main.tile[x, y + 2].collisionType == 0 &&
+                   Main.tile[x + 1, y].collisionType == 0 &&
+                   Main.tile[x + 1, y + 1].collisionType == 0 &&
+                   Main.tile[x + 1, y + 2].collisionType == 0;
+        }
 
         internal static float GetNextHallowedWeaponColor() {
             if (HallowedWeaponColor >= 1) {
@@ -745,11 +787,7 @@ namespace Abilities {
         }
 
         public static int GetVelocityXDirection(Player player) {
-            if (player.velocity.X == 0) {
-                return player.direction;
-            }
-
-            return (int)(player.velocity.X / Math.Abs(player.velocity.X));
+            return (player.velocity.X == 0) ? player.direction : (int)(player.velocity.X / Math.Abs(player.velocity.X));
         }
 
         /// <summary>
