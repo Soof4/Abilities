@@ -5,7 +5,8 @@ using TShockAPI;
 using dw = Terraria.GameContent.Drawing;
 using Microsoft.Xna.Framework;
 using TerrariaApi.Server;
-using IL.Terraria.GameContent;
+
+// Version 1.2.4
 
 namespace Abilities {
     public class Abilities {
@@ -168,7 +169,7 @@ namespace Abilities {
 
         public static void Adrenaline(TSPlayer caster, int cooldown, int abilityLevel = 1) {
             #region Properties
-            int buffDurationInTicks = (10 + 5 * (abilityLevel - 1))*60;
+            int buffDurationInTicks = (int)(10 + 1.5 * (abilityLevel - 1))*60;
             cooldown -= (int)(cooldown * (abilityLevel - 1) * 0.1);
             #endregion
 
