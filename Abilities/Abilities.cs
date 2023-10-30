@@ -6,7 +6,7 @@ using dw = Terraria.GameContent.Drawing;
 using Microsoft.Xna.Framework;
 using TerrariaApi.Server;
 
-// Version 1.2.4
+// Version 1.2.5
 
 namespace Abilities {
     public class Abilities {
@@ -308,7 +308,7 @@ namespace Abilities {
                     type: ProjectileID.DD2SquireSonicBoom,
                     damage: damage,
                     knockback: 30,
-                    owner: caster.Index
+                    owner: -1
                     );
             }
             #endregion
