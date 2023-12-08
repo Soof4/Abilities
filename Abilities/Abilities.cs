@@ -6,7 +6,7 @@ using dw = Terraria.GameContent.Drawing;
 using Microsoft.Xna.Framework;
 using TerrariaApi.Server;
 
-// Version 1.2.5
+// Version 1.2.6
 
 namespace Abilities {
     public class Abilities {
