@@ -861,6 +861,7 @@ namespace Abilities {
         RandomTeleport,
         EmpressOfLight,
         Twilight,
-        Harvest
+        Harvest,
+        IceGolem
     }
 }
