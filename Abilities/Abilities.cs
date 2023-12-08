@@ -730,6 +730,32 @@ namespace Abilities {
             });
             #endregion
         }
+    
+        public static void IceGolem(TSPlayer caster, int cooldown, int abilityLevel = 1) {
+            #region Properties
+            int buffDurationInTicks = 540 + 120 * abilityLevel;
+            cooldown -= (int)(cooldown * (abilityLevel - 1) * 0.1);
+            #endregion
+
+            #region Cooldown
+            if (AbilityExtentions.IsInCooldown((byte)caster.Index, cooldown)) {
+                return;
+            }
+            #endregion
+
+            #region Visuals
+            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y + 16, 0, 0, ProjectileID.StardustGuardianExplosion, 0, 0);
+            #endregion
+
+            #region Functionality
+            caster.SetBuff(BuffID.Dazed, buffDurationInTicks);
+            caster.SetBuff(BuffID.Chilled, buffDurationInTicks);
+            caster.SetBuff(BuffID.OgreSpit, buffDurationInTicks);
+            caster.SetBuff(BuffID.Ironskin, buffDurationInTicks);
+            caster.SetBuff(BuffID.NebulaUpLife1, buffDurationInTicks);
+            caster.SetBuff(BuffID.RapidHealing, buffDurationInTicks);
+            #endregion
+        }
     }
 
     public class AbilityExtentions {
