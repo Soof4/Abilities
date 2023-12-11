@@ -5,8 +5,9 @@ using TShockAPI;
 using dw = Terraria.GameContent.Drawing;
 using Microsoft.Xna.Framework;
 using TerrariaApi.Server;
+using Terraria.GameContent;
 
-// Version 1.2.6
+// Version 1.2.7
 
 namespace Abilities {
     public class Abilities {
@@ -525,8 +526,7 @@ namespace Abilities {
                     caster.SetBuff(11, eyesBuffDuration, false);
                     caster.SetBuff(12, eyesBuffDuration, false);
                     caster.SetBuff(17, eyesBuffDuration, false);
-                    switch (abilityLevel)
-                    {
+                    switch (abilityLevel) {
                         case 1:
                             Task.Run(async () =>
                             {
@@ -756,15 +756,298 @@ namespace Abilities {
             caster.SetBuff(BuffID.RapidHealing, buffDurationInTicks);
             #endregion
         }
-    }
 
+        public static void MagicDice(TSPlayer caster, int cooldown, int abilityLevel = 1) {
+            #region Properties
+            cooldown -= WorldGen.genRand.Next(0, 16);
+            int roll1DMG = (int)((60 + (abilityLevel - 1) * 35) * (1 + abilityLevel / 5f));
+            int roll2HP = 75 * abilityLevel;
+            int roll3DMG = (int)((15 + (abilityLevel - 1) * 15) * (1 + abilityLevel / 10f));
+            int[] roll4List = { BuffID.Blackout, BuffID.VortexDebuff, BuffID.WitheredArmor, BuffID.WitheredWeapon, BuffID.CursedInferno, BuffID.MoonLeech, BuffID.Ichor, BuffID.Lucky, BuffID.RapidHealing, BuffID.Endurance, BuffID.Thorns, BuffID.Honey, BuffID.Ironskin, BuffID.Regeneration, BuffID.ShadowDodge, BuffID.Invisibility };
+            int roll4Duration = (int)(600 + (abilityLevel - 1) * 120);
+            int roll4Amount = (int)(2 + (abilityLevel / 2));
+            int roll5Amount = (int)(2 + abilityLevel);
+            int roll6DMG = (int)((200 + (abilityLevel - 1) * 100) * (1 + abilityLevel / 5f));
+            int roll7Duration = (int)(5000 + (abilityLevel - 1) * 200);
+            int roll7DMG = (int)(15 + (abilityLevel - 1) * 10);
+            int roll8Duration = (int)(300 + (abilityLevel - 1) * 120);
+            int roll8HP = (int)(20 + (abilityLevel - 1) * 10);
+            int roll8DMG = (int)((25 + (abilityLevel - 1) * 15) * (1 + abilityLevel / 10f));
+            float roll8Scale = 1f + (abilityLevel - 1) * 0.5f;
+            int roll9Count = (int)(3 + abilityLevel);
+            int roll9DMG = (int)((60 + (abilityLevel - 1) * 35) * (1 + abilityLevel / 5f));
+            int roll10Ticks = (int)(420 + (abilityLevel - 1) * 60);
+            float roll10Duration = (float)(7 + (abilityLevel - 1) * 1);
+            int roll11Cap = (int)(250 + (abilityLevel - 1) * 500);
+            int roll12Duration = (int)(10000 + (abilityLevel - 1) * 3000);
+            int roll15DMG = (int)(25 + (abilityLevel - 1) * 15);
+            int i = 0;
+            float i2 = 0;
+
+            #endregion
+
+            #region Cooldown
+            if (AbilityExtentions.IsInCooldown((byte)caster.Index, cooldown)) {
+                return;
+            }
+            #endregion
+
+            #region Visuals
+            NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1,
+            Terraria.Localization.NetworkText.FromLiteral("You roll..."), (int)new Color(255, 255, 255).PackedValue,
+            caster.X + 16, caster.Y - 20);
+            ParticleOrchestraSettings settings = new() {
+                IndexOfPlayerWhoInvokedThis = (byte)caster.Index,
+                MovementVector = new(0, 0),
+                PositionInWorld = new(caster.X + 16, caster.Y),
+                UniqueInfoPiece = 1
+            };
+            ParticleOrchestraSettings why = new()
+            {
+                IndexOfPlayerWhoInvokedThis = (byte)caster.Index,
+                MovementVector = new(0, 0),
+                PositionInWorld = new(caster.X + 16, caster.Y + 16),
+                UniqueInfoPiece = 1
+            };
+            ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.Keybrand, settings);
+            ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.Keybrand, settings);
+            ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.Keybrand, settings);
+            #endregion
+
+            #region Functionality
+            Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+                if (caster.Dead) return;
+                Vector2 savedPos = caster.LastNetPosition;
+                ParticleOrchestraSettings settings = new()
+                {
+                    IndexOfPlayerWhoInvokedThis = (byte)caster.Index,
+                    MovementVector = new(0, 0),
+                    PositionInWorld = new(caster.X + 16, caster.Y),
+                    UniqueInfoPiece = 1
+                };
+                switch (WorldGen.genRand.Next(1, 16))
+                {
+                    case 1:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Explosion?"), (int)new Color(255, 255, 75).PackedValue, caster.X + 16, caster.Y);
+                        caster.SetBuff(BuffID.Dazed, 650);
+                        caster.SetBuff(BuffID.WitheredArmor, 650);
+                        caster.SetBuff(BuffID.WitheredWeapon, 650);
+                        int explosionTimer = 10;
+                        await Task.Delay(1000);
+                        while (explosionTimer > 0 && !caster.Dead)
+                        {
+                            if (caster.Dead) return;
+                            why.PositionInWorld.X = caster.X + 16;
+                            why.PositionInWorld.Y = caster.Y + 16;
+                            ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.RainbowRodHit, why);
+                            NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral(explosionTimer.ToString()), (int)new Color(255, 25, 25).PackedValue, caster.X + 16, caster.Y + 33);
+                            explosionTimer--;
+                            await Task.Delay(1000);
+                        }
+                        if (!caster.Dead)
+                        {
+                            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y, 7, 0, 950, roll1DMG, 8, caster.Index);
+                            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y, 5.5f, 5.5f, 950, roll1DMG, 8, caster.Index);
+                            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y, 0, 7, 950, roll1DMG, 8, caster.Index);
+                            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y, -5.5f, 5.5f, 950, roll1DMG, 8, caster.Index);
+                            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y, -7, 0, 950, roll1DMG, 8, caster.Index);
+                            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y, -5.5f, -5.5f, 950, roll1DMG, 8, caster.Index);
+                            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y, 0, -7, 950, roll1DMG, 8, caster.Index);
+                            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y, 5.5f, -5.5f, 950, roll1DMG, 8, caster.Index);
+                        }
+
+                        break;
+                    case 2:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Heal!"), (int)new Color(75, 255, 75).PackedValue, caster.X + 16, caster.Y - 20);
+                        caster.Heal(WorldGen.genRand.Next(10, roll2HP));
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.StellarTune, settings);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.StellarTune, settings);
+                        break;
+                    case 3:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Stone."), (int)new Color(255, 75, 75).PackedValue, caster.X + 16, caster.Y);
+                        caster.SetBuff(BuffID.Stoned, 100);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.PetExchange, settings);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.PetExchange, settings);
+                        i = 0;
+                        while (i < 15)
+                        {
+                            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y, WorldGen.genRand.Next(-70, 70) / 10f, WorldGen.genRand.Next(-70, 70) / 10f, ProjectileID.PewMaticHornShot, roll3DMG, 1.75f, caster.Index);
+                            i++;
+                            await Task.Delay(50);
+                        }
+                        break;
+                    case 4:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Buff Shuffle?"), (int)new Color(255, 255, 75).PackedValue, caster.X + 16, caster.Y);
+                        i = roll4Amount;
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ShimmerTownNPCSend, settings);
+                        while (i > 0)
+                        {
+                            caster.SetBuff(roll4List[WorldGen.genRand.Next(0, roll4List.Length)], roll4Duration);
+                            i--;
+                        }
+                        break;
+                    case 5:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Nebula Burst!"), (int)new Color(75, 255, 75).PackedValue, caster.X + 16, caster.Y);
+                        i = roll5Amount;
+                        while (i > 0)
+                        {
+                            switch (WorldGen.genRand.Next(1, 4))
+                            {
+                                case 1:
+                                    Terraria.Item.NewItem(new Terraria.DataStructures.EntitySource_DebugCommand(), (int)caster.X + 16, (int)caster.Y, (int)caster.TPlayer.Size.X, (int)caster.TPlayer.Size.X, Terraria.ID.ItemID.NebulaPickup1, 1);
+                                    break;
+                                case 2:
+                                    Terraria.Item.NewItem(new Terraria.DataStructures.EntitySource_DebugCommand(), (int)caster.X + 16, (int)caster.Y, (int)caster.TPlayer.Size.X, (int)caster.TPlayer.Size.X, Terraria.ID.ItemID.NebulaPickup2, 1);
+                                    break;
+                                case 3:
+                                    Terraria.Item.NewItem(new Terraria.DataStructures.EntitySource_DebugCommand(), (int)caster.X + 16, (int)caster.Y, (int)caster.TPlayer.Size.X, (int)caster.TPlayer.Size.X, Terraria.ID.ItemID.NebulaPickup3, 1);
+                                    break;
+                            }
+                            i--;
+                        }
+                        break;
+                    case 6:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("The dice exploded..?"), (int)new Color(255, 75, 75).PackedValue, caster.X + 16, caster.Y);
+                        AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y, 0, 0, ProjectileID.DD2ExplosiveTrapT3Explosion, roll6DMG, 20, caster.Index);
+                        caster.DamagePlayer(roll6DMG / 4);
+                        break;
+                    case 7:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Overcharge?"), (int)new Color(255, 255, 75).PackedValue, caster.X + 16, caster.Y);
+                        i = roll7Duration;
+                        caster.SetBuff(BuffID.NebulaUpDmg3, 600, true);
+                        caster.SetBuff(BuffID.NebulaUpLife3, 600, true);
+                        while (i > 0 && !caster.Dead)
+                        {
+                            why.PositionInWorld.X = caster.X + 16;
+                            why.PositionInWorld.Y = caster.Y + 16;
+                            ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.RainbowRodHit, why);
+                            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y + 16, 0, 0, ProjectileID.FairyQueenMagicItemShot, roll7DMG, 2, caster.Index, 0f, 0.45f);
+                            await Task.Delay(100);
+                            i -= 100;
+                        }
+                        if (!caster.Dead) caster.KillPlayer();
+                        break;
+                    case 8:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Rooted?"), (int)new Color(255, 255, 75).PackedValue, caster.X + 16, caster.Y);
+                        i = roll8Duration;
+                        caster.SetBuff(BuffID.Webbed, roll8Duration);
+                        while (i > 0 && !caster.Dead)
+                        {
+                            caster.Heal(roll8HP);
+                            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, roll8DMG, 7, caster.Index, 0f, roll8Scale);
+                            await Task.Delay(250);
+                            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, roll8DMG, 7, caster.Index, 0f, roll8Scale);
+                            await Task.Delay(250);
+                            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, roll8DMG, 7, caster.Index, 0f, roll8Scale);
+                            await Task.Delay(250);
+                            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, roll8DMG, 7, caster.Index, 0f, roll8Scale);
+                            await Task.Delay(250);
+                            i -= 60;
+                        }
+                        break;
+                    case 9:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Teleportation?"), (int)new Color(255, 255, 75).PackedValue, caster.X + 16, caster.Y);
+                        i = roll9Count;
+                        await Task.Delay(750);
+                        while (i > 0 && !caster.Dead)
+                        {
+                            why.PositionInWorld.X = caster.X + 16;
+                            why.PositionInWorld.Y = caster.Y + 16;
+                            ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.StellarTune, why);
+                            ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.StellarTune, why);
+                            ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.StellarTune, why);
+                            caster.Teleport(WorldGen.genRand.Next(-480, 481) + caster.X, WorldGen.genRand.Next(-480, 481) + caster.Y);
+                            AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y + 16, 0, 0, 950, roll9DMG, 14, caster.Index);
+                            await Task.Delay(750);
+                            i--;
+                        }
+                        why.PositionInWorld.X = caster.X + 16;
+                        why.PositionInWorld.Y = caster.Y + 16;
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.StellarTune, why);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.StellarTune, why);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.StellarTune, why);
+                        caster.Teleport(savedPos.X, savedPos.Y);
+                        AbilityExtentions.SpawnProjectile(caster.X + 16, caster.Y + 16, 0, 0, 950, roll9DMG, 14, caster.Index);
+                        break;
+                    case 10:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Smoke Bomb!"), (int)new Color(75, 255, 75).PackedValue, caster.X + 16, caster.Y);
+                        i2 = roll10Duration;
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.PetExchange, settings);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.PetExchange, settings);
+                        caster.SetBuff(BuffID.Invisibility, roll10Ticks);
+                        caster.SetBuff(BuffID.WitheredWeapon, roll10Ticks);
+                        while (i2 >= 1.33)
+                        {
+                            caster.SendData(PacketTypes.PlayerDodge, number: caster.Index, number2: 2);
+                            i2 -= 0.1f;
+                            await Task.Delay(100);
+                        }
+                        break;
+                    case 11:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Magic Cleaver!"), (int)new Color(75, 255, 75).PackedValue, caster.X + 16, caster.Y);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.RainbowRodHit, settings);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.RainbowRodHit, settings);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.RainbowRodHit, settings);
+                        foreach (NPC npc in Main.npc)
+                        {
+                            int cleaveDMG = 0;
+                            if (npc != null && npc.active && npc.type != 0 && npc.netID != 400 && !npc.friendly && !npc.CountsAsACritter && npc.position.WithinRange(caster.TPlayer.position, 60 * 16))
+                            {
+                                if (npc.lifeMax > roll11Cap) cleaveDMG += npc.life / 8;
+                                else cleaveDMG += npc.life / 2;
+                                if (npc.aiStyle == 6 || npc.netID == 267) cleaveDMG /= 10;
+                                else if (npc.aiStyle == 37) cleaveDMG /= 100;
+                                TSPlayer.Server.StrikeNPC(npc.whoAmI, cleaveDMG, 0, 0);
+                                AbilityExtentions.SpawnProjectile(npc.position.X + 16, npc.position.Y - 160, 0, 12, ProjectileID.LightsBane, 0, 0, caster.Index, 2.5f);
+                            }
+                        }
+                        break;
+                    case 12:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Explosive Effect!"), (int)new Color(75, 255, 75).PackedValue, caster.X + 16, caster.Y);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.RainbowRodHit, settings);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.RainbowRodHit, settings);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.RainbowRodHit, settings);
+                        AbilityExtentions.ExplosiveEffectState++;
+                        await Task.Delay(roll12Duration);
+                        AbilityExtentions.ExplosiveEffectState--;
+                        break;
+                    case 13:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Inked."), (int)new Color(255, 75, 75).PackedValue, caster.X + 16, caster.Y);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.BlackLightningHit, settings);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.BlackLightningHit, settings);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.BlackLightningHit, settings);
+                        caster.SetBuff(BuffID.Obstructed, 600);
+                        caster.SetBuff(BuffID.Blackout, 600);
+                        break;
+                    case 14:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Withered."), (int)new Color(255, 75, 75).PackedValue, caster.X + 16, caster.Y);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.BlackLightningHit, settings);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.BlackLightningHit, settings);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.StellarTune, settings);
+                        caster.SetBuff(BuffID.WitheredArmor, 900);
+                        caster.SetBuff(BuffID.WitheredWeapon, 900);
+                        break;
+                    case 15:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Zapped."), (int)new Color(255, 75, 75).PackedValue, caster.X + 16, caster.Y);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ShimmerArrow, settings);
+                        ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.Keybrand, settings);
+                        caster.DamagePlayer(roll15DMG);
+                        caster.SetBuff(BuffID.Electrified, 600);
+                        break;
+                }
+            });
+            #endregion
+        }
+    }
     public class AbilityExtentions {
         internal static Dictionary<byte, DateTime> Cooldowns = new();
         internal static Dictionary<byte, int> CooldownLengths = new();
         internal static Dictionary<string, int> EmpressCycles = new();
         internal static Dictionary<string, int> TwilightCycles = new();
         internal static float HallowedWeaponColor = 0;
-
+        internal static int ExplosiveEffectState = 0;
         internal static bool IsPosTeleportable(int x, int y) {
             return x + 1 < Main.maxTilesX && y + 2 < Main.maxTilesY &&
                    Main.tile[x, y].collisionType == 0 &&
@@ -812,6 +1095,19 @@ namespace Abilities {
 
             return projIndex;
         }
+        
+        public static void ExplosiveEffectEffect(Vector2 pos, int HP)
+        {
+            if (ExplosiveEffectState <= 0) return;
+            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, 5, 0, 950, HP, 8, -1);
+            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, 4, 4, 950, HP, 8, -1);
+            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, 0, 5, 950, HP, 8, -1);
+            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, -4, 4, 950, HP, 8, -1);
+            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, -5, 0, 950, HP, 8, -1);
+            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, -4, -4, 950, HP, 8, -1);
+            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, 0, -5, 950, HP, 8, -1);
+            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, 4, -4, 950, HP, 8, -1);
+        }
 
         public static int GetVelocityXDirection(Player player) {
             return (player.velocity.X == 0) ? player.direction : (int)(player.velocity.X / Math.Abs(player.velocity.X));
@@ -850,7 +1146,6 @@ namespace Abilities {
             return false;
         }
     }
-
     public enum AbilityType {
         DryadsRingOfHealing,
         RingOfDracula,
@@ -862,6 +1157,7 @@ namespace Abilities {
         EmpressOfLight,
         Twilight,
         Harvest,
-        IceGolem
+        IceGolem,
+        MagicDice
     }
 }
