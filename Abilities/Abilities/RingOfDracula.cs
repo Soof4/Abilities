@@ -89,8 +89,6 @@ namespace Abilities
 
                 Shapes.DrawCircle(plr.X + 16, plr.Y + 16, 384, 0.1963, ParticleOrchestraType.BlackLightningSmall, (byte)plr.Index);
             }
-
-
         }
     }
 }
