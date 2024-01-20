@@ -5,6 +5,8 @@ namespace Abilities
 {
     public abstract class Ability
     {
+        internal protected int AbilityLevel = 0;
+
 
         /// <summary>
         /// Cast method for dependents to use.
