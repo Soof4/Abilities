@@ -7,6 +7,7 @@ namespace Abilities
     {
         internal protected int AbilityLevel = 0;
 
+        internal protected Ability() {}
 
         /// <summary>
         /// Cast method for dependents to use.
