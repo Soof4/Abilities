@@ -96,14 +96,14 @@ namespace Abilities
                         }
                         if (!plr.Dead)
                         {
-                            AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y, 7, 0, 950, R1_Dmg, 8, plr.Index);
-                            AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y, 5.5f, 5.5f, 950, R1_Dmg, 8, plr.Index);
-                            AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y, 0, 7, 950, R1_Dmg, 8, plr.Index);
-                            AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y, -5.5f, 5.5f, 950, R1_Dmg, 8, plr.Index);
-                            AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y, -7, 0, 950, R1_Dmg, 8, plr.Index);
-                            AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y, -5.5f, -5.5f, 950, R1_Dmg, 8, plr.Index);
-                            AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y, 0, -7, 950, R1_Dmg, 8, plr.Index);
-                            AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y, 5.5f, -5.5f, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, 7, 0, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, 5.5f, 5.5f, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, 0, 7, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, -5.5f, 5.5f, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, -7, 0, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, -5.5f, -5.5f, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, 0, -7, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, 5.5f, -5.5f, 950, R1_Dmg, 8, plr.Index);
                         }
 
                         break;
@@ -122,7 +122,7 @@ namespace Abilities
                         i = 0;
                         while (i < 15)
                         {
-                            AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y, WorldGen.genRand.Next(-70, 70) / 10f, WorldGen.genRand.Next(-70, 70) / 10f, ProjectileID.PewMaticHornShot, R3_Dmg, 1.75f, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, WorldGen.genRand.Next(-70, 70) / 10f, WorldGen.genRand.Next(-70, 70) / 10f, ProjectileID.PewMaticHornShot, R3_Dmg, 1.75f, plr.Index);
                             i++;
                             await Task.Delay(50);
                         }
@@ -161,7 +161,7 @@ namespace Abilities
                         break;
                     case 6:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("The dice exploded..?"), (int)new Color(255, 75, 75).PackedValue, plr.X + 16, plr.Y);
-                        AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y, 0, 0, ProjectileID.DD2ExplosiveTrapT3Explosion, R6_Dmg, 20, plr.Index);
+                        Extensions.SpawnProjectile(plr.X + 16, plr.Y, 0, 0, ProjectileID.DD2ExplosiveTrapT3Explosion, R6_Dmg, 20, plr.Index);
                         plr.DamagePlayer(R6_Dmg / 4);
                         break;
                     case 7:
@@ -173,7 +173,7 @@ namespace Abilities
                         {
                             PlayVisuals(plr, 7);
 
-                            AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y + 16, 0, 0, ProjectileID.FairyQueenMagicItemShot, R7_Dmg, 2, plr.Index, 0f, 0.45f);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, 0, 0, ProjectileID.FairyQueenMagicItemShot, R7_Dmg, 2, plr.Index, 0f, 0.45f);
                             await Task.Delay(100);
                             i -= 100;
                         }
@@ -186,13 +186,13 @@ namespace Abilities
                         while (i > 0 && !plr.Dead)
                         {
                             plr.Heal(R8_HP);
-                            AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
                             await Task.Delay(250);
-                            AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
                             await Task.Delay(250);
-                            AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
                             await Task.Delay(250);
-                            AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
                             await Task.Delay(250);
                             i -= 60;
                         }
@@ -206,7 +206,7 @@ namespace Abilities
                             PlayVisuals(plr, 9_1);
 
                             plr.Teleport(WorldGen.genRand.Next(-480, 481) + plr.X, WorldGen.genRand.Next(-480, 481) + plr.Y);
-                            AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y + 16, 0, 0, 950, R9_Dmg, 14, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, 0, 0, 950, R9_Dmg, 14, plr.Index);
                             await Task.Delay(750);
                             i--;
                         }
@@ -214,7 +214,7 @@ namespace Abilities
                         PlayVisuals(plr, 9_2);
 
                         plr.Teleport(savedPos.X, savedPos.Y);
-                        AbilityExtentions.SpawnProjectile(plr.X + 16, plr.Y + 16, 0, 0, 950, R9_Dmg, 14, plr.Index);
+                        Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, 0, 0, 950, R9_Dmg, 14, plr.Index);
                         break;
                     case 10:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Smoke Bomb!"), (int)new Color(75, 255, 75).PackedValue, plr.X + 16, plr.Y);
@@ -245,7 +245,7 @@ namespace Abilities
                                 if (npc.aiStyle == 6 || npc.netID == 267) cleaveDMG /= 10;
                                 else if (npc.aiStyle == 37) cleaveDMG /= 100;
                                 TSPlayer.Server.StrikeNPC(npc.whoAmI, cleaveDMG, 0, 0);
-                                AbilityExtentions.SpawnProjectile(npc.position.X + 16, npc.position.Y - 160, 0, 12, ProjectileID.LightsBane, 0, 0, plr.Index, 2.5f);
+                                Extensions.SpawnProjectile(npc.position.X + 16, npc.position.Y - 160, 0, 12, ProjectileID.LightsBane, 0, 0, plr.Index, 2.5f);
                             }
                         }
                         break;
@@ -253,9 +253,9 @@ namespace Abilities
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Explosive Effect!"), (int)new Color(75, 255, 75).PackedValue, plr.X + 16, plr.Y);
                         PlayVisuals(plr, 12);
 
-                        AbilityExtentions.ExplosiveEffectState++;
+                        Extensions.ExplosiveEffectState++;
                         await Task.Delay(R12_Duration);
-                        AbilityExtentions.ExplosiveEffectState--;
+                        Extensions.ExplosiveEffectState--;
                         break;
                     case 13:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Inked."), (int)new Color(255, 75, 75).PackedValue, plr.X + 16, plr.Y);

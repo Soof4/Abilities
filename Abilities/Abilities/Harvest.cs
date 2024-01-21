@@ -40,7 +40,7 @@ namespace Abilities
                 {
                     float randX = plr.X + 16 + WorldGen.genRand.Next(-64, 64);
                     float randY = plr.Y + 16 + WorldGen.genRand.Next(-64, 64);
-                    AbilityExtentions.SpawnProjectile(randX, randY, 0, 0, ProjectileID.ScytheWhipProj, Damage, 6, plr.Index);
+                    Extensions.SpawnProjectile(randX, randY, 0, 0, ProjectileID.ScytheWhipProj, Damage, 6, plr.Index);
                     ms += ProjSpawnInterval;
                     await Task.Delay(ProjSpawnInterval);
                 }

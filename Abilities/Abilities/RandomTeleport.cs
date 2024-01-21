@@ -41,7 +41,7 @@ namespace Abilities
                 x = d * (float)Math.Cos(tetha);
                 y = d * (float)Math.Sin(tetha);
 
-                if (AbilityExtentions.IsPosTeleportable((int)((x + plr.X) / 16), (int)((y + plr.Y) / 16)))
+                if (Extensions.IsPosTeleportable((int)((x + plr.X) / 16), (int)((y + plr.Y) / 16)))
                 {
                     break;
                 }

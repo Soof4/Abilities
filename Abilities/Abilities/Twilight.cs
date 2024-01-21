@@ -41,12 +41,12 @@ namespace Abilities
             CalculateProperties(abilityLevel);
             PlayVisuals(plr, 0);
 
-            if (!AbilityExtentions.TwilightCycles.ContainsKey(plr.Name))
+            if (!Extensions.TwilightCycles.ContainsKey(plr.Name))
             {
-                AbilityExtentions.TwilightCycles.Add(plr.Name, 1);
+                Extensions.TwilightCycles.Add(plr.Name, 1);
             }
 
-            switch (AbilityExtentions.TwilightCycles[plr.Name])
+            switch (Extensions.TwilightCycles[plr.Name])
             {
                 case 1:    //Brilliant Eyes
                     plr.SetBuff(11, EyesBuffDuration, false);
@@ -57,101 +57,101 @@ namespace Abilities
                         case 1:
                             Task.Run(async () =>
                             {
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 0, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 0, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(250);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 4, 0, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 4, 0, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(250);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 0, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 0, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(250);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -4, 0, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -4, 0, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                             });
                             break;
                         case 2:
                             Task.Run(async () =>
                             {
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 0, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 0, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(150);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 4, -2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 4, -2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(150);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 4, 2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 4, 2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(150);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 0, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 0, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(150);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -4, 2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -4, 2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(150);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -4, -2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -4, -2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                             });
                             break;
                         case 3:
                             Task.Run(async () =>
                             {
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 2, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 2, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(107);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 4, -2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 4, -2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(107);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 4, 2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 4, 2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(107);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 2, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 2, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(107);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -2, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -2, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(107);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -4, 2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -4, 2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(107);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -4, -2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -4, -2, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(107);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -2, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -2, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                             });
                             break;
                         case 4:
                             Task.Run(async () =>
                             {
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 2, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 2, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(83);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 4, -2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 4, -2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(83);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 4, 0, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 4, 0, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(83);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 4, 2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 4, 2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(83);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 2, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 2, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(83);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -2, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -2, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(83);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -4, 2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -4, 2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(83);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -4, 0, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -4, 0, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(83);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -4, -2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -4, -2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(83);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -2, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -2, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                             });
                             break;
                         case 5:
                             Task.Run(async () =>
                             {
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 0, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 0, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(68);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 2.5f, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 2.5f, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(68);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 4, -2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 4, -2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(68);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 4, 0, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 4, 0, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(68);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 4, 2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 4, 2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(68);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 2.5f, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 2.5f, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(68);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, 0, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, 0, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(68);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -2.5f, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -2.5f, 4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(68);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -4, 2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -4, 2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(68);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -4, 0, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -4, 0, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(68);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -4, -2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -4, -2.5f, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                                 await Task.Delay(68);
-                                AbilityExtentions.SpawnProjectile(plr.X, plr.Y, -2.5f, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
+                                Extensions.SpawnProjectile(plr.X, plr.Y, -2.5f, -4, ProjectileID.LostSoulFriendly, EyesDmg, 0, plr.Index);
                             });
                             break;
                     }
@@ -188,15 +188,15 @@ namespace Abilities
                                 TSPlayer.All.SendData(PacketTypes.NpcUpdateBuff, number: npc.whoAmI);
                                 if (npc.life <= 0)
                                 {
-                                    AbilityExtentions.SpawnProjectile(npc.position.X, npc.position.Y, 0, 0, ProjectileID.FairyQueenMagicItemShot, JudgeBaseDmg * 3, 0, plr.Index);
+                                    Extensions.SpawnProjectile(npc.position.X, npc.position.Y, 0, 0, ProjectileID.FairyQueenMagicItemShot, JudgeBaseDmg * 3, 0, plr.Index);
                                 }
                             }
                         }
                     });
                     break;
                 case 3:    //Punishment
-                    AbilityExtentions.SpawnProjectile(plr.X + 70, plr.Y, 3, 0, ProjectileID.DD2ExplosiveTrapT3Explosion, PunishDmg, PunishKB, plr.Index);
-                    AbilityExtentions.SpawnProjectile(plr.X - 70, plr.Y, -3, 0, ProjectileID.DD2ExplosiveTrapT3Explosion, PunishDmg, PunishKB, plr.Index);
+                    Extensions.SpawnProjectile(plr.X + 70, plr.Y, 3, 0, ProjectileID.DD2ExplosiveTrapT3Explosion, PunishDmg, PunishKB, plr.Index);
+                    Extensions.SpawnProjectile(plr.X - 70, plr.Y, -3, 0, ProjectileID.DD2ExplosiveTrapT3Explosion, PunishDmg, PunishKB, plr.Index);
                     plr.SetBuff(173, PunishBuffDuration, false);
                     plr.SetBuff(176, PunishBuffDuration, false);
                     plr.SetBuff(179, PunishBuffDuration, false);
@@ -204,13 +204,13 @@ namespace Abilities
 
             }
 
-            if (AbilityExtentions.TwilightCycles[plr.Name] < 3)
+            if (Extensions.TwilightCycles[plr.Name] < 3)
             {
-                AbilityExtentions.TwilightCycles[plr.Name]++;
+                Extensions.TwilightCycles[plr.Name]++;
             }
             else
             {
-                AbilityExtentions.TwilightCycles[plr.Name] = 1;
+                Extensions.TwilightCycles[plr.Name] = 1;
             }
         }
 

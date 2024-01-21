@@ -34,7 +34,7 @@ namespace Abilities
 
             for (double i = 0; i < Math.Tau; i += 0.3926)
             {
-                AbilityExtentions.SpawnProjectile(
+                Extensions.SpawnProjectile(
                     posX: plr.X + 16 * (float)Math.Cos(i),
                     posY: plr.Y + 16 * (float)Math.Sin(i),
                     speedX: SpeedFactor * (float)Math.Cos(i),
