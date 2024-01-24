@@ -5,11 +5,11 @@ using Microsoft.Xna.Framework;
 
 namespace Abilities
 {
-    public class SandFrames : Ability
+    public class SetsBlessing : Ability
     {
         private double DodgeDurationInSeconds;
 
-        public SandFrames(int abilityLevel)
+        public SetsBlessing(int abilityLevel)
         {
             CalculateProperties(abilityLevel);
         }

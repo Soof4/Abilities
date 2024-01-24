@@ -10,7 +10,7 @@ namespace Abilities
     {
         internal static Dictionary<byte, DateTime> Cooldowns = new();
         internal static Dictionary<byte, int> CooldownLengths = new();
-        internal static Dictionary<string, int> EmpressCycles = new();
+        internal static Dictionary<string, int> FairyOfLightCycles = new();
         internal static Dictionary<string, int> TwilightCycles = new();
         internal static float HallowedWeaponColor = 0;
         internal static int ExplosiveEffectState = 0;
@@ -72,14 +72,14 @@ namespace Abilities
         public static void ExplosiveEffectEffect(Vector2 pos, int HP)
         {
             if (ExplosiveEffectState <= 0) return;
-            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, 5, 0, 950, HP, 8, -1);
-            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, 4, 4, 950, HP, 8, -1);
-            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, 0, 5, 950, HP, 8, -1);
-            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, -4, 4, 950, HP, 8, -1);
-            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, -5, 0, 950, HP, 8, -1);
-            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, -4, -4, 950, HP, 8, -1);
-            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, 0, -5, 950, HP, 8, -1);
-            AbilityExtentions.SpawnProjectile(pos.X + 16, pos.Y, 4, -4, 950, HP, 8, -1);
+            Extensions.SpawnProjectile(pos.X + 16, pos.Y, 5, 0, 950, HP, 8, -1);
+            Extensions.SpawnProjectile(pos.X + 16, pos.Y, 4, 4, 950, HP, 8, -1);
+            Extensions.SpawnProjectile(pos.X + 16, pos.Y, 0, 5, 950, HP, 8, -1);
+            Extensions.SpawnProjectile(pos.X + 16, pos.Y, -4, 4, 950, HP, 8, -1);
+            Extensions.SpawnProjectile(pos.X + 16, pos.Y, -5, 0, 950, HP, 8, -1);
+            Extensions.SpawnProjectile(pos.X + 16, pos.Y, -4, -4, 950, HP, 8, -1);
+            Extensions.SpawnProjectile(pos.X + 16, pos.Y, 0, -5, 950, HP, 8, -1);
+            Extensions.SpawnProjectile(pos.X + 16, pos.Y, 4, -4, 950, HP, 8, -1);
         }
 
         public static int GetVelocityXDirection(Player player)

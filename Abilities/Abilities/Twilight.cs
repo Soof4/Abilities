@@ -5,6 +5,7 @@ using Terraria.GameContent.Drawing;
 
 namespace Abilities
 {
+    // Author of this ability is @strangelad on Discord
     public class Twilight : Ability
     {
         private int EyesDmg, EyesBuffDuration, JudgeBaseDmg, JudgeRange, JudgeDuration, PunishDmg, PunishBuffDuration, PunishKB;

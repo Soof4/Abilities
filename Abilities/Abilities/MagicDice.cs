@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Abilities
 {
+    // Author of this ability is @strangelad on Discord
     public class MagicDice : Ability
     {
         int R1_Dmg, R2_HP, R3_Dmg, R4_Duration, R4_Amount, R5_Amount, R6_Dmg, R7_Duration, R7_Dmg, R8_Duration, R8_HP, R8_Dmg,

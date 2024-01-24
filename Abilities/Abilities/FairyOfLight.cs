@@ -5,11 +5,11 @@ using Terraria.GameContent.Drawing;
 
 namespace Abilities
 {
-    public class EmpressOfLight : Ability
+    public class FairyOfLight : Ability
     {
         int LanceDmg, DashDmg, BoltDmg, BoltSpawnInterval, DanceDmg;
 
-        public EmpressOfLight(int abilityLevel)
+        public FairyOfLight(int abilityLevel)
         {
             CalculateProperties(abilityLevel);
         }
@@ -35,12 +35,12 @@ namespace Abilities
         {
             CalculateProperties(abilityLevel);
 
-            if (!Extensions.EmpressCycles.ContainsKey(plr.Name))
+            if (!Extensions.FairyOfLightCycles.ContainsKey(plr.Name))
             {
-                Extensions.EmpressCycles.Add(plr.Name, 1);
+                Extensions.FairyOfLightCycles.Add(plr.Name, 1);
             }
 
-            switch (Extensions.EmpressCycles[plr.Name])
+            switch (Extensions.FairyOfLightCycles[plr.Name])
             {
                 case 1:    // Ethereal Lance
                     float startingYPos = plr.Y - 8 * 16;
@@ -140,13 +140,13 @@ namespace Abilities
                     break;
             }
 
-            if (Extensions.EmpressCycles[plr.Name] < 4)
+            if (Extensions.FairyOfLightCycles[plr.Name] < 4)
             {
-                Extensions.EmpressCycles[plr.Name]++;
+                Extensions.FairyOfLightCycles[plr.Name]++;
             }
             else
             {
-                Extensions.EmpressCycles[plr.Name] = 1;
+                Extensions.FairyOfLightCycles[plr.Name] = 1;
             }
         }
 

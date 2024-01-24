@@ -23,7 +23,7 @@ namespace Abilities
             {
                 AbilityLevel = abilityLevel;
                 SpeedFactor = 9 + abilityLevel;
-                Damage = 250 + 100 * abilityLevel;
+                Damage = 75 + 100 * abilityLevel;
             }
         }
 
@@ -45,6 +45,8 @@ namespace Abilities
                     owner: -1
                     );
             }
+
+            plr.KillPlayer();
         }
 
         internal override void PlayVisuals(params object[] args) { }
