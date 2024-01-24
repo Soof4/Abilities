@@ -70,7 +70,7 @@ namespace Abilities
                 IndexOfPlayerWhoInvokedThis = (byte)plr.Index,
                 MovementVector = new(0, -8),
                 PositionInWorld = new(plr.X + 16, plr.Y - 16),
-                UniqueInfoPiece = ItemID.ScytheWhip
+                UniqueInfoPiece = ItemID.ObsidianSkullRose
             };
 
             if (spawnSkull)
