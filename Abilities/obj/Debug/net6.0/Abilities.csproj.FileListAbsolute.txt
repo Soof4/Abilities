@@ -1,0 +1,13 @@
+/home/soofa/GitProjects/Abilities-v2/Abilities/Abilities/obj/Debug/net6.0/Abilities.csproj.AssemblyReference.cache
+/home/soofa/GitProjects/Abilities-v2/Abilities/Abilities/obj/Debug/net6.0/Abilities.GeneratedMSBuildEditorConfig.editorconfig
+/home/soofa/GitProjects/Abilities-v2/Abilities/Abilities/obj/Debug/net6.0/Abilities.AssemblyInfoInputs.cache
+/home/soofa/GitProjects/Abilities-v2/Abilities/Abilities/obj/Debug/net6.0/Abilities.AssemblyInfo.cs
+/home/soofa/GitProjects/Abilities-v2/Abilities/Abilities/obj/Debug/net6.0/Abilities.csproj.CoreCompileInputs.cache
+/home/soofa/GitProjects/Abilities-v2/Abilities/Abilities/bin/Debug/net6.0/HttpServer.dll
+/home/soofa/GitProjects/Abilities-v2/Abilities/Abilities/bin/Debug/net6.0/Abilities.deps.json
+/home/soofa/GitProjects/Abilities-v2/Abilities/Abilities/bin/Debug/net6.0/Abilities.dll
+/home/soofa/GitProjects/Abilities-v2/Abilities/Abilities/bin/Debug/net6.0/ref/Abilities.dll
+/home/soofa/GitProjects/Abilities-v2/Abilities/Abilities/bin/Debug/net6.0/Abilities.pdb
+/home/soofa/GitProjects/Abilities-v2/Abilities/Abilities/obj/Debug/net6.0/Abilities.dll
+/home/soofa/GitProjects/Abilities-v2/Abilities/Abilities/obj/Debug/net6.0/ref/Abilities.dll
+/home/soofa/GitProjects/Abilities-v2/Abilities/Abilities/obj/Debug/net6.0/Abilities.pdb
