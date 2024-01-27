@@ -12,7 +12,8 @@ public enum AbilityType {
     Twilight,
     Harvest,
     IceGolem,
-    MagicDice
+    MagicDice,
+    TheBound
 }
 
 }

@@ -14,7 +14,8 @@ namespace Abilities
         internal static Dictionary<string, int> TwilightCycles = new();
         internal static float HallowedWeaponColor = 0;
         internal static int ExplosiveEffectState = 0;
-        
+        internal static Random Random = new Random();
+
         internal static bool IsPosTeleportable(int x, int y)
         {
             return x + 1 < Main.maxTilesX && y + 2 < Main.maxTilesY &&
@@ -68,7 +69,37 @@ namespace Abilities
 
             return projIndex;
         }
-
+        public static int NewNPC(int X, int Y, int Type)
+        {
+            int index = 200;
+            for (int i = 0; i < 200; i++)
+            {
+                if (!Main.npc[i].active)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            Main.npc[index].SetDefaults(Type);
+            Main.npc[index].velocity.X = 0;
+            Main.npc[index].velocity.Y = 0;
+            Main.npc[index].position.X = X;
+            Main.npc[index].position.Y = Y;
+            return index;
+        }
+        public static NPC? GetNearestEnemy(Vector2 pos)
+        {
+            NPC? nearestEnemy = null;
+            foreach (NPC npc in Main.npc)
+            {
+                if (npc != null && npc.active && npc.type != 0 && npc.netID != 400 && npc.netID != 70 && npc.netID != 72 && !npc.friendly && !npc.CountsAsACritter)
+                {
+                    if (nearestEnemy == null) nearestEnemy = npc;
+                    if (npc.position.Distance(pos) < nearestEnemy.position.Distance(pos)) nearestEnemy = npc;
+                }
+            }
+            return nearestEnemy;
+        }
         public static void ExplosiveEffectEffect(Vector2 pos, int HP)
         {
             if (ExplosiveEffectState <= 0) return;
@@ -80,6 +111,15 @@ namespace Abilities
             Extensions.SpawnProjectile(pos.X + 16, pos.Y, -4, -4, 950, HP, 8, -1);
             Extensions.SpawnProjectile(pos.X + 16, pos.Y, 0, -5, 950, HP, 8, -1);
             Extensions.SpawnProjectile(pos.X + 16, pos.Y, 4, -4, 950, HP, 8, -1);
+        }
+
+        public static float GetDistance(float posX1, float posY1, float posX2, float posY2)
+        {
+            return (float)Math.Sqrt(Math.Pow(posX2 - posX1, 2) + Math.Pow(posY2 - posY1, 2));
+        }
+        public static float GetDistance(Entity entity1, Entity entity2)
+        {
+            return GetDistance(entity1.position.X, entity1.position.Y, entity2.position.X, entity2.position.Y);
         }
 
         public static int GetVelocityXDirection(Player player)

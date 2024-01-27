@@ -3,14 +3,16 @@ using TShockAPI;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Microsoft.Xna.Framework;
+using Org.BouncyCastle.Asn1.X509;
 
 namespace Abilities
 {
     // Author of this ability is @strangelad on Discord
     public class MagicDice : Ability
     {
-        int R1_Dmg, R2_HP, R3_Dmg, R4_Duration, R4_Amount, R5_Amount, R6_Dmg, R7_Duration, R7_Dmg, R8_Duration, R8_HP, R8_Dmg,
-            R9_Count, R9_Dmg, R10_Ticks, R11_Cap, R12_Duration, R15_Dmg;
+        int R1_Dmg, R2_HP, R3_Dmg, R4_HP, R5_Amount,R6_Dmg, R7_Duration, R7_Dmg, R8_Duration, R8_HP, R8_Dmg,
+            R9_Count, R9_Dmg, R10_Ticks, R11_Cap, R12_Range, R13_Duration, R14_Duration, R15_Duration, R15_Dmg, R16_Count,
+            R16_Dmg, R17_Duration, R17_Dmg, R18_Duration, R18_Dmg, R19_Duration, R19_Dmg, R20_Health, R21_Dmg, R21_Count;
 
         float R8_Scale, R10_Duration;
 
@@ -32,26 +34,39 @@ namespace Abilities
             if (abilityLevel != AbilityLevel)
             {
                 AbilityLevel = abilityLevel;
-                R1_Dmg = (int)((60 + (abilityLevel - 1) * 35) * (1 + abilityLevel / 5f));
-                R2_HP = 75 * abilityLevel;
-                R3_Dmg = (int)((15 + (abilityLevel - 1) * 15) * (1 + abilityLevel / 10f));
-                R4_Duration = (int)(600 + (abilityLevel - 1) * 120);
-                R4_Amount = (int)(2 + (abilityLevel / 2));
-                R5_Amount = (int)(2 + abilityLevel);
-                R6_Dmg = (int)((200 + (abilityLevel - 1) * 100) * (1 + abilityLevel / 5f));
-                R7_Duration = (int)(5000 + (abilityLevel - 1) * 200);
-                R7_Dmg = (int)(15 + (abilityLevel - 1) * 10);
+                R1_Dmg = (int)((60 + (abilityLevel - 1) * 35) * (1 + (abilityLevel - 1) / 5f));
+                R2_HP = 50 + (50 * abilityLevel);
+                R3_Dmg = (int)((15 + (abilityLevel - 1) * 15) * (1 + (abilityLevel - 1) / 10f));
+                R4_HP = (int)(100 + (abilityLevel - 1) * 50);
+                R5_Amount = (int)(1 + abilityLevel);
+                R6_Dmg = (int)((260 + (abilityLevel - 1) * 210) * (1 + (abilityLevel - 1) / 5f));
+                R7_Duration = (int)(4000 + (abilityLevel - 1) * 1000);
+                R7_Dmg = (int)(15 + (abilityLevel - 1) * 15);
                 R8_Duration = (int)(300 + (abilityLevel - 1) * 120);
                 R8_HP = (int)(20 + (abilityLevel - 1) * 10);
-                R8_Dmg = (int)((25 + (abilityLevel - 1) * 15) * (1 + abilityLevel / 10f));
+                R8_Dmg = (int)((30 + (abilityLevel - 1) * 15) * (1 + (abilityLevel - 1) / 10f));
                 R8_Scale = 1f + (abilityLevel - 1) * 0.5f;
                 R9_Count = (int)(3 + abilityLevel);
-                R9_Dmg = (int)((60 + (abilityLevel - 1) * 35) * (1 + abilityLevel / 5f));
-                R10_Ticks = (int)(420 + (abilityLevel - 1) * 60);
-                R10_Duration = (float)(7 + (abilityLevel - 1) * 1);
-                R11_Cap = (int)(250 + (abilityLevel - 1) * 500);
-                R12_Duration = (int)(10000 + (abilityLevel - 1) * 3000);
-                R15_Dmg = (int)(25 + (abilityLevel - 1) * 15);
+                R9_Dmg = (int)((75 + (abilityLevel - 1) * 50) * (1 + (abilityLevel - 1) / 10f));
+                R10_Ticks = (int)(300 + (abilityLevel - 1) * 60);
+                R10_Duration = (float)(5 + (abilityLevel - 1));
+                R11_Cap = (int)(300 + 300 * ((abilityLevel - 1) * (abilityLevel - 1)));
+                R12_Range = (int)(50 + (abilityLevel - 1) * 25);
+                R13_Duration = (int)(300 + (abilityLevel - 1) * 30);
+                R14_Duration = (int)(240 + (abilityLevel - 1) * 60);
+                R15_Duration = (int)(240 + (abilityLevel - 1) * 30);
+                R15_Dmg = (int)(25 * abilityLevel);
+                R16_Count = (int)(2 + abilityLevel);
+                R16_Dmg = (int)((35 + (abilityLevel - 1) * 20) * (1 + (abilityLevel - 1) / 5f));
+                R17_Duration = (int)(300 + (abilityLevel - 1) * 60);
+                R17_Dmg = (int)((20 + (abilityLevel - 1) * 15) * (1 + (abilityLevel - 1) / 5f));
+                R18_Duration = (int)(3 + (abilityLevel - 1) * 2);
+                R18_Dmg = (int)(10 + (abilityLevel - 1) * 10);
+                R19_Duration = (int)(300 + (abilityLevel - 1) * 60);
+                R19_Dmg = (int)((20 + (abilityLevel - 1) * 15) * (1 + (abilityLevel - 1) / 5f));
+                R20_Health = (int)(15 + (abilityLevel - 1) * 10);
+                R21_Dmg = (int)((60 + (abilityLevel - 1) * 30) * (1 + (abilityLevel - 1) / 5f));
+                R21_Count = (int)(3 + (abilityLevel - 1) * 2);
             }
         }
 
@@ -63,6 +78,7 @@ namespace Abilities
 
             int i = 0;
             float i2 = 0;
+            NPC? target = null;
 
             Task.Run(async () =>
             {
@@ -76,13 +92,13 @@ namespace Abilities
                     PositionInWorld = new(plr.X + 16, plr.Y),
                     UniqueInfoPiece = 1
                 };
-                switch (WorldGen.genRand.Next(1, 16))
+                switch (Extensions.Random.Next(1,22))
                 {
                     case 1:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Explosion?"), (int)new Color(255, 255, 75).PackedValue, plr.X + 16, plr.Y);
-                        plr.SetBuff(BuffID.Dazed, 650);
-                        plr.SetBuff(BuffID.WitheredArmor, 650);
-                        plr.SetBuff(BuffID.WitheredWeapon, 650);
+                        plr.SetBuff(BuffID.Dazed, 650, true);
+                        plr.SetBuff(BuffID.WitheredArmor, 650, true);
+                        plr.SetBuff(BuffID.WitheredWeapon, 650, true);
                         int explosionTimer = 10;
                         await Task.Delay(1000);
                         while (explosionTimer > 0 && !plr.Dead)
@@ -97,55 +113,64 @@ namespace Abilities
                         }
                         if (!plr.Dead)
                         {
-                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, 7, 0, 950, R1_Dmg, 8, plr.Index);
-                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, 5.5f, 5.5f, 950, R1_Dmg, 8, plr.Index);
-                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, 0, 7, 950, R1_Dmg, 8, plr.Index);
-                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, -5.5f, 5.5f, 950, R1_Dmg, 8, plr.Index);
-                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, -7, 0, 950, R1_Dmg, 8, plr.Index);
-                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, -5.5f, -5.5f, 950, R1_Dmg, 8, plr.Index);
-                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, 0, -7, 950, R1_Dmg, 8, plr.Index);
-                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, 5.5f, -5.5f, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(1, 0)).X * 7, Vector2.Zero.DirectionTo(new Vector2(1, 0)).Y * 7, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(1, 1)).X * 7, Vector2.Zero.DirectionTo(new Vector2(1, 1)).Y * 7, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(0, 1)).X * 7, Vector2.Zero.DirectionTo(new Vector2(0, 1)).Y * 7, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(-1, 1)).X * 7, Vector2.Zero.DirectionTo(new Vector2(-1, 1)).Y * 7, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(-1, 0)).X * 7, Vector2.Zero.DirectionTo(new Vector2(-1, 0)).Y * 7, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(-1, -1)).X * 7, Vector2.Zero.DirectionTo(new Vector2(-1, -1)).Y * 7, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(0, -1)).X * 7, Vector2.Zero.DirectionTo(new Vector2(0, -1)).Y * 7, 950, R1_Dmg, 8, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(1, -1)).X * 7, Vector2.Zero.DirectionTo(new Vector2(1, -1)).Y * 7, 950, R1_Dmg, 8, plr.Index);
                         }
 
-                        break;
+                        break; //explosion
                     case 2:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Heal!"), (int)new Color(75, 255, 75).PackedValue, plr.X + 16, plr.Y - 20);
-                        plr.Heal(WorldGen.genRand.Next(10, R2_HP));
+                        plr.Heal(Extensions.Random.Next(10, R2_HP));
 
                         PlayVisuals(plr, 2);
-                        break;
+                        break; //heal
                     case 3:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Stone."), (int)new Color(255, 75, 75).PackedValue, plr.X + 16, plr.Y);
-                        plr.SetBuff(BuffID.Stoned, 100);
+                        plr.SetBuff(BuffID.Stoned, 120, true);
 
                         PlayVisuals(plr, 3);
 
                         i = 0;
                         while (i < 15)
                         {
-                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, WorldGen.genRand.Next(-70, 70) / 10f, WorldGen.genRand.Next(-70, 70) / 10f, ProjectileID.PewMaticHornShot, R3_Dmg, 1.75f, plr.Index);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Extensions.Random.Next(-70, 70) / 10f, Extensions.Random.Next(-70, 70) / 10f, ProjectileID.PewMaticHornShot, R3_Dmg, 1.75f, plr.Index);
                             i++;
                             await Task.Delay(50);
                         }
-                        break;
+                        break; //stone
                     case 4:
-                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Buff Shuffle?"), (int)new Color(255, 255, 75).PackedValue, plr.X + 16, plr.Y);
-                        i = R4_Amount;
-
-                        PlayVisuals(plr, 4);
-
-                        while (i > 0)
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Sacrifice?"), (int)new Color(255, 255, 75).PackedValue, plr.X + 16, plr.Y);
+                        int dmgCounter = 0;
+                        await Task.Delay(500);
+                        foreach (TSPlayer aplr in TShock.Players)
                         {
-                            plr.SetBuff(roll4List[WorldGen.genRand.Next(0, roll4List.Length)], R4_Duration);
-                            i--;
+                            if (aplr != null)
+                            {
+                                if (aplr.Active)
+                                {
+                                    if (!aplr.Dead && aplr != plr && aplr.TPlayer.position.WithinRange(plr.TPlayer.position, 1600))
+                                    {
+                                        aplr.Heal(R4_HP);
+                                        dmgCounter += R4_HP / 2;
+                                    }
+                                }
+                            }
                         }
-                        break;
+                        if (dmgCounter == 0) NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("But there was nobody else."), (int)new Color(255, 75, 75).PackedValue, plr.X + 16, plr.Y);
+                        else plr.DamagePlayer(dmgCounter);
+                        break; //sacrifice
                     case 5:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Nebula Burst!"), (int)new Color(75, 255, 75).PackedValue, plr.X + 16, plr.Y);
                         i = R5_Amount;
                         while (i > 0)
                         {
-                            switch (WorldGen.genRand.Next(1, 4))
+                            switch (Extensions.Random.Next(1, 4))
                             {
                                 case 1:
                                     Terraria.Item.NewItem(new Terraria.DataStructures.EntitySource_DebugCommand(), (int)plr.X + 16, (int)plr.Y, (int)plr.TPlayer.Size.X, (int)plr.TPlayer.Size.X, Terraria.ID.ItemID.NebulaPickup1, 1);
@@ -159,12 +184,12 @@ namespace Abilities
                             }
                             i--;
                         }
-                        break;
+                        break; //nebula burst
                     case 6:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("The dice exploded..?"), (int)new Color(255, 75, 75).PackedValue, plr.X + 16, plr.Y);
                         Extensions.SpawnProjectile(plr.X + 16, plr.Y, 0, 0, ProjectileID.DD2ExplosiveTrapT3Explosion, R6_Dmg, 20, plr.Index);
                         plr.DamagePlayer(R6_Dmg / 4);
-                        break;
+                        break; //dice explosion
                     case 7:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Overcharge?"), (int)new Color(255, 255, 75).PackedValue, plr.X + 16, plr.Y);
                         i = R7_Duration;
@@ -174,30 +199,41 @@ namespace Abilities
                         {
                             PlayVisuals(plr, 7);
 
-                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, 0, 0, ProjectileID.FairyQueenMagicItemShot, R7_Dmg, 2, plr.Index, 0f, 0.45f);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, 0, 0, ProjectileID.FairyQueenMagicItemShot, R7_Dmg, 2, -1, 0f, 0.45f);
                             await Task.Delay(100);
                             i -= 100;
                         }
-                        if (!plr.Dead) plr.KillPlayer();
-                        break;
+                        if (!plr.Dead)
+                        {
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(1, 0)).X * 7, Vector2.Zero.DirectionTo(new Vector2(1, 0)).Y * 7, ProjectileID.FairyQueenMagicItemShot, R7_Dmg, 2, -1, 0f, 0.45f);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(1, 1)).X * 7, Vector2.Zero.DirectionTo(new Vector2(1, 1)).Y * 7, ProjectileID.FairyQueenMagicItemShot, R7_Dmg, 2, -1, 0f, 0.45f);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(0, 1)).X * 7, Vector2.Zero.DirectionTo(new Vector2(0, 1)).Y * 7, ProjectileID.FairyQueenMagicItemShot, R7_Dmg, 2, -1, 0f, 0.45f);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(-1, 1)).X * 7, Vector2.Zero.DirectionTo(new Vector2(-1, 1)).Y * 7, ProjectileID.FairyQueenMagicItemShot, R7_Dmg, 2, -1, 0f, 0.45f);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(-1, 0)).X * 7, Vector2.Zero.DirectionTo(new Vector2(-1, 0)).Y * 7, ProjectileID.FairyQueenMagicItemShot, R7_Dmg, 2, -1, 0f, 0.45f);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(-1, -1)).X * 7, Vector2.Zero.DirectionTo(new Vector2(-1, -1)).Y * 7, ProjectileID.FairyQueenMagicItemShot, R7_Dmg, 2, -1, 0f, 0.45f);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(0, -1)).X * 7, Vector2.Zero.DirectionTo(new Vector2(0, -1)).Y * 7, ProjectileID.FairyQueenMagicItemShot, R7_Dmg, 2, -1, 0f, 0.45f);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y, Vector2.Zero.DirectionTo(new Vector2(1, -1)).X * 7, Vector2.Zero.DirectionTo(new Vector2(1, -1)).Y * 7, ProjectileID.FairyQueenMagicItemShot, R7_Dmg, 2, -1, 0f, 0.45f);
+                            plr.KillPlayer();
+                        }
+                        break; //overcharge
                     case 8:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Rooted?"), (int)new Color(255, 255, 75).PackedValue, plr.X + 16, plr.Y);
                         i = R8_Duration;
-                        plr.SetBuff(BuffID.Webbed, R8_Duration);
+                        plr.SetBuff(BuffID.Webbed, R8_Duration, true);
                         while (i > 0 && !plr.Dead)
                         {
                             plr.Heal(R8_HP);
-                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, Extensions.Random.Next(-10, 11) / 10f, Extensions.Random.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
                             await Task.Delay(250);
-                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, Extensions.Random.Next(-10, 11) / 10f, Extensions.Random.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
                             await Task.Delay(250);
-                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, Extensions.Random.Next(-10, 11) / 10f, Extensions.Random.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
                             await Task.Delay(250);
-                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, WorldGen.genRand.Next(-10, 11) / 10f, WorldGen.genRand.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, Extensions.Random.Next(-10, 11) / 10f, Extensions.Random.Next(-10, 11) / 10f, ProjectileID.SharpTears, R8_Dmg, 7, plr.Index, 0f, R8_Scale);
                             await Task.Delay(250);
                             i -= 60;
                         }
-                        break;
+                        break; //rooted
                     case 9:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Teleportation?"), (int)new Color(255, 255, 75).PackedValue, plr.X + 16, plr.Y);
                         i = R9_Count;
@@ -206,7 +242,7 @@ namespace Abilities
                         {
                             PlayVisuals(plr, 9_1);
 
-                            plr.Teleport(WorldGen.genRand.Next(-480, 481) + plr.X, WorldGen.genRand.Next(-480, 481) + plr.Y);
+                            plr.Teleport(Extensions.Random.Next(-480, 481) + plr.X, Extensions.Random.Next(-480, 481) + plr.Y);
                             Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, 0, 0, 950, R9_Dmg, 14, plr.Index);
                             await Task.Delay(750);
                             i--;
@@ -216,22 +252,22 @@ namespace Abilities
 
                         plr.Teleport(savedPos.X, savedPos.Y);
                         Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, 0, 0, 950, R9_Dmg, 14, plr.Index);
-                        break;
+                        break; //teleportation
                     case 10:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Smoke Bomb!"), (int)new Color(75, 255, 75).PackedValue, plr.X + 16, plr.Y);
                         i2 = R10_Duration;
 
                         PlayVisuals(plr, 10);
 
-                        plr.SetBuff(BuffID.Invisibility, R10_Ticks);
-                        plr.SetBuff(BuffID.WitheredWeapon, R10_Ticks);
+                        plr.SetBuff(BuffID.Invisibility, R10_Ticks, true);
+                        plr.SetBuff(BuffID.WitheredWeapon, R10_Ticks, true);
                         while (i2 >= 1.33)
                         {
                             plr.SendData(PacketTypes.PlayerDodge, number: plr.Index, number2: 2);
                             i2 -= 0.1f;
                             await Task.Delay(100);
                         }
-                        break;
+                        break; //smoke bomb
                     case 11:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Magic Cleaver!"), (int)new Color(75, 255, 75).PackedValue, plr.X + 16, plr.Y);
                         PlayVisuals(plr, 11);
@@ -249,36 +285,132 @@ namespace Abilities
                                 Extensions.SpawnProjectile(npc.position.X + 16, npc.position.Y - 160, 0, 12, ProjectileID.LightsBane, 0, 0, plr.Index, 2.5f);
                             }
                         }
-                        break;
+                        break; //magic cleaver
                     case 12:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Explosive Effect!"), (int)new Color(75, 255, 75).PackedValue, plr.X + 16, plr.Y);
                         PlayVisuals(plr, 12);
-
-                        Extensions.ExplosiveEffectState++;
-                        await Task.Delay(R12_Duration);
-                        Extensions.ExplosiveEffectState--;
-                        break;
+                        foreach (NPC npc in Main.npc)
+                        {
+                            if (npc != null && npc.active && npc.rarity != 11 && npc.type != 0 && npc.netID != 400 && npc.netID != 70 && npc.netID != 72 &&
+                                !npc.friendly && !npc.CountsAsACritter && npc.position.WithinRange(plr.TPlayer.position, R12_Range * 16))
+                            {
+                                Extensions.SpawnProjectile(npc.position.X + 16, npc.position.Y, 0, 0, 950, 0, 8, -1);
+                                npc.rarity = 10;
+                            }
+                        }
+                        break; //explosive effect
                     case 13:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Inked."), (int)new Color(255, 75, 75).PackedValue, plr.X + 16, plr.Y);
                         PlayVisuals(plr, 13);
 
-                        plr.SetBuff(BuffID.Obstructed, 600);
-                        plr.SetBuff(BuffID.Blackout, 600);
-                        break;
+                        plr.SetBuff(BuffID.Obstructed, R13_Duration, true);
+                        break; //inked
                     case 14:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Withered."), (int)new Color(255, 75, 75).PackedValue, plr.X + 16, plr.Y);
                         PlayVisuals(plr, 14);
 
-                        plr.SetBuff(BuffID.WitheredArmor, 900);
-                        plr.SetBuff(BuffID.WitheredWeapon, 900);
-                        break;
+                        plr.SetBuff(BuffID.WitheredArmor, R14_Duration, true);
+                        plr.SetBuff(BuffID.WitheredWeapon, R14_Duration, true);
+                        break; //withered
                     case 15:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Zapped."), (int)new Color(255, 75, 75).PackedValue, plr.X + 16, plr.Y);
                         PlayVisuals(plr, 15);
 
                         plr.DamagePlayer(R15_Dmg);
-                        plr.SetBuff(BuffID.Electrified, 600);
-                        break;
+                        plr.SetBuff(BuffID.Electrified, R15_Duration, true);
+                        break; //zapped
+                    case 16:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Hyper Dash!"), (int)new Color(75, 255, 75).PackedValue, plr.X + 16, plr.Y);
+
+                        i = R16_Count;
+                        while (i > 0)
+                        {
+                            target = Extensions.GetNearestEnemy(plr.TPlayer.position);
+                            if (target != null && !plr.Dead)
+                            {
+                                PlayVisuals(plr, 13);
+                                plr.SendData(PacketTypes.PlayerDodge, number: (byte)plr.Index, number2: 2);
+                                plr.TPlayer.velocity = plr.TPlayer.position.DirectionTo(target.position) * 30;
+                                TSPlayer.All.SendData(PacketTypes.PlayerUpdate, "", plr.Index);
+                                for (int i3 = 0; i3 < 15; i3++)
+                                {
+                                    Extensions.SpawnProjectile(plr.TPlayer.position.X + 16, plr.TPlayer.position.Y + 16, Extensions.Random.Next(-10, 11)/10f, Extensions.Random.Next(-10, 11)/10f, ProjectileID.LightsBane, R16_Dmg, 2, plr.Index, 2.25f);
+                                    await Task.Delay(20);
+                                }
+                            }
+                            await Task.Delay(200);
+                            i--;
+                        }
+                        break; //hyper dash
+                    case 17:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Shoop Da Whoop!"), (int)new Color(75, 255, 75).PackedValue, plr.X + 16, plr.Y);
+                        i = R17_Duration;
+                        while (i > 0 && !plr.Dead)
+                        {
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 13, plr.TPlayer.direction * 20, Extensions.Random.Next(-10, 11) / 10f, ProjectileID.LaserMachinegunLaser, R17_Dmg, 6, plr.Index);
+                            await Task.Delay(50);
+                            i -= 3;
+                        }
+                        break; //shoop da whoop
+                    case 18:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Bullet Hell."), (int)new Color(255, 75, 75).PackedValue, plr.X + 16, plr.Y);
+                        i = R18_Duration;
+                        while (i > 0 && !plr.Dead)
+                        {
+                            foreach (NPC npc in Main.npc)
+                            {
+                                if (npc != null && npc.active && npc.type != 0 && !npc.friendly && !npc.CountsAsACritter && npc.position.WithinRange(plr.TPlayer.position, 1600))
+                                {
+                                    Extensions.SpawnProjectile(npc.position.X + 16, npc.position.Y, npc.position.DirectionTo(plr.TPlayer.position).X * 12, npc.position.DirectionTo(plr.TPlayer.position).Y * 12, ProjectileID.RuneBlast, R18_Dmg, 0, -1);
+                                    await Task.Delay(80);
+                                }
+                            }
+                            await Task.Delay(500);
+                            i--;
+                        }
+                        break; //bullet hell
+                    case 19:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Cursed Inferno?"), (int)new Color(255, 255, 75).PackedValue, plr.X + 16, plr.Y);
+                        i = R19_Duration;
+                        plr.SetBuff(BuffID.CursedInferno, R19_Duration / 2, true);
+                        plr.SetBuff(BuffID.Panic, R19_Duration, true);
+                        while (i > 0 && !plr.Dead)
+                        {
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 5, Extensions.Random.Next(-100, 101) / 10f, Extensions.Random.Next(-100, 101) / 10f, ProjectileID.CursedFlameFriendly, R19_Dmg, 3, plr.Index);
+                            await Task.Delay(200);
+                            i -= 10;
+                        }
+                        break; //cursed inferno
+                    case 20:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("..."), (int)new Color(255, 75, 75).PackedValue, plr.X + 16, plr.Y);
+                        Extensions.SpawnProjectile(savedPos.X, savedPos.Y, 0, 0, 950, 0, 8, -1);
+                        await Task.Delay(850);
+                        Extensions.SpawnProjectile(savedPos.X, savedPos.Y, 0, 0, 950, 0, 8, -1);
+                        await Task.Delay(850);
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("THE SKELETON APPEARS"), (int)new Color(255, 75, 75).PackedValue, plr.X + 16, plr.Y);
+                        int enemyID = Extensions.NewNPC((int)savedPos.X - 48, (int)savedPos.Y - 48, 68);
+                        Main.npc[enemyID].lifeMax = R20_Health;
+                        Main.npc[enemyID].life = R20_Health;
+                        Main.npc[enemyID].active = true;
+                        Main.npc[enemyID].value = 1f;
+                        Main.npc[enemyID].rarity = 11;
+                        NetMessage.SendData((int)PacketTypes.NpcUpdate, -1, -1, null, enemyID);
+                        break; //THE SKELETON APPEARS
+                    case 21:
+                        NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Bomb Jump?"), (int)new Color(255, 255, 75).PackedValue, plr.X + 16, plr.Y);
+                        i = R21_Count;
+                        Extensions.SpawnProjectile(plr.X + 16, plr.Y, 0, 0, ProjectileID.DD2ExplosiveTrapT3Explosion, R21_Dmg, 9, plr.Index);
+                        plr.DamagePlayer(R21_Dmg / 2);
+                        plr.TPlayer.velocity = new Vector2(0,-15);
+                        TSPlayer.All.SendData(PacketTypes.PlayerUpdate, "", plr.Index);
+                        await Task.Delay(1000);
+                        while (i > 0)
+                        {
+                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, plr.TPlayer.direction * 8, Extensions.Random.Next(-60, 61) / 10f, ProjectileID.BouncyGrenade, R21_Dmg, 4, plr.Index);
+                            await Task.Delay(80);
+                            i--;
+                        }
+                        break; //bomb jump
                 }
             });
 
