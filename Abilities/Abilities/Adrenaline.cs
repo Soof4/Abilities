@@ -44,17 +44,10 @@ namespace Abilities
         {
             TSPlayer plr = (TSPlayer)args[0];
 
-            dw.ParticleOrchestraSettings settings = new() {
-                IndexOfPlayerWhoInvokedThis = (byte)plr.Index,
-                MovementVector = new(0, 0),
-                PositionInWorld = new(plr.X + 16, plr.Y + 16),
-                UniqueInfoPiece = 1171
-            };
-
-            dw.ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.WaffleIron, settings);
-            dw.ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.StellarTune, settings);
-            settings.PositionInWorld = new(plr.X + 8, plr.Y - 16);
-            dw.ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ItemTransfer, settings);
+            Projectile.NewProjectile(Projectile.GetNoneSource(),
+                        new(plr.X + 16, plr.Y + 16), new(0, 0),
+                        Type: 443, Damage: 0, KnockBack: 0,
+                        ai0: 0, ai1: 0, ai2: 0);
         }
     }
 }

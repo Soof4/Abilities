@@ -7,9 +7,23 @@ namespace Abilities
 {
     public class TheBound : Ability
     {
+        internal static Dictionary<int, int> BoundedPlayersHPPairs = new Dictionary<int, int>();
+        private int BarrierAmount;
+
+        public TheBound(int abilityLevel)
+        {
+            CalculateProperties(abilityLevel);
+        }
+
         internal override void CalculateProperties(params object[] args)
         {
+            int abilityLevel = (int)args[0];
 
+            if (abilityLevel != AbilityLevel)
+            {
+                AbilityLevel = abilityLevel;
+                BarrierAmount = 5 + abilityLevel * 5;
+            }
         }
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
@@ -32,23 +46,47 @@ namespace Abilities
                 return;
             }
 
-            int seconds = 30;
+            int curBarrier = BarrierAmount;
+            plr.TPlayer.statLifeMax += curBarrier;
+            tp.TPlayer.statLifeMax += curBarrier;
+
+            if (!BoundedPlayersHPPairs.TryAdd(plr.Index, curBarrier))
+            {
+                BoundedPlayersHPPairs[plr.Index] += curBarrier;
+            }
+
+            if (!BoundedPlayersHPPairs.TryAdd(tp.Index, curBarrier))
+            {
+                BoundedPlayersHPPairs[tp.Index] += curBarrier;
+            }
+
+            TSPlayer.All.SendData(PacketTypes.PlayerHp, number: plr.Index);
+            TSPlayer.All.SendData(PacketTypes.PlayerHp, number: tp.Index);
 
             Task.Run(async () =>
             {
-                while (seconds > 0 && plr.Active && tp.Active && !plr.Dead && !tp.Dead && tp.LastNetPosition.WithinRange(plr.LastNetPosition, 100*16))
+                while (plr.Active && tp.Active && !plr.Dead && !tp.Dead && tp.LastNetPosition.WithinRange(plr.LastNetPosition, 100 * 16))
                 {
                     PlayVisuals(plr, tp);
-
-                    plr.Heal(2);
-                    tp.Heal(2);
-
-                    seconds--;
                     await Task.Delay(1000);
                 }
+
+                plr.TPlayer.statLifeMax -= curBarrier;
+                tp.TPlayer.statLifeMax -= curBarrier;
+
+                if (!BoundedPlayersHPPairs.TryAdd(plr.Index, curBarrier))
+                {
+                    BoundedPlayersHPPairs[plr.Index] -= curBarrier;
+                }
+
+                if (!BoundedPlayersHPPairs.TryAdd(tp.Index, curBarrier))
+                {
+                    BoundedPlayersHPPairs[tp.Index] -= curBarrier;
+                }
+
+                TSPlayer.All.SendData(PacketTypes.PlayerHp, number: plr.Index);
+                TSPlayer.All.SendData(PacketTypes.PlayerHp, number: tp.Index);
             });
-
-
         }
 
         internal override void PlayVisuals(params object[] args)
@@ -56,7 +94,7 @@ namespace Abilities
             TSPlayer plr = (TSPlayer)args[0];
             TSPlayer plr2 = (TSPlayer)args[1];
 
-            Shapes.DrawLine(plr.X, plr.Y, plr2.X, plr2.Y, 64, ParticleOrchestraType.StardustPunch, (byte)plr.Index);
+            Shapes.DrawLine(plr.X + 16, plr.Y + 16, plr2.X + 16, plr2.Y + 16, 64, ParticleOrchestraType.Keybrand, (byte)plr.Index);
         }
     }
 }
