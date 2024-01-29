@@ -31,13 +31,15 @@ namespace Abilities
         {
             CalculateProperties(abilityLevel);
             PlayVisuals(plr);
+            
+            double secs = DodgeDurationInSeconds;
 
             Task.Run(async () =>
             {
-                while (DodgeDurationInSeconds >= 1.33)
+                while (secs >= 1.33)
                 {
                     plr.SendData(PacketTypes.PlayerDodge, number: plr.Index, number2: 2);
-                    DodgeDurationInSeconds -= 0.1;
+                    secs -= 0.1;
                     await Task.Delay(100);
                 }
             });
