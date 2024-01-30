@@ -13,7 +13,8 @@ public enum AbilityType {
     Harvest,
     IceGolem,
     MagicDice,
-    TheBound
+    TheBound,
+    Alchemist
 }
 
 }

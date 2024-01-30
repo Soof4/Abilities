@@ -143,27 +143,7 @@ namespace Abilities
             TShock.Players[(byte)args.number].SetBuff(307, (int)((CooldownLengths[(byte)args.number] - (DateTime.UtcNow - Cooldowns[(byte)args.number]).TotalSeconds) * 60), true);
 
         }
-
-        /// <summary>
-        /// Register this into ServerApi.Hooks.ServerLeave in order to reset player healths on leave.
-        /// </summary>
-        public static void TheBoundOnPlayerLeaveHook(LeaveEventArgs args)
-        {
-            if (TShock.ShuttingDown)
-            {
-                foreach (var kvp in TheBound.BoundedPlayersHPPairs)
-                {
-                    TShock.Players[kvp.Key].TPlayer.statLifeMax -= kvp.Value;
-                    TShock.Players[kvp.Key].SaveServerCharacter();
-                }
-            }
-            else if (TheBound.BoundedPlayersHPPairs.ContainsKey(args.Who))
-            {
-                TShock.Players[args.Who].TPlayer.statLifeMax -= TheBound.BoundedPlayersHPPairs[args.Who];
-                TShock.Players[args.Who].SaveServerCharacter();
-                TheBound.BoundedPlayersHPPairs.Remove(args.Who);
-            }
-        }
+        
         internal static bool IsInCooldown(byte casterId, int cooldown)
         {
             if (Cooldowns.ContainsKey(casterId))
