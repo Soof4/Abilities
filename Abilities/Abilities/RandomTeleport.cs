@@ -1,6 +1,7 @@
 using TShockAPI;
 using Terraria;
 using Terraria.GameContent.Drawing;
+using Microsoft.Xna.Framework;
 
 namespace Abilities
 {
@@ -29,7 +30,7 @@ namespace Abilities
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
             CalculateProperties(abilityLevel);
-            PlayVisuals(plr, 0, 0);
+            PlayVisuals(plr, 0f, 0f);
 
             float x = 0;
             float y = 0;
@@ -47,8 +48,19 @@ namespace Abilities
                 }
             }
 
-            plr.Teleport(x + plr.X, y + plr.Y);
+            Vector2 inPortalPos = plr.TPlayer.Bottom;
+            Vector2 outPortalPos = plr.TPlayer.Bottom + new Vector2(x, y);
 
+            foreach (TSPlayer p in TShock.Players)
+            {
+                if (p != null && p.Active && !p.Dead && p.TPlayer.position.WithinRange(plr.TPlayer.position, 20 * 16))
+                {
+                    p.TPlayer.PotionOfReturnHomePosition = inPortalPos;
+                    p.TPlayer.PotionOfReturnOriginalUsePosition = outPortalPos;
+
+                    p.SendData(PacketTypes.PlayerUpdate, number: p.Index);
+                }
+            }
             PlayVisuals(plr, x, y);
         }
 
