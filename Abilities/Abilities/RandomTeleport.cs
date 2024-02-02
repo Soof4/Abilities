@@ -36,8 +36,8 @@ namespace Abilities
 
             for (int i = 0; i < 100; i++)
             {
-                int d = WorldGen.genRand.Next(160, RangeInBlocks * 16);
-                double tetha = WorldGen.genRand.NextDouble() * Math.Tau;
+                int d = Extensions.Random.Next(160, RangeInBlocks * 16);
+                double tetha = Extensions.Random.NextDouble() * Math.Tau;
                 x = d * (float)Math.Cos(tetha);
                 y = d * (float)Math.Sin(tetha);
 

@@ -98,10 +98,10 @@ namespace Abilities
                         while (ms < 2500)
                         {
                             Extensions.SpawnProjectile(
-                                posX: plr.X + WorldGen.genRand.Next(33),
-                                posY: plr.Y + WorldGen.genRand.Next(-8, 33),
-                                speedX: WorldGen.genRand.Next(-4, 5),
-                                speedY: WorldGen.genRand.Next(-4, 5),
+                                posX: plr.X + Extensions.Random.Next(33),
+                                posY: plr.Y + Extensions.Random.Next(-8, 33),
+                                speedX: Extensions.Random.Next(-4, 5),
+                                speedY: Extensions.Random.Next(-4, 5),
                                 type: ProjectileID.FairyQueenMagicItemShot,
                                 damage: BoltDmg,
                                 knockback: 6,

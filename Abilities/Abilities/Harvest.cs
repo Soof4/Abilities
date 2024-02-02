@@ -35,13 +35,24 @@ namespace Abilities
 
             Task.Run(async () =>
             {
+                int loopsTillBuffLoop = 0;
                 int ms = 0;
                 while (ms < 10000)
                 {
-                    float randX = plr.X + 16 + WorldGen.genRand.Next(-64, 64);
-                    float randY = plr.Y + 16 + WorldGen.genRand.Next(-64, 64);
-                    Extensions.SpawnProjectile(randX, randY, 0, 0, ProjectileID.ScytheWhipProj, Damage, 6, plr.Index);
+                    if (loopsTillBuffLoop == 0) {
+                        foreach (NPC npc in Main.npc) {
+                            if (npc != null && npc.active && npc.position.WithinRange(plr.TPlayer.position, 16*16)) {
+                                npc.AddBuff(BuffID.ScytheWhipEnemyDebuff, 10);
+                                TSPlayer.All.SendData(PacketTypes.NpcUpdateBuff, number: npc.whoAmI);
+                            }
+                        }
+                        loopsTillBuffLoop = 6;
+                    }
+                    float randX = plr.X + 16 + Extensions.Random.Next(-64, 64);
+                    float randY = plr.Y + 16 + Extensions.Random.Next(-64, 64);
+                    Extensions.SpawnProjectile(randX, randY, 0, 0, ProjectileID.ScytheWhipProj, Damage, 4, plr.Index);
                     ms += ProjSpawnInterval;
+                    loopsTillBuffLoop--;
                     await Task.Delay(ProjSpawnInterval);
                 }
             });
