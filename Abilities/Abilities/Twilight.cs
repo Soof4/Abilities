@@ -50,9 +50,9 @@ namespace Abilities
             switch (Extensions.TwilightCycles[plr.Name])
             {
                 case 1:    //Brilliant Eyes
-                    plr.SetBuff(11, EyesBuffDuration, false);
-                    plr.SetBuff(12, EyesBuffDuration, false);
-                    plr.SetBuff(17, EyesBuffDuration, false);
+                    plr.SetBuff(BuffID.Shine, EyesBuffDuration, false);
+                    plr.SetBuff(BuffID.NightOwl, EyesBuffDuration, false);
+                    plr.SetBuff(BuffID.Hunter, EyesBuffDuration, false);
                     switch (abilityLevel)
                     {
                         case 1:
@@ -158,7 +158,7 @@ namespace Abilities
                     }
                     break;
                 case 2:    //Judgement
-                    plr.SetBuff(160, 180, true);
+                    plr.SetBuff(BuffID.Dazed, 180, true);
                     Task.Run(async () =>
                     {
                         await Task.Delay(3000);
@@ -198,9 +198,9 @@ namespace Abilities
                 case 3:    //Punishment
                     Extensions.SpawnProjectile(plr.X + 70, plr.Y, 3, 0, ProjectileID.DD2ExplosiveTrapT3Explosion, PunishDmg, PunishKB, plr.Index);
                     Extensions.SpawnProjectile(plr.X - 70, plr.Y, -3, 0, ProjectileID.DD2ExplosiveTrapT3Explosion, PunishDmg, PunishKB, plr.Index);
-                    plr.SetBuff(173, PunishBuffDuration, false);
-                    plr.SetBuff(176, PunishBuffDuration, false);
-                    plr.SetBuff(179, PunishBuffDuration, false);
+                    plr.SetBuff(BuffID.NebulaUpLife1, PunishBuffDuration, false);
+                    plr.SetBuff(BuffID.NebulaUpMana1, PunishBuffDuration, false);
+                    plr.SetBuff(BuffID.NebulaUpDmg1, PunishBuffDuration, false);
                     break;
 
             }

@@ -1,0 +1,84 @@
+[1] Dryad's Ring of Healing
+Summons a healing circle around the player. The circle heals everyone inside it and gives them Dryad's Blessing buff.
+
+
+[2] Ring of Dracula
+Summons a circle around the player that chooses the enemy with highest hp and steals some health from it.
+
+
+[3] Set's Blessing
+Turns you into sand which gives you immunity-frames for some amount of time.
+
+
+[4] Adrenaline
+Pumps adrenaline into your blood. Increases movement speed and damage of the player.
+
+
+[5] Witch
+Curse your enemies with debuffs by summoning an ancient magical circle.
+
+
+[6] Marthymr
+Blow yourself up to damage enemies nearby with shockwave.
+
+
+[7] RandomTeleport
+Opens a teleportation portal to a random location for everyone around the caster.
+
+
+[8] Fairy of Light
+Cycles through 4 different sub-abilities:
+    1: Ethereal Lance   -> Spawns horizontal ethereal lances near the player.
+    2: Dash             -> Dashes towards the direction player is looking at, and creates projectiles behind the player which can damage enemies.
+    3: Prismatic Bolts  -> Periodically spawns prismatic bolts around the player that target the nearby enemies.
+    4: Sundance         -> Webs the player in the location and spawns projectiles that resemble Empress of Light's sundance attack.
+
+
+[9] Twilight
+Cycles through 3 different sub-abilities:
+    1: Brilliant Eyes   -> Get vision buffs and spawn projectiles around the player that target the nearby enemies.
+    2: Judgement        -> Dazes the player for a bit and attacks enemies within a range. If an enemy dies after the attack, they'll spawn a projectile which will attack other enemies.
+    3: Punishment       -> Creates an explosion near the player that damages enemies nearby and buffs the player for a few seconds.
+
+
+[10] Harvest
+Harvest the enemies nearby the player with Reaper's dark magic.
+
+
+[11] Magic Dice
+Rolls a D21, and cast a sub-ability (some good, some neutral, some bad) based on roll:
+    1: Explosion
+    2: Heal
+    3: Stone
+    4: Sacrifice
+    5: Nebula Burst
+    6: Dice Explosion
+    7: Overcharge
+    8: Rooted
+    9: Teleportation
+    10: Smoke Bomb
+    11: Magic Cleaver
+    12: Explosive Effect
+    13: Inked
+    14: Withered
+    15: Zapped
+    16: Hyper Dash
+    17: Shoop da Whoop
+    18: Bullet Hell
+    19: Cursed Inferno
+    20: The Skeleton Appears
+    21: Bomb Jump
+
+
+[12] The Bound
+Bound with the nearest player and get healed every second as long as the bound is not broken.
+
+
+[13] Alchemist
+Throws different kinds of potions around the player that lasts for a few seconds in their location:
+    1: Heal Potion
+    2: Harm Potion
+    3: Vortex Potion
+    4: Curse Potion
+    5: Shield Potion
+    6: Power Potion
