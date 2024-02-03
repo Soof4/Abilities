@@ -12,3 +12,5 @@ A dependency for TShock plugins. Adds various abilities:
 * Harvest
 * IceGolem
 * MagicDice
+* TheBound
+* Alchemist
