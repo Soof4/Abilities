@@ -10,7 +10,7 @@ A dependency for TShock plugins. Adds various abilities:
 * [FairyOfLight](https://github.com/Soof4/Abilities/blob/e4992318375c43c6765ffb1b324563f35acb9422/Ability-Descriptions.txt#L29-L34)
 * [Twilight](https://github.com/Soof4/Abilities/blob/e4992318375c43c6765ffb1b324563f35acb9422/Ability-Descriptions.txt#L37-L41)
 * [Harvest](https://github.com/Soof4/Abilities/blob/e4992318375c43c6765ffb1b324563f35acb9422/Ability-Descriptions.txt#L44-L45)
-* [IceGolem]()
+* [IceGolem](https://github.com/Soof4/Abilities/blob/fc96ab026f9b1495a60d8b85403baf41e6d5b0c7/Ability-Descriptions.txt#L48-L49)
 * [MagicDice](https://github.com/Soof4/Abilities/blob/e4992318375c43c6765ffb1b324563f35acb9422/Ability-Descriptions.txt#L48-L70)
 * [TheBound](https://github.com/Soof4/Abilities/blob/e4992318375c43c6765ffb1b324563f35acb9422/Ability-Descriptions.txt#L73-L74)
 * [Alchemist](https://github.com/Soof4/Abilities/blob/e4992318375c43c6765ffb1b324563f35acb9422/Ability-Descriptions.txt#L77-L84)
