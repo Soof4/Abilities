@@ -48,6 +48,7 @@ Harvest the enemies nearby the player with Reaper's dark magic.
 [11] Ice Golem
 Slows the player down and regenerated health.
 
+
 [12] Magic Dice
 Rolls a D21, and cast a sub-ability (some good, some neutral, some bad) based on roll:
     1: Explosion
