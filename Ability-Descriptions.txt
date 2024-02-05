@@ -45,7 +45,10 @@ Cycles through 3 different sub-abilities:
 Harvest the enemies nearby the player with Reaper's dark magic.
 
 
-[11] Magic Dice
+[11] Ice Golem
+Slows the player down and regenerated health.
+
+[12] Magic Dice
 Rolls a D21, and cast a sub-ability (some good, some neutral, some bad) based on roll:
     1: Explosion
     2: Heal
@@ -70,11 +73,11 @@ Rolls a D21, and cast a sub-ability (some good, some neutral, some bad) based on
     21: Bomb Jump
 
 
-[12] The Bound
+[13] The Bound
 Bound with the nearest player and get healed every second as long as the bound is not broken.
 
 
-[13] Alchemist
+[14] Alchemist
 Throws different kinds of potions around the player that lasts for a few seconds in their location:
     1: Heal Potion
     2: Harm Potion
