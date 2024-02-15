@@ -11,8 +11,8 @@ namespace Abilities
     {
         internal static Dictionary<byte, DateTime> Cooldowns = new();
         internal static Dictionary<byte, int> CooldownLengths = new();
-        internal static Dictionary<string, int> FairyOfLightCycles = new();
-        internal static Dictionary<string, int> TwilightCycles = new();
+        internal static Dictionary<string, int> FairyOfLightCycles = new();    //TODO: Move this into its own class
+        internal static Dictionary<string, int> TwilightCycles = new();    //TODO: Move this into its own class
         internal static float HallowedWeaponColor = 0;
         internal static int ExplosiveEffectState = 0;
         internal static Random Random = new Random();
@@ -30,34 +30,25 @@ namespace Abilities
 
         internal static float GetNextHallowedWeaponColor()
         {
-            if (HallowedWeaponColor >= 1)
-            {
-                HallowedWeaponColor = 0;
-            }
-            else
-            {
-                HallowedWeaponColor += 0.015f;
-            }
-            return HallowedWeaponColor;
+            return HallowedWeaponColor >= 1 ? HallowedWeaponColor = 0 : HallowedWeaponColor += 0.015f;
         }
 
         public static int SpawnProjectile(float posX, float posY, float speedX, float speedY, int type,
             int damage, float knockback, int owner = -1, float ai_0 = 0, float ai_1 = 0, float ai_2 = 0)
         {
-            int projIndex = Projectile.NewProjectile(
-                                spawnSource: Projectile.GetNoneSource(),
-                                X: posX,
-                                Y: posY,
-                                SpeedX: speedX,
-                                SpeedY: speedY,
-                                Type: type,
-                                Damage: damage,
-                                KnockBack: knockback,
-                                Owner: owner,
-                                ai0: ai_0,
-                                ai1: ai_1,
-                                ai2: ai_2
-                            );
+            int projIndex = Projectile.NewProjectile(spawnSource: Projectile.GetNoneSource(),
+                                                     X: posX,
+                                                     Y: posY,
+                                                     SpeedX: speedX,
+                                                     SpeedY: speedY,
+                                                     Type: type,
+                                                     Damage: damage,
+                                                     KnockBack: knockback,
+                                                     Owner: owner,
+                                                     ai0: ai_0,
+                                                     ai1: ai_1,
+                                                     ai2: ai_2
+                                                     );
 
             Main.projectile[projIndex].ai[0] = ai_0;
             Main.projectile[projIndex].ai[1] = ai_1;
@@ -96,7 +87,7 @@ namespace Abilities
             return (0, -1);
         }
 
-        public static int NewNPC(int X, int Y, int Type)
+        public static int NewNPC(int x, int y, int type)
         {
             int index = 200;
             for (int i = 0; i < 200; i++)
@@ -107,23 +98,17 @@ namespace Abilities
                     break;
                 }
             }
-            Main.npc[index].SetDefaults(Type);
+            Main.npc[index].SetDefaults(type);
             Main.npc[index].velocity.X = 0;
             Main.npc[index].velocity.Y = 0;
-            Main.npc[index].position.X = X;
-            Main.npc[index].position.Y = Y;
+            Main.npc[index].position.X = x;
+            Main.npc[index].position.Y = y;
             return index;
         }
 
-        public static void MakeSound(Vector2 pos, ushort index, int style, float volume, float pitch)
+        public static void MakeSound(Vector2 pos, ushort index, int style, float volume, float pitch, int remoteClient = -1, int ignoreClient = -1)
         {
-            NetMessage.NetSoundInfo soundinfo = new NetMessage.NetSoundInfo();
-            soundinfo.position = pos;
-            soundinfo.soundIndex = index;
-            soundinfo.style = style;
-            soundinfo.volume = volume;
-            soundinfo.pitchOffset = pitch;
-            NetMessage.PlayNetSound(soundinfo);
+            NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(pos, index, style, volume, pitch), remoteClient, ignoreClient);
         }
 
         public static NPC? GetNearestEnemy(Vector2 pos)
@@ -133,8 +118,9 @@ namespace Abilities
             {
                 if (npc != null && npc.active && npc.type != 0 && npc.netID != 400 && npc.netID != 70 && npc.netID != 72 && !npc.friendly && !npc.CountsAsACritter)
                 {
-                    if (nearestEnemy == null) nearestEnemy = npc;
-                    if (npc.position.Distance(pos) < nearestEnemy.position.Distance(pos)) nearestEnemy = npc;
+                    if (nearestEnemy == null || npc.position.Distance(pos) < nearestEnemy.position.Distance(pos)) {
+                        nearestEnemy = npc;
+                    }
                 }
             }
             return nearestEnemy;
@@ -143,14 +129,14 @@ namespace Abilities
         public static void ExplosiveEffectEffect(Vector2 pos, int HP)
         {
             if (ExplosiveEffectState <= 0) return;
-            Extensions.SpawnProjectile(pos.X + 16, pos.Y, 5, 0, 950, HP, 8, -1);
-            Extensions.SpawnProjectile(pos.X + 16, pos.Y, 4, 4, 950, HP, 8, -1);
-            Extensions.SpawnProjectile(pos.X + 16, pos.Y, 0, 5, 950, HP, 8, -1);
-            Extensions.SpawnProjectile(pos.X + 16, pos.Y, -4, 4, 950, HP, 8, -1);
-            Extensions.SpawnProjectile(pos.X + 16, pos.Y, -5, 0, 950, HP, 8, -1);
-            Extensions.SpawnProjectile(pos.X + 16, pos.Y, -4, -4, 950, HP, 8, -1);
-            Extensions.SpawnProjectile(pos.X + 16, pos.Y, 0, -5, 950, HP, 8, -1);
-            Extensions.SpawnProjectile(pos.X + 16, pos.Y, 4, -4, 950, HP, 8, -1);
+            SpawnProjectile(pos.X + 16, pos.Y, 5, 0, 950, HP, 8, -1);
+            SpawnProjectile(pos.X + 16, pos.Y, 4, 4, 950, HP, 8, -1);
+            SpawnProjectile(pos.X + 16, pos.Y, 0, 5, 950, HP, 8, -1);
+            SpawnProjectile(pos.X + 16, pos.Y, -4, 4, 950, HP, 8, -1);
+            SpawnProjectile(pos.X + 16, pos.Y, -5, 0, 950, HP, 8, -1);
+            SpawnProjectile(pos.X + 16, pos.Y, -4, -4, 950, HP, 8, -1);
+            SpawnProjectile(pos.X + 16, pos.Y, 0, -5, 950, HP, 8, -1);
+            SpawnProjectile(pos.X + 16, pos.Y, 4, -4, 950, HP, 8, -1);
         }
 
         public static float GetDistance(float posX1, float posY1, float posX2, float posY2)

@@ -13,7 +13,6 @@ namespace Abilities
             CalculateProperties(abilityLevel);
         }
 
-
         internal override void CalculateProperties(params object[] args)
         {
             int abilityLevel = (int)args[0];
@@ -25,7 +24,6 @@ namespace Abilities
                 RangeInBlocks = 25 + abilityLevel * 10;
             }
         }
-
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
@@ -54,7 +52,6 @@ namespace Abilities
                     PlaySounds(p, DurationInSecs * 1000);
                 }
             }
-
         }
 
         internal override void PlayVisuals(params object[] args)
@@ -83,16 +80,15 @@ namespace Abilities
             (ushort, int) dreadCharge = Extensions.GetSoundIndexAndId(2, 170);
             (ushort, int) koboldFlyerDeath1 = Extensions.GetSoundIndexAndId(42, 129);
 
-
             Task.Run(async () =>
             {
                 if (Extensions.Random.Next(2) == 0)
                 {
-                    NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, abigailCry0.Item1, abigailCry0.Item2, 3), plr.Index);
+                    NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, abigailCry0.Item1, abigailCry0.Item2, 10), plr.Index);
                 }
                 else
                 {
-                    NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, abigailCry1.Item1, abigailCry1.Item2, 3), plr.Index);
+                    NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, abigailCry1.Item1, abigailCry1.Item2, 10), plr.Index);
                 }
 
                 int ms = 0;
@@ -113,16 +109,16 @@ namespace Abilities
                         switch (Extensions.Random.Next(4))
                         {
                             case 0:
-                                NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, abigailUpgrade1.Item1, abigailUpgrade1.Item2, 3), plr.Index);
+                                NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, abigailUpgrade1.Item1, abigailUpgrade1.Item2, 10), plr.Index);
                                 break;
                             case 1:
-                                NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, abigailUpgrade1.Item1, abigailUpgrade1.Item2, 3), plr.Index);
+                                NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, abigailUpgrade1.Item1, abigailUpgrade1.Item2, 10), plr.Index);
                                 break;
                             case 2:
-                                NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, abigailUpgrade1.Item1, abigailUpgrade1.Item2, 3), plr.Index);
+                                NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, abigailUpgrade1.Item1, abigailUpgrade1.Item2, 10), plr.Index);
                                 break;
                             case 3:
-                                NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, dreadCharge.Item1, dreadCharge.Item2, 3), plr.Index);
+                                NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, dreadCharge.Item1, dreadCharge.Item2, 10), plr.Index);
                                 break;
                         }
                     }

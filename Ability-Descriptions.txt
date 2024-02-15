@@ -86,3 +86,7 @@ Throws different kinds of potions around the player that lasts for a few seconds
     4: Curse Potion
     5: Shield Potion
     6: Power Potion
+
+
+[15] Paranoia
+Puts nearby hostile players in a state of paranoia. Causes them to go blind and debuffs them.
