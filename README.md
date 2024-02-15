@@ -14,3 +14,4 @@ A dependency for TShock plugins. Adds various abilities:
 * [MagicDice](https://github.com/Soof4/Abilities/blob/e4992318375c43c6765ffb1b324563f35acb9422/Ability-Descriptions.txt#L48-L70)
 * [TheBound](https://github.com/Soof4/Abilities/blob/e4992318375c43c6765ffb1b324563f35acb9422/Ability-Descriptions.txt#L73-L74)
 * [Alchemist](https://github.com/Soof4/Abilities/blob/e4992318375c43c6765ffb1b324563f35acb9422/Ability-Descriptions.txt#L77-L84)
+* [Paranoia](https://github.com/Soof4/Abilities/blob/c025de1ffb1e95b16791d3a617bfb515078aba36/Ability-Descriptions.txt#L91-L92)
