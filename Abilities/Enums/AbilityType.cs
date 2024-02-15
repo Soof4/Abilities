@@ -1,20 +1,22 @@
-namespace Abilities {
+namespace Abilities
+{
 
-public enum AbilityType {
-    DryadsRingOfHealing,
-    RingOfDracula,
-    SetsBlessing,
-    Adrenaline,
-    Witch,
-    Marthymr,
-    RandomTeleport,
-    FairyOfLight,
-    Twilight,
-    Harvest,
-    IceGolem,
-    MagicDice,
-    TheBound,
-    Alchemist
-}
-
+    public enum AbilityType
+    {
+        DryadsRingOfHealing,
+        RingOfDracula,
+        SetsBlessing,
+        Adrenaline,
+        Witch,
+        Marthymr,
+        RandomTeleport,
+        FairyOfLight,
+        Twilight,
+        Harvest,
+        IceGolem,
+        MagicDice,
+        TheBound,
+        Alchemist,
+        Paranoia
+    }
 }

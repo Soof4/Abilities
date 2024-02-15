@@ -3,11 +3,10 @@ using TShockAPI;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Microsoft.Xna.Framework;
-using System.Drawing;
-using Org.BouncyCastle.Asn1.X509;
 
 namespace Abilities
 {
+    // Author of this ability is @strangelad on Discord
     public class Alchemist : Ability
     {
         private double potionSize, potionLifetime;

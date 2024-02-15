@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using TerrariaApi.Server;
 using TShockAPI;
 
@@ -69,6 +70,32 @@ namespace Abilities
 
             return projIndex;
         }
+
+        public static (ushort, int) GetSoundIndexAndId(int wikiID, int wikiStyle)
+        {
+            if (wikiID == 2)
+            {
+                return (110, wikiStyle);
+            }
+
+            if (wikiID == 3)
+            {
+                return (355, wikiStyle);
+            }
+
+            if (wikiID == 4)
+            {
+                return (288, wikiStyle);
+            }
+
+            if (wikiID == 42)
+            {
+                return (0, wikiStyle);
+            }
+
+            return (0, -1);
+        }
+
         public static int NewNPC(int X, int Y, int Type)
         {
             int index = 200;
@@ -87,6 +114,18 @@ namespace Abilities
             Main.npc[index].position.Y = Y;
             return index;
         }
+
+        public static void MakeSound(Vector2 pos, ushort index, int style, float volume, float pitch)
+        {
+            NetMessage.NetSoundInfo soundinfo = new NetMessage.NetSoundInfo();
+            soundinfo.position = pos;
+            soundinfo.soundIndex = index;
+            soundinfo.style = style;
+            soundinfo.volume = volume;
+            soundinfo.pitchOffset = pitch;
+            NetMessage.PlayNetSound(soundinfo);
+        }
+
         public static NPC? GetNearestEnemy(Vector2 pos)
         {
             NPC? nearestEnemy = null;
@@ -100,6 +139,7 @@ namespace Abilities
             }
             return nearestEnemy;
         }
+
         public static void ExplosiveEffectEffect(Vector2 pos, int HP)
         {
             if (ExplosiveEffectState <= 0) return;
@@ -117,6 +157,7 @@ namespace Abilities
         {
             return (float)Math.Sqrt(Math.Pow(posX2 - posX1, 2) + Math.Pow(posY2 - posY1, 2));
         }
+
         public static float GetDistance(Entity entity1, Entity entity2)
         {
             return GetDistance(entity1.position.X, entity1.position.Y, entity2.position.X, entity2.position.Y);
@@ -143,7 +184,7 @@ namespace Abilities
             TShock.Players[(byte)args.number].SetBuff(307, (int)((CooldownLengths[(byte)args.number] - (DateTime.UtcNow - Cooldowns[(byte)args.number]).TotalSeconds) * 60), true);
 
         }
-        
+
         internal static bool IsInCooldown(byte casterId, int cooldown)
         {
             if (Cooldowns.ContainsKey(casterId))
