@@ -17,7 +17,7 @@ namespace Abilities
         {
             get
             {
-                return hallowedWeaponColor >= 1 ? hallowedWeaponColor = 0 : hallowedWeaponColor + 0.015f;
+                return hallowedWeaponColor >= 1 ? hallowedWeaponColor = 0 : hallowedWeaponColor += 0.015f;
             }
         }
         internal static int ExplosiveEffectState = 0;
