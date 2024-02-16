@@ -10,10 +10,16 @@ namespace Abilities
     public class Extensions
     {
         internal static Dictionary<byte, DateTime> Cooldowns = new();
-        internal static Dictionary<byte, int> CooldownLengths = new();
-        internal static Dictionary<string, int> FairyOfLightCycles = new();    //TODO: Move this into its own class
-        internal static Dictionary<string, int> TwilightCycles = new();    //TODO: Move this into its own class
-        internal static float HallowedWeaponColor = 0;
+        internal static Dictionary<byte, int> CooldownLengths = new();    //TODO: Is this actually necessary? Try getting rid of this.
+        
+        private static float hallowedWeaponColor;
+        internal static float HallowedWeaponColor
+        {
+            get
+            {
+                return hallowedWeaponColor >= 1 ? hallowedWeaponColor = 0 : hallowedWeaponColor + 0.015f;
+            }
+        }
         internal static int ExplosiveEffectState = 0;
         internal static Random Random = new Random();
 
@@ -26,11 +32,6 @@ namespace Abilities
                    Main.tile[x + 1, y].collisionType == 0 &&
                    Main.tile[x + 1, y + 1].collisionType == 0 &&
                    Main.tile[x + 1, y + 2].collisionType == 0;
-        }
-
-        internal static float GetNextHallowedWeaponColor()
-        {
-            return HallowedWeaponColor >= 1 ? HallowedWeaponColor = 0 : HallowedWeaponColor += 0.015f;
         }
 
         public static int SpawnProjectile(float posX, float posY, float speedX, float speedY, int type,
@@ -118,7 +119,8 @@ namespace Abilities
             {
                 if (npc != null && npc.active && npc.type != 0 && npc.netID != 400 && npc.netID != 70 && npc.netID != 72 && !npc.friendly && !npc.CountsAsACritter)
                 {
-                    if (nearestEnemy == null || npc.position.Distance(pos) < nearestEnemy.position.Distance(pos)) {
+                    if (nearestEnemy == null || npc.position.Distance(pos) < nearestEnemy.position.Distance(pos))
+                    {
                         nearestEnemy = npc;
                     }
                 }

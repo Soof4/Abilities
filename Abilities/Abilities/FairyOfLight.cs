@@ -7,13 +7,13 @@ namespace Abilities
 {
     public class FairyOfLight : Ability
     {
+        private static Dictionary<string, int> FairyOfLightCycles = new Dictionary<string, int>();
         int LanceDmg, DashDmg, BoltDmg, BoltSpawnInterval, DanceDmg;
 
         public FairyOfLight(int abilityLevel)
         {
             CalculateProperties(abilityLevel);
         }
-
 
         internal override void CalculateProperties(params object[] args)
         {
@@ -30,19 +30,18 @@ namespace Abilities
             }
         }
 
-
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
             CalculateProperties(abilityLevel);
 
-            if (!Extensions.FairyOfLightCycles.ContainsKey(plr.Name))
+            if (!FairyOfLightCycles.ContainsKey(plr.Name))
             {
-                Extensions.FairyOfLightCycles.Add(plr.Name, 1);
+                FairyOfLightCycles.Add(plr.Name, 0);
             }
 
-            switch (Extensions.FairyOfLightCycles[plr.Name])
+            switch (FairyOfLightCycles[plr.Name])
             {
-                case 1:    // Ethereal Lance
+                case 0:    // Ethereal Lance
                     float startingYPos = plr.Y - 8 * 16;
                     for (int i = 0; i < 19; i += 3)
                     {
@@ -55,11 +54,11 @@ namespace Abilities
                             damage: LanceDmg,
                             knockback: 5,
                             owner: plr.Index,
-                            ai_1: Extensions.GetNextHallowedWeaponColor()
+                            ai_1: Extensions.HallowedWeaponColor
                             );
                     }
                     break;
-                case 2:    // Dash
+                case 1:    // Dash
                     plr.SendData(PacketTypes.PlayerDodge, number: (byte)plr.Index, number2: 2);
 
                     int direction = Extensions.GetVelocityXDirection(plr.TPlayer);
@@ -91,7 +90,7 @@ namespace Abilities
                         }
                     });
                     break;
-                case 3:    // Prismatic Bolts
+                case 2:    // Prismatic Bolts
                     Task.Run(async () =>
                     {
                         int ms = 0;
@@ -106,7 +105,7 @@ namespace Abilities
                                 damage: BoltDmg,
                                 knockback: 6,
                                 owner: plr.Index,
-                                ai_1: Extensions.GetNextHallowedWeaponColor()
+                                ai_1: Extensions.HallowedWeaponColor
                                 );
 
                             ms += BoltSpawnInterval;
@@ -114,7 +113,7 @@ namespace Abilities
                         }
                     });
                     break;
-                case 4:    // Sundance
+                case 3:    // Sundance
                     plr.SetBuff(BuffID.Webbed, 140, true);
 
                     Task.Run(async () =>
@@ -140,14 +139,7 @@ namespace Abilities
                     break;
             }
 
-            if (Extensions.FairyOfLightCycles[plr.Name] < 4)
-            {
-                Extensions.FairyOfLightCycles[plr.Name]++;
-            }
-            else
-            {
-                Extensions.FairyOfLightCycles[plr.Name] = 1;
-            }
+            FairyOfLightCycles[plr.Name] += FairyOfLightCycles[plr.Name] < 3 ? 1 : -FairyOfLightCycles[plr.Name];    // Loop sub-ability
         }
 
         internal override void PlayVisuals(params object[] args) { }

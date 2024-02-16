@@ -13,12 +13,12 @@ namespace Abilities
     // Author of this ability is @strangelad on Discord
     public class Twilight : Ability
     {
-        private int EyesDmg, EyesBuffDuration, EyesCount, JudgeBaseDmg, JudgeRange,  PunishDmg, PunishKB;
-
-        private int[] ignore = {8, 9, 11, 12, 14, 15, 40, 41, 68, 70, 72, 88, 89, 90, 91, 92, 96, 97, 99, 100, 114, 118, 119, 135, 136, 249, 263, 267, 328, 379, 380, 400, 403, 404, 412, 413, 437, 440, 438, 455, 456, 457, 458, 459, 491, 511, 512, 514, 515, 549, 622, 623};
-        private int[] evil = {-43, -42, -41, -40, -39, -38, -25, -24, -23, -22, -12, -11, -2, -1, 6, 7, 24, 34, 47, 57, 62, 66, 79, 81, 82, 83, 94, 98, 101, 109, 121, 156, 158, 159, 168, 173, 174, 179, 181, 182, 183, 189, 190, 191, 192, 193, 194, 195, 196, 239, 240, 241, 242, 253, 268, 281, 282, 283, 284, 288, 289, 464, 465, 470, 473, 474, 489, 490, 525, 526, 529, 533, 534, 543, 544, 630};
-        private int[] kindaevil = {-21, -20, -19, -18, 4, 5, 13, 35, 36, 60, 104, 113, 115, 116, 117, 133, 151, 162, 166, 176, 266, 315, 329, 330, 351, 460, 461, 462, 463, 466, 467, 468, 469, 472, 477, 479, 523, 586, 587, 618, 619, 620, 621, 662};
-        private int[] notevil = {75, 80, 84, 86, 120, 122, 137, 138, 475, 527, 545, 636, 657, 658, 659, 660};
+        private static Dictionary<string, int> TwilightCycles = new Dictionary<string, int>();
+        private int EyesDmg, EyesBuffDuration, EyesCount, JudgeBaseDmg, JudgeRange, PunishDmg, PunishKB;
+        private int[] ignore = { 8, 9, 11, 12, 14, 15, 40, 41, 68, 70, 72, 88, 89, 90, 91, 92, 96, 97, 99, 100, 114, 118, 119, 135, 136, 249, 263, 267, 328, 379, 380, 400, 403, 404, 412, 413, 437, 440, 438, 455, 456, 457, 458, 459, 491, 511, 512, 514, 515, 549, 622, 623 };
+        private int[] evil = { -43, -42, -41, -40, -39, -38, -25, -24, -23, -22, -12, -11, -2, -1, 6, 7, 24, 34, 47, 57, 62, 66, 79, 81, 82, 83, 94, 98, 101, 109, 121, 156, 158, 159, 168, 173, 174, 179, 181, 182, 183, 189, 190, 191, 192, 193, 194, 195, 196, 239, 240, 241, 242, 253, 268, 281, 282, 283, 284, 288, 289, 464, 465, 470, 473, 474, 489, 490, 525, 526, 529, 533, 534, 543, 544, 630 };
+        private int[] kindaevil = { -21, -20, -19, -18, 4, 5, 13, 35, 36, 60, 104, 113, 115, 116, 117, 133, 151, 162, 166, 176, 266, 315, 329, 330, 351, 460, 461, 462, 463, 466, 467, 468, 469, 472, 477, 479, 523, 586, 587, 618, 619, 620, 621, 662 };
+        private int[] notevil = { 75, 80, 84, 86, 120, 122, 137, 138, 475, 527, 545, 636, 657, 658, 659, 660 };
 
 
         public Twilight(int abilityLevel)
@@ -50,14 +50,14 @@ namespace Abilities
             CalculateProperties(abilityLevel);
             PlayVisuals(plr, 0);
 
-            if (!Extensions.TwilightCycles.ContainsKey(plr.Name))
+            if (!TwilightCycles.ContainsKey(plr.Name))
             {
-                Extensions.TwilightCycles.Add(plr.Name, 1);
+                TwilightCycles.Add(plr.Name, 0);
             }
 
-            switch (Extensions.TwilightCycles[plr.Name])
+            switch (TwilightCycles[plr.Name])
             {
-                case 1:    //Brilliant Eyes
+                case 0:    //Brilliant Eyes
                     plr.SetBuff(BuffID.Shine, EyesBuffDuration, false);
                     plr.SetBuff(BuffID.NightOwl, EyesBuffDuration, false);
                     plr.SetBuff(BuffID.Hunter, EyesBuffDuration, false);
@@ -69,14 +69,14 @@ namespace Abilities
                         {
                             float random = Extensions.Random.Next(-30, 31) / 10f;
                             Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, plr.TPlayer.direction * -6, random, ProjectileID.FairyQueenMagicItemShot, EyesDmg, 2, plr.Index, 0f, 0.67f);
-                            Extensions.SpawnProjectile(plr.X + 16 + (plr.TPlayer.direction * -25), plr.Y + 16, plr.TPlayer.direction * -3f, random/2f, ProjectileID.LightsBane, 0, 0, -1, 0.67f);
+                            Extensions.SpawnProjectile(plr.X + 16 + (plr.TPlayer.direction * -25), plr.Y + 16, plr.TPlayer.direction * -3f, random / 2f, ProjectileID.LightsBane, 0, 0, -1, 0.67f);
                             PlayVisuals(plr, 0);
                             await Task.Delay(125);
                             i--;
                         }
                     });
                     break;
-                case 2:    //Judgement
+                case 1:    //Judgement
                     plr.SetBuff(BuffID.Dazed, 240, true);
                     plr.SetBuff(BuffID.WitheredArmor, 240, true);
                     Task.Run(async () =>
@@ -123,7 +123,7 @@ namespace Abilities
                         }
                     });
                     break;
-                case 3:    //Punishment
+                case 2:    //Punishment
                     Extensions.MakeSound(plr.TPlayer.position, 288, 62, 1f, -0.4f);
                     Extensions.MakeSound(plr.TPlayer.position, 105, 105, 1f, -0.15f);
                     Extensions.SpawnProjectile(plr.X + 16 + (plr.TPlayer.direction * 32), plr.Y + 16, plr.TPlayer.direction * 1, 0, ProjectileID.SharpTears, PunishDmg, PunishKB, plr.Index, 0f, 3f);
@@ -135,14 +135,7 @@ namespace Abilities
 
             }
 
-            if (Extensions.TwilightCycles[plr.Name] < 3)
-            {
-                Extensions.TwilightCycles[plr.Name]++;
-            }
-            else
-            {
-                Extensions.TwilightCycles[plr.Name] = 1;
-            }
+            TwilightCycles[plr.Name] += TwilightCycles[plr.Name] < 2 ? 1 : -TwilightCycles[plr.Name];    // Loop sub-ability
         }
 
         internal override void PlayVisuals(params object[] args)
