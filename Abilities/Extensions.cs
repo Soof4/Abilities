@@ -11,7 +11,7 @@ namespace Abilities
     {
         internal static Dictionary<byte, DateTime> Cooldowns = new();
         internal static Dictionary<byte, int> CooldownLengths = new();    //TODO: Is this actually necessary? Try getting rid of this.
-        
+
         private static float hallowedWeaponColor;
         internal static float HallowedWeaponColor
         {
@@ -151,6 +151,10 @@ namespace Abilities
             return GetDistance(entity1.position.X, entity1.position.Y, entity2.position.X, entity2.position.Y);
         }
 
+        public static bool CanDamageThisPlayer(TSPlayer plr1, TSPlayer plr2)
+        {
+            return plr1 != plr2 && plr1.TPlayer.hostile && plr2.TPlayer.hostile && (plr1.Team == 0 && plr2.Team == 0 || plr1.Team != plr2.Team);
+        }
         public static int GetVelocityXDirection(Player player)
         {
             return (player.velocity.X == 0) ? player.direction : (int)(player.velocity.X / Math.Abs(player.velocity.X));

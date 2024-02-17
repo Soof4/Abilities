@@ -121,7 +121,7 @@ namespace Abilities
                         {
                             if (aplr.Active)
                             {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos, scale))
+                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Extensions.CanDamageThisPlayer(plr, aplr) == false)
                                 {
                                     aplr.Heal(pot1Heal);
                                     if (AbilityLevel == 5) aplr.SetBuff(BuffID.Honey, 360);
@@ -166,9 +166,22 @@ namespace Abilities
                     await Task.Delay(300);
                     foreach (NPC npc in Main.npc)
                     {
-                        if (npc != null && npc.active && npc.type != 0 && npc.netID != 400 && npc.netID != 70 && npc.netID != 72 && !npc.friendly && !npc.CountsAsACritter && npc.position.WithinRange(splashPos, scale + (npc.width / 2) + (npc.height / 2)))
+                        if (npc != null && npc.active && npc.type != 0 && npc.netID != 400 && npc.netID != 70 && npc.netID != 72 && !npc.friendly && !npc.CountsAsACritter && npc.position.WithinRange(splashPos + new Vector2(npc.width / 2, npc.height / 2), scale))
                         {
                             TSPlayer.Server.StrikeNPC(npc.whoAmI, pot2Dmg, 0, 0);
+                        }
+                    }
+                    foreach (TSPlayer aplr in TShock.Players)
+                    {
+                        if (aplr != null)
+                        {
+                            if (aplr.Active)
+                            {
+                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Extensions.CanDamageThisPlayer(plr, aplr) == true)
+                                {
+                                    aplr.DamagePlayer(pot2Dmg);
+                                }
+                            }
                         }
                     }
                     await Task.Delay(200);
@@ -208,11 +221,26 @@ namespace Abilities
                     await Task.Delay(300);
                     foreach (NPC npc in Main.npc)
                     {
-                        if (npc != null && npc.active && npc.type != 0 && npc.netID != 400 && npc.netID != 70 && npc.netID != 72 && npc.netID != 113 && !npc.friendly && !npc.CountsAsACritter && npc.position.WithinRange(splashPos, scale + (npc.width / 2) + (npc.height / 2)))
+                        if (npc != null && npc.active && npc.type != 0 && npc.netID != 400 && npc.netID != 70 && npc.netID != 72 && npc.netID != 113 && !npc.friendly && !npc.CountsAsACritter && npc.position.WithinRange(splashPos + new Vector2(npc.width / 2, npc.height / 2), scale))
                         {
                             TSPlayer.Server.StrikeNPC(npc.whoAmI, pot3Dmg, 0, 0);
                             npc.velocity = npc.position.DirectionTo(splashPos) * (scale / 25f);
                             NetMessage.SendData((int)PacketTypes.NpcUpdate, -1, -1, null, npc.whoAmI);
+                        }
+                    }
+                    foreach (TSPlayer aplr in TShock.Players)
+                    {
+                        if (aplr != null)
+                        {
+                            if (aplr.Active)
+                            {
+                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Extensions.CanDamageThisPlayer(plr, aplr) == true)
+                                {
+                                    aplr.DamagePlayer(pot3Dmg);
+                                    aplr.TPlayer.velocity = aplr.TPlayer.position.DirectionTo(splashPos) * (scale / 25f);
+                                    TSPlayer.All.SendData(PacketTypes.PlayerUpdate, "", plr.Index);
+                                }
+                            }
                         }
                     }
                     await Task.Delay(200);
@@ -225,6 +253,15 @@ namespace Abilities
             {
                 int loops = (int)Math.Round(6.5 * potionLifetime);
                 int scale = (int)(80 * potionSize);
+                double gameModeBuffFactor = 1;
+                if (Main.GameMode == GameModeID.Master)
+                {
+                    gameModeBuffFactor = 2.5;
+                }
+                else if (Main.GameMode == GameModeID.Expert)
+                {
+                    gameModeBuffFactor = 2;
+                }
                 Vector2 splashPos = new Vector2(plr.X + Extensions.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Extensions.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
                 ParticleOrchestraSettings settings = new()
                 {
@@ -252,7 +289,7 @@ namespace Abilities
                     await Task.Delay(300);
                     foreach (NPC npc in Main.npc)
                     {
-                        if (npc != null && npc.active && npc.type != 0 && npc.netID != 400 && npc.netID != 70 && npc.netID != 72 && !npc.friendly && !npc.CountsAsACritter && npc.position.WithinRange(splashPos, scale + (npc.width / 2) + (npc.height / 2)))
+                        if (npc != null && npc.active && npc.type != 0 && npc.netID != 400 && npc.netID != 70 && npc.netID != 72 && !npc.friendly && !npc.CountsAsACritter && npc.position.WithinRange(splashPos + new Vector2(npc.width / 2, npc.height / 2), scale))
                         {
                             npc.AddBuff(BuffID.CursedInferno, pot4Duration);
                             npc.AddBuff(BuffID.Ichor, pot4Duration);
@@ -262,6 +299,25 @@ namespace Abilities
                                 npc.AddBuff(BuffID.BetsysCurse, pot4Duration);
                             }
                             TSPlayer.All.SendData(PacketTypes.NpcUpdateBuff, number: npc.whoAmI);
+                        }
+                    }
+                    foreach (TSPlayer aplr in TShock.Players)
+                    {
+                        if (aplr != null)
+                        {
+                            if (aplr.Active)
+                            {
+                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Extensions.CanDamageThisPlayer(plr, aplr) == true)
+                                {
+                                    aplr.SetBuff(BuffID.CursedInferno, (int)(pot4Duration / gameModeBuffFactor));
+                                    aplr.SetBuff(BuffID.Ichor, (int)(pot4Duration / gameModeBuffFactor));
+                                    if (AbilityLevel == 5)
+                                    {
+                                        aplr.SetBuff(BuffID.Oiled, pot4Duration);
+                                        aplr.SetBuff(BuffID.BetsysCurse, pot4Duration);
+                                    }
+                                }
+                            }
                         }
                     }
                     await Task.Delay(200);
@@ -305,7 +361,7 @@ namespace Abilities
                         {
                             if (aplr.Active)
                             {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos, scale))
+                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Extensions.CanDamageThisPlayer(plr, aplr) == false)
                                 {
                                     aplr.SendData(PacketTypes.PlayerDodge, number: plr.Index, number2: 2);
                                 }
@@ -353,7 +409,7 @@ namespace Abilities
                         {
                             if (aplr.Active)
                             {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos, scale))
+                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Extensions.CanDamageThisPlayer(plr, aplr) == false)
                                 {
                                     if (AbilityLevel < 5) aplr.SetBuff(BuffID.NebulaUpDmg2, 90);
                                     else aplr.SetBuff(BuffID.NebulaUpDmg3, 90);
