@@ -9,10 +9,10 @@ namespace Abilities
 
     public class Extensions
     {
+        private static float hallowedWeaponColor;
         internal static Dictionary<byte, DateTime> Cooldowns = new();
         internal static Dictionary<byte, int> CooldownLengths = new();    //TODO: Is this actually necessary? Try getting rid of this.
 
-        private static float hallowedWeaponColor;
         internal static float HallowedWeaponColor
         {
             get

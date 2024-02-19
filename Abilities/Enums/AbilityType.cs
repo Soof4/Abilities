@@ -17,6 +17,7 @@ namespace Abilities
         MagicDice,
         TheBound,
         Alchemist,
-        Paranoia
+        Paranoia,
+        HyperCrit
     }
 }
