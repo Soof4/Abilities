@@ -50,11 +50,11 @@ namespace Abilities
             }
 
             HyperCrit.HyperCritCooldown[(byte)args.Player.whoAmI] = true;
-            int DMG = args.Damage * 5;
+            int DMG = args.Damage * 3;
 
             if (args.Npc.type == 14 || args.Npc.type == 135 || args.Npc.type == 267)
             {
-                DMG = args.Damage * 3;
+                DMG = args.Damage * 2;
             }
             HyperCrit.HyperCritHit(args.Npc.position + new Vector2(args.Npc.width / 2, args.Npc.height / 2), DMG, args.Player.whoAmI);
 

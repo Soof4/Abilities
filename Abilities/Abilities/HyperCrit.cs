@@ -26,7 +26,7 @@ namespace Abilities
             if (abilityLevel != AbilityLevel)
             {
                 AbilityLevel = abilityLevel;
-                Duration = 12 + ((abilityLevel - 1) * 4);
+                Duration = 10 + ((abilityLevel - 1) * 2);
                 ExtraChance = 3 + abilityLevel;
             }
         }
