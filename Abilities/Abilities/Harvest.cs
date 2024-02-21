@@ -22,7 +22,7 @@ namespace Abilities
             if (abilityLevel != AbilityLevel)
             {
                 AbilityLevel = abilityLevel;
-                Damage = (int)(5 * abilityLevel * (3 + abilityLevel * abilityLevel / 10f));
+                Damage = (int)(5 * abilityLevel * (3 + Math.Pow(abilityLevel, 5 / 2f) / 10f));
                 ProjSpawnInterval = (int)(1000 / Math.Sqrt(abilityLevel + 1));
             }
         }
