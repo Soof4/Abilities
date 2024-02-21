@@ -15,3 +15,4 @@ A dependency for TShock plugins. Adds various abilities:
 * [TheBound](https://github.com/Soof4/Abilities/blob/e4992318375c43c6765ffb1b324563f35acb9422/Ability-Descriptions.txt#L73-L74)
 * [Alchemist](https://github.com/Soof4/Abilities/blob/e4992318375c43c6765ffb1b324563f35acb9422/Ability-Descriptions.txt#L77-L84)
 * [Paranoia](https://github.com/Soof4/Abilities/blob/c025de1ffb1e95b16791d3a617bfb515078aba36/Ability-Descriptions.txt#L91-L92)
+* [HyperCrit](https://github.com/Soof4/Abilities/blob/ae82b0fd3f4b099b2c044af17f73baf1c2179cd7/Ability-Descriptions.txt#L94-L95)
