@@ -8,7 +8,7 @@ namespace Abilities
     public class FairyOfLight : Ability
     {
         private static Dictionary<string, int> FairyOfLightCycles = new Dictionary<string, int>();
-        int LanceDmg, DashDmg, BoltDmg, BoltSpawnInterval, DanceDmg;
+        private int LanceDmg, DashDmg, BoltDmg, BoltSpawnInterval, DanceDmg;
 
         public FairyOfLight(int abilityLevel)
         {
@@ -67,6 +67,9 @@ namespace Abilities
                     {
                         plr.TPlayer.velocity.X = 36 * direction;
                         TSPlayer.All.SendData(PacketTypes.PlayerUpdate, "", plr.Index);
+                        float startX = plr.X;
+                        float startY = plr.Y;
+                        float xVelocity = plr.TPlayer.velocity.X;
 
                         for (int i = 0; i < 12; i++)
                         {
@@ -74,11 +77,14 @@ namespace Abilities
                                 posX: plr.X + 16,
                                 posY: plr.Y + 16,
                                 speedX: 0,
-                                speedY: i % 2 == 0 ? -0.5f : +0.5f,
-                                type: ProjectileID.PrincessWeapon,
+                                speedY: 0,
+                                type: ProjectileID.TrueExcalibur,
                                 damage: DashDmg,
-                                knockback: 14,
-                                owner: plr.Index
+                                knockback: 4,
+                                owner: plr.Index,
+                                ai_0: 16,     // laps
+                                ai_1: 12,     // time
+                                ai_2: 0.4f    // size
                                 );
 
                             if (i == 9)
