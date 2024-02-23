@@ -71,29 +71,22 @@ namespace Abilities
                         float startY = plr.Y;
                         float xVelocity = plr.TPlayer.velocity.X;
 
-                        for (int i = 0; i < 12; i++)
-                        {
-                            Extensions.SpawnProjectile(
-                                posX: plr.X + 16,
-                                posY: plr.Y + 16,
-                                speedX: 0,
-                                speedY: 0,
-                                type: ProjectileID.TrueExcalibur,
-                                damage: DashDmg,
-                                knockback: 4,
-                                owner: plr.Index,
-                                ai_0: 16,     // laps
-                                ai_1: 12,     // time
-                                ai_2: 0.4f    // size
-                                );
+                        Extensions.SpawnProjectile(
+                            posX: plr.X + 16,
+                            posY: plr.Y + 16,
+                            speedX: 0,
+                            speedY: 0,
+                            type: ProjectileID.TrueExcalibur,
+                            damage: DashDmg,
+                            knockback: 9,
+                            owner: plr.Index,
+                            ai_0: 16,     // laps
+                            ai_1: 12,     // time
+                            ai_2: 0.4f    // size
+                            );
 
-                            if (i == 9)
-                            {
-                                plr.SetBuff(BuffID.Webbed, 1);
-                            }
-
-                            await Task.Delay(17);
-                        }
+                        await Task.Delay(12 * 16);
+                        plr.SetBuff(BuffID.Webbed, 1);
                     });
                     break;
                 case 2:    // Prismatic Bolts
