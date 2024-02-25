@@ -12,32 +12,22 @@ namespace Abilities
         private double potionSize, potionLifetime;
         private int pot1Heal, pot2Dmg, pot3Dmg, pot4Duration;
 
-        public Alchemist(int abilityLevel)
+        public Alchemist(int abilityLevel) : base(abilityLevel) { }
+
+
+        internal override void CalculateProperties()
         {
-            CalculateProperties(abilityLevel);
-        }
-
-
-        internal override void CalculateProperties(params object[] args)
-        {
-            int abilityLevel = (int)args[0];
-
-            if (abilityLevel != AbilityLevel)
-            {
-                AbilityLevel = abilityLevel;
-                potionSize = (double)1 + (abilityLevel / 2.0);
-                potionLifetime = (double)1 + (abilityLevel / 2.5);
-                pot1Heal = (int)8 + (abilityLevel * 4);
-                pot2Dmg = (int)((15 + (abilityLevel * 9)) * (1 + (abilityLevel - 1) / 5f));
-                pot3Dmg = (int)((8 + (abilityLevel * 4)) * (1 + (abilityLevel - 1) / 10f));
-                pot4Duration = (int)180 + (abilityLevel * 60);
-            }
+            potionSize = (double)1 + (AbilityLevel / 2.0);
+            potionLifetime = (double)1 + (AbilityLevel / 2.5);
+            pot1Heal = (int)8 + (AbilityLevel * 4);
+            pot2Dmg = (int)((15 + (AbilityLevel * 9)) * (1 + (AbilityLevel - 1) / 5f));
+            pot3Dmg = (int)((8 + (AbilityLevel * 4)) * (1 + (AbilityLevel - 1) / 10f));
+            pot4Duration = (int)180 + (AbilityLevel * 60);
         }
 
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
-            CalculateProperties(abilityLevel);
             PlayVisuals(plr);
 
             Task.Run(async () =>

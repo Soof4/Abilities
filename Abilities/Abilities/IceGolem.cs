@@ -7,34 +7,24 @@ namespace Abilities
     {
         private int BuffDurationInTicks;
 
-        public IceGolem(int abilityLevel) {
-            CalculateProperties(abilityLevel);
-        }
-        
- 
-        internal override void CalculateProperties(params object[] args)
+        public IceGolem(int abilityLevel) : base(abilityLevel) { }
+
+
+        internal override void CalculateProperties()
         {
-            int abilityLevel = (int)args[0];
-
-            if (abilityLevel != AbilityLevel)
-            {
-                AbilityLevel = abilityLevel;
-                BuffDurationInTicks = 540 + 120 * abilityLevel;
-
-            }
+            BuffDurationInTicks = 540 + 120 * AbilityLevel;
         }
 
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
-            CalculateProperties(abilityLevel);
             PlayVisuals(plr);
 
             plr.SetBuff(BuffID.Dazed, BuffDurationInTicks);
             plr.SetBuff(BuffID.Chilled, BuffDurationInTicks);
             plr.SetBuff(BuffID.OgreSpit, BuffDurationInTicks);
             plr.SetBuff(BuffID.Ironskin, BuffDurationInTicks);
-            plr.SetBuff(BuffID.NebulaUpLife1,BuffDurationInTicks);
+            plr.SetBuff(BuffID.NebulaUpLife1, BuffDurationInTicks);
             plr.SetBuff(BuffID.RapidHealing, BuffDurationInTicks);
         }
 

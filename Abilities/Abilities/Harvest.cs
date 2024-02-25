@@ -9,28 +9,18 @@ namespace Abilities
     {
         private int Damage, ProjSpawnInterval;
 
-        public Harvest(int abilityLevel)
+        public Harvest(int abilityLevel) : base(abilityLevel) { }
+
+
+        internal override void CalculateProperties()
         {
-            CalculateProperties(abilityLevel);
-        }
-
-
-        internal override void CalculateProperties(params object[] args)
-        {
-            int abilityLevel = (int)args[0];
-
-            if (abilityLevel != AbilityLevel)
-            {
-                AbilityLevel = abilityLevel;
-                Damage = (int)(5 * abilityLevel * (3 + Math.Pow(abilityLevel, 5 / 2f) / 10f));
-                ProjSpawnInterval = (int)(1000 / Math.Sqrt(abilityLevel + 1));
-            }
+            Damage = (int)(5 * AbilityLevel * (3 + Math.Pow(AbilityLevel, 5 / 2f) / 10f));
+            ProjSpawnInterval = (int)(1000 / Math.Sqrt(AbilityLevel + 1));
         }
 
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
-            CalculateProperties(abilityLevel);
             PlayVisuals(plr);
 
             Task.Run(async () =>
@@ -39,9 +29,12 @@ namespace Abilities
                 int ms = 0;
                 while (ms < 10000)
                 {
-                    if (loopsTillBuffLoop == 0) {
-                        foreach (NPC npc in Main.npc) {
-                            if (npc != null && npc.active && npc.position.WithinRange(plr.TPlayer.position, 16*16)) {
+                    if (loopsTillBuffLoop == 0)
+                    {
+                        foreach (NPC npc in Main.npc)
+                        {
+                            if (npc != null && npc.active && npc.position.WithinRange(plr.TPlayer.position, 16 * 16))
+                            {
                                 npc.AddBuff(BuffID.ScytheWhipEnemyDebuff, 10);
                                 TSPlayer.All.SendData(PacketTypes.NpcUpdateBuff, number: npc.whoAmI);
                             }

@@ -21,33 +21,22 @@ namespace Abilities
         private int[] notevil = { 75, 80, 84, 86, 120, 122, 137, 138, 475, 527, 545, 636, 657, 658, 659, 660 };
 
 
-        public Twilight(int abilityLevel)
+        public Twilight(int abilityLevel) : base(abilityLevel) { }
+
+        internal override void CalculateProperties()
         {
-            CalculateProperties(abilityLevel);
-        }
-
-
-        internal override void CalculateProperties(params object[] args)
-        {
-            int abilityLevel = (int)args[0];
-
-            if (abilityLevel != AbilityLevel)
-            {
-                AbilityLevel = abilityLevel;
-                EyesDmg = (int)((10 + (abilityLevel - 1) * 5) * (1 + abilityLevel / 10f));
-                EyesBuffDuration = 720 + (abilityLevel - 1) * 240;
-                EyesCount = 10 + (abilityLevel - 1) * 4;
-                JudgeBaseDmg = (int)(25 + (abilityLevel - 1) * 25);
-                JudgeRange = 50 + (abilityLevel - 1) * 15;
-                PunishDmg = (int)((50 + (abilityLevel - 1) * 25) * (1 + abilityLevel / 5f));
-                PunishKB = 25 + (abilityLevel - 1) * 10;
-            }
+            EyesDmg = (int)((10 + (AbilityLevel - 1) * 5) * (1 + AbilityLevel / 10f));
+            EyesBuffDuration = 720 + (AbilityLevel - 1) * 240;
+            EyesCount = 10 + (AbilityLevel - 1) * 4;
+            JudgeBaseDmg = (int)(25 + (AbilityLevel - 1) * 25);
+            JudgeRange = 50 + (AbilityLevel - 1) * 15;
+            PunishDmg = (int)((50 + (AbilityLevel - 1) * 25) * (1 + AbilityLevel / 5f));
+            PunishKB = 25 + (AbilityLevel - 1) * 10;
         }
 
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
-            CalculateProperties(abilityLevel);
             PlayVisuals(plr, 0);
 
             if (!TwilightCycles.ContainsKey(plr.Name))

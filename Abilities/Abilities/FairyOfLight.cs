@@ -10,30 +10,19 @@ namespace Abilities
         private static Dictionary<string, int> FairyOfLightCycles = new Dictionary<string, int>();
         private int LanceDmg, DashDmg, BoltDmg, BoltSpawnInterval, DanceDmg;
 
-        public FairyOfLight(int abilityLevel)
-        {
-            CalculateProperties(abilityLevel);
-        }
+        public FairyOfLight(int abilityLevel) : base(abilityLevel) { }
 
-        internal override void CalculateProperties(params object[] args)
+        internal override void CalculateProperties()
         {
-            int abilityLevel = (int)args[0];
-
-            if (abilityLevel != AbilityLevel)
-            {
-                AbilityLevel = abilityLevel;
-                LanceDmg = (int)((50 + (abilityLevel - 1) * 15) * (1 + abilityLevel / 10f));
-                DashDmg = (int)((100 + (abilityLevel - 1) * 30) * (1 + abilityLevel / 10f));
-                BoltDmg = (int)((10 + (abilityLevel - 1) * 10) * (1 + abilityLevel / 10));
-                BoltSpawnInterval = 400 * (10 - abilityLevel) / 10;
-                DanceDmg = (int)((55 + (abilityLevel - 1) * 20) * (1 + abilityLevel / 10f));
-            }
+            LanceDmg = (int)((50 + (AbilityLevel - 1) * 15) * (1 + AbilityLevel / 10f));
+            DashDmg = (int)((100 + (AbilityLevel - 1) * 30) * (1 + AbilityLevel / 10f));
+            BoltDmg = (int)((10 + (AbilityLevel - 1) * 10) * (1 + AbilityLevel / 10));
+            BoltSpawnInterval = 400 * (10 - AbilityLevel) / 10;
+            DanceDmg = (int)((55 + (AbilityLevel - 1) * 20) * (1 + AbilityLevel / 10f));
         }
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
-            CalculateProperties(abilityLevel);
-
             if (!FairyOfLightCycles.ContainsKey(plr.Name))
             {
                 FairyOfLightCycles.Add(plr.Name, 0);

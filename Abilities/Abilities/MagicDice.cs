@@ -10,7 +10,7 @@ namespace Abilities
     // Author of this ability is @strangelad on Discord
     public class MagicDice : Ability
     {
-        int R1_Dmg, R2_HP, R3_Dmg, R4_HP, R5_Amount,R6_Dmg, R7_Duration, R7_Dmg, R8_Duration, R8_HP, R8_Dmg,
+        int R1_Dmg, R2_HP, R3_Dmg, R4_HP, R5_Amount, R6_Dmg, R7_Duration, R7_Dmg, R8_Duration, R8_HP, R8_Dmg,
             R9_Count, R9_Dmg, R10_Ticks, R11_Cap, R12_Range, R13_Duration, R14_Duration, R15_Duration, R15_Dmg, R16_Count,
             R16_Dmg, R17_Duration, R17_Dmg, R18_Duration, R18_Dmg, R19_Duration, R19_Dmg, R20_Health, R21_Dmg, R21_Count;
 
@@ -21,59 +21,49 @@ namespace Abilities
             BuffID.Thorns, BuffID.Honey, BuffID.Ironskin, BuffID.Regeneration, BuffID.ShadowDodge, BuffID.Invisibility };
 
 
-        public MagicDice(int abilityLevel)
+        public MagicDice(int abilityLevel) : base(abilityLevel) { }
+
+
+        internal override void CalculateProperties()
         {
-            CalculateProperties(abilityLevel);
-        }
-
-
-        internal override void CalculateProperties(params object[] args)
-        {
-            int abilityLevel = (int)args[0];
-
-            if (abilityLevel != AbilityLevel)
-            {
-                AbilityLevel = abilityLevel;
-                R1_Dmg = (int)((60 + (abilityLevel - 1) * 35) * (1 + (abilityLevel - 1) / 5f));
-                R2_HP = 50 + (50 * abilityLevel);
-                R3_Dmg = (int)((15 + (abilityLevel - 1) * 15) * (1 + (abilityLevel - 1) / 10f));
-                R4_HP = (int)(100 + (abilityLevel - 1) * 50);
-                R5_Amount = (int)(1 + abilityLevel);
-                R6_Dmg = (int)((260 + (abilityLevel - 1) * 210) * (1 + (abilityLevel - 1) / 5f));
-                R7_Duration = (int)(4000 + (abilityLevel - 1) * 1000);
-                R7_Dmg = (int)(15 + (abilityLevel - 1) * 15);
-                R8_Duration = (int)(300 + (abilityLevel - 1) * 120);
-                R8_HP = (int)(20 + (abilityLevel - 1) * 10);
-                R8_Dmg = (int)((30 + (abilityLevel - 1) * 15) * (1 + (abilityLevel - 1) / 10f));
-                R8_Scale = 1f + (abilityLevel - 1) * 0.5f;
-                R9_Count = (int)(3 + abilityLevel);
-                R9_Dmg = (int)((75 + (abilityLevel - 1) * 50) * (1 + (abilityLevel - 1) / 10f));
-                R10_Ticks = (int)(300 + (abilityLevel - 1) * 60);
-                R10_Duration = (float)(5 + (abilityLevel - 1));
-                R11_Cap = (int)(300 + 300 * ((abilityLevel - 1) * (abilityLevel - 1)));
-                R12_Range = (int)(50 + (abilityLevel - 1) * 25);
-                R13_Duration = (int)(300 + (abilityLevel - 1) * 30);
-                R14_Duration = (int)(240 + (abilityLevel - 1) * 60);
-                R15_Duration = (int)(240 + (abilityLevel - 1) * 30);
-                R15_Dmg = (int)(25 * abilityLevel);
-                R16_Count = (int)(2 + abilityLevel);
-                R16_Dmg = (int)((35 + (abilityLevel - 1) * 20) * (1 + (abilityLevel - 1) / 5f));
-                R17_Duration = (int)(300 + (abilityLevel - 1) * 60);
-                R17_Dmg = (int)((20 + (abilityLevel - 1) * 15) * (1 + (abilityLevel - 1) / 5f));
-                R18_Duration = (int)(3 + (abilityLevel - 1) * 2);
-                R18_Dmg = (int)(10 + (abilityLevel - 1) * 10);
-                R19_Duration = (int)(300 + (abilityLevel - 1) * 60);
-                R19_Dmg = (int)((20 + (abilityLevel - 1) * 15) * (1 + (abilityLevel - 1) / 5f));
-                R20_Health = (int)(15 + (abilityLevel - 1) * 10);
-                R21_Dmg = (int)((60 + (abilityLevel - 1) * 30) * (1 + (abilityLevel - 1) / 5f));
-                R21_Count = (int)(3 + (abilityLevel - 1) * 2);
-            }
+            R1_Dmg = (int)((60 + (AbilityLevel - 1) * 35) * (1 + (AbilityLevel - 1) / 5f));
+            R2_HP = 50 + (50 * AbilityLevel);
+            R3_Dmg = (int)((15 + (AbilityLevel - 1) * 15) * (1 + (AbilityLevel - 1) / 10f));
+            R4_HP = (int)(100 + (AbilityLevel - 1) * 50);
+            R5_Amount = (int)(1 + AbilityLevel);
+            R6_Dmg = (int)((260 + (AbilityLevel - 1) * 210) * (1 + (AbilityLevel - 1) / 5f));
+            R7_Duration = (int)(4000 + (AbilityLevel - 1) * 1000);
+            R7_Dmg = (int)(15 + (AbilityLevel - 1) * 15);
+            R8_Duration = (int)(300 + (AbilityLevel - 1) * 120);
+            R8_HP = (int)(20 + (AbilityLevel - 1) * 10);
+            R8_Dmg = (int)((30 + (AbilityLevel - 1) * 15) * (1 + (AbilityLevel - 1) / 10f));
+            R8_Scale = 1f + (AbilityLevel - 1) * 0.5f;
+            R9_Count = (int)(3 + AbilityLevel);
+            R9_Dmg = (int)((75 + (AbilityLevel - 1) * 50) * (1 + (AbilityLevel - 1) / 10f));
+            R10_Ticks = (int)(300 + (AbilityLevel - 1) * 60);
+            R10_Duration = (float)(5 + (AbilityLevel - 1));
+            R11_Cap = (int)(300 + 300 * ((AbilityLevel - 1) * (AbilityLevel - 1)));
+            R12_Range = (int)(50 + (AbilityLevel - 1) * 25);
+            R13_Duration = (int)(300 + (AbilityLevel - 1) * 30);
+            R14_Duration = (int)(240 + (AbilityLevel - 1) * 60);
+            R15_Duration = (int)(240 + (AbilityLevel - 1) * 30);
+            R15_Dmg = (int)(25 * AbilityLevel);
+            R16_Count = (int)(2 + AbilityLevel);
+            R16_Dmg = (int)((35 + (AbilityLevel - 1) * 20) * (1 + (AbilityLevel - 1) / 5f));
+            R17_Duration = (int)(300 + (AbilityLevel - 1) * 60);
+            R17_Dmg = (int)((20 + (AbilityLevel - 1) * 15) * (1 + (AbilityLevel - 1) / 5f));
+            R18_Duration = (int)(3 + (AbilityLevel - 1) * 2);
+            R18_Dmg = (int)(10 + (AbilityLevel - 1) * 10);
+            R19_Duration = (int)(300 + (AbilityLevel - 1) * 60);
+            R19_Dmg = (int)((20 + (AbilityLevel - 1) * 15) * (1 + (AbilityLevel - 1) / 5f));
+            R20_Health = (int)(15 + (AbilityLevel - 1) * 10);
+            R21_Dmg = (int)((60 + (AbilityLevel - 1) * 30) * (1 + (AbilityLevel - 1) / 5f));
+            R21_Count = (int)(3 + (AbilityLevel - 1) * 2);
         }
 
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
-            CalculateProperties(abilityLevel);
             PlayVisuals(plr, 0);
 
             int i = 0;
@@ -92,7 +82,7 @@ namespace Abilities
                     PositionInWorld = new(plr.X + 16, plr.Y),
                     UniqueInfoPiece = 1
                 };
-                switch (Extensions.Random.Next(1,22))
+                switch (Extensions.Random.Next(1, 22))
                 {
                     case 1:
                         NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1, Terraria.Localization.NetworkText.FromLiteral("Explosion?"), (int)new Color(255, 255, 75).PackedValue, plr.X + 16, plr.Y);
@@ -334,7 +324,7 @@ namespace Abilities
                                 TSPlayer.All.SendData(PacketTypes.PlayerUpdate, "", plr.Index);
                                 for (int i3 = 0; i3 < 15; i3++)
                                 {
-                                    Extensions.SpawnProjectile(plr.TPlayer.position.X + 16, plr.TPlayer.position.Y + 16, Extensions.Random.Next(-10, 11)/10f, Extensions.Random.Next(-10, 11)/10f, ProjectileID.LightsBane, R16_Dmg, 2, plr.Index, 2.25f);
+                                    Extensions.SpawnProjectile(plr.TPlayer.position.X + 16, plr.TPlayer.position.Y + 16, Extensions.Random.Next(-10, 11) / 10f, Extensions.Random.Next(-10, 11) / 10f, ProjectileID.LightsBane, R16_Dmg, 2, plr.Index, 2.25f);
                                     await Task.Delay(20);
                                 }
                             }
@@ -401,7 +391,7 @@ namespace Abilities
                         i = R21_Count;
                         Extensions.SpawnProjectile(plr.X + 16, plr.Y, 0, 0, ProjectileID.DD2ExplosiveTrapT3Explosion, R21_Dmg, 9, plr.Index);
                         plr.DamagePlayer(R21_Dmg / 2);
-                        plr.TPlayer.velocity = new Vector2(0,-15);
+                        plr.TPlayer.velocity = new Vector2(0, -15);
                         TSPlayer.All.SendData(PacketTypes.PlayerUpdate, "", plr.Index);
                         await Task.Delay(1000);
                         while (i > 0)

@@ -8,52 +8,39 @@ namespace Abilities
     public class Witch : Ability
     {
         private int RangeInBlocks;
-        private List<int> BuffTypes;
+        private List<int> BuffTypes = new List<int>();
 
-        public Witch(int abilityLevel)
+        public Witch(int abilityLevel) : base(abilityLevel) { }
+
+        internal override void CalculateProperties()
         {
+            RangeInBlocks = 16 + (AbilityLevel - 1) * 2;
             BuffTypes = new List<int>();
-            CalculateProperties(abilityLevel);
-        }
 
-
-        internal override void CalculateProperties(params object[] args)
-        {
-            int abilityLevel = (int)args[0];
-
-            if (abilityLevel != AbilityLevel)
+            switch (AbilityLevel)
             {
-                AbilityLevel = abilityLevel;
-                RangeInBlocks = 16 + (abilityLevel - 1) * 2;
-                BuffTypes = new List<int>();
-
-                switch (abilityLevel)
-                {
-                    case 1:
-                        BuffTypes.Add(BuffID.Frostburn);
-                        break;
-                    case 2:
-                        BuffTypes.Add(BuffID.Frostburn);
-                        BuffTypes.Add(BuffID.Bleeding);
-                        break;
-                    case 3:
-                        BuffTypes.Add(BuffID.ShadowFlame);
-                        break;
-                    case 4:
-                        BuffTypes.Add(BuffID.Venom);
-                        break;
-                    default:
-                        BuffTypes.Add(BuffID.ShadowFlame);
-                        BuffTypes.Add(BuffID.Venom);
-                        break;
-                }
+                case 1:
+                    BuffTypes.Add(BuffID.Frostburn);
+                    break;
+                case 2:
+                    BuffTypes.Add(BuffID.Frostburn);
+                    BuffTypes.Add(BuffID.Bleeding);
+                    break;
+                case 3:
+                    BuffTypes.Add(BuffID.ShadowFlame);
+                    break;
+                case 4:
+                    BuffTypes.Add(BuffID.Venom);
+                    break;
+                default:
+                    BuffTypes.Add(BuffID.ShadowFlame);
+                    BuffTypes.Add(BuffID.Venom);
+                    break;
             }
         }
 
-
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
-            CalculateProperties(abilityLevel);
             PlayVisuals(plr);
 
             foreach (NPC npc in Main.npc)

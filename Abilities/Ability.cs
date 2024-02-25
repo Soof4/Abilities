@@ -7,7 +7,11 @@ namespace Abilities
     {
         internal protected int AbilityLevel = 0;
 
-        internal protected Ability() {}
+        internal protected Ability(int abilityLevel)
+        {
+            AbilityLevel = abilityLevel;
+            CalculateProperties();
+        }
 
         /// <summary>
         /// Cast method for dependents to use.
@@ -24,6 +28,11 @@ namespace Abilities
         {
             if (!Extensions.IsInCooldown((byte)plr.Index, cooldown))
             {
+                if (abilityLevel != AbilityLevel)
+                {
+                    AbilityLevel = abilityLevel;
+                    CalculateProperties();
+                }
                 Function(plr, cooldown, abilityLevel);
             }
         }
@@ -63,7 +72,7 @@ namespace Abilities
         /// </code>
         /// </example>
         /// <param name="args">Arguments that might be used for the calculations.</param>
-        internal abstract void CalculateProperties(params object[] args);
+        internal abstract void CalculateProperties();
     }
 
 }

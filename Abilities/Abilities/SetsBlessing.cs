@@ -9,29 +9,19 @@ namespace Abilities
     {
         private double DodgeDurationInSeconds;
 
-        public SetsBlessing(int abilityLevel)
+        public SetsBlessing(int abilityLevel) : base(abilityLevel) { }
+
+
+        internal override void CalculateProperties()
         {
-            CalculateProperties(abilityLevel);
-        }
-
-
-        internal override void CalculateProperties(params object[] args)
-        {
-            int abilityLevel = (int)args[0];
-
-            if (abilityLevel != AbilityLevel)
-            {
-                AbilityLevel = abilityLevel;
-                DodgeDurationInSeconds = 3 + abilityLevel * 0.2;
-            }
+            DodgeDurationInSeconds = 3 + AbilityLevel * 0.2;
         }
 
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
-            CalculateProperties(abilityLevel);
             PlayVisuals(plr);
-            
+
             double secs = DodgeDurationInSeconds;
 
             Task.Run(async () =>

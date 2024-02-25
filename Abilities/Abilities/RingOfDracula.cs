@@ -9,26 +9,14 @@ namespace Abilities
     public class RingOfDracula : Ability
     {
 
-        public RingOfDracula(int abilityLevel)
-        {
-            CalculateProperties(abilityLevel);
-        }
+        public RingOfDracula(int abilityLevel) : base(abilityLevel) { }
 
 
-        internal override void CalculateProperties(params object[] args)
-        {
-            int abilityLevel = (int)args[0];
-
-            if (abilityLevel != AbilityLevel)
-            {
-                AbilityLevel = abilityLevel;
-            }
-        }
+        internal override void CalculateProperties() { }
 
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
-            CalculateProperties(abilityLevel);
             PlayVisuals(plr, false);
 
             int healAmount = 0;

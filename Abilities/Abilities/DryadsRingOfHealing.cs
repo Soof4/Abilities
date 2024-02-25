@@ -12,27 +12,18 @@ namespace Abilities
         private double HealPercentage;
 
 
-        public DryadsRingOfHealing(int abilityLevel) {
-            CalculateProperties(abilityLevel);
-        }
+        public DryadsRingOfHealing(int abilityLevel) : base(abilityLevel) { }
 
 
-        internal override void CalculateProperties(params object[] args)
+        internal override void CalculateProperties()
         {
-            int abilityLevel = (int)args[0];
-
-            if (abilityLevel != AbilityLevel)
-            {
-                AbilityLevel = abilityLevel;
-                BuffDurationInTicks = 400 + 20 * abilityLevel;
-                HealPercentage = 0.04 + abilityLevel * 0.01;
-            }
+            BuffDurationInTicks = 400 + 20 * AbilityLevel;
+            HealPercentage = 0.04 + AbilityLevel * 0.01;
         }
 
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
-            CalculateProperties(abilityLevel);
             PlayVisuals(plr);
 
             foreach (TSPlayer p in TShock.Players)

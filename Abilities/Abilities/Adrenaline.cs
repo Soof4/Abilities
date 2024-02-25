@@ -9,26 +9,17 @@ namespace Abilities
         private int BuffDurationInTicks;
 
 
-        public Adrenaline(int abilityLevel) {
-            CalculateProperties(abilityLevel);
-        }
-        
- 
-        internal override void CalculateProperties(params object[] args)
-        {
-            int abilityLevel = (int)args[0];
+        public Adrenaline(int abilityLevel) : base(abilityLevel) { }
 
-            if (abilityLevel != AbilityLevel)
-            {
-                AbilityLevel = abilityLevel;
-                BuffDurationInTicks = (int)(10 + 1.5 * (abilityLevel - 1)) * 60;
-            }
+
+        internal override void CalculateProperties()
+        {
+            BuffDurationInTicks = (int)(10 + 1.5 * (AbilityLevel - 1)) * 60;
         }
 
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
-            CalculateProperties(abilityLevel);
             PlayVisuals(plr);
 
             plr.SetBuff(BuffID.Swiftness, BuffDurationInTicks, true);

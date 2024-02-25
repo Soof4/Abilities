@@ -13,28 +13,18 @@ namespace Abilities
         public static Dictionary<byte, bool> HyperCritCooldown = new();
 
         private int Duration, ExtraChance;
-        public HyperCrit(int abilityLevel)
+        public HyperCrit(int abilityLevel) : base(abilityLevel) { }
+
+
+        internal override void CalculateProperties()
         {
-            CalculateProperties(abilityLevel);
-        }
-
-
-        internal override void CalculateProperties(params object[] args)
-        {
-            int abilityLevel = (int)args[0];
-
-            if (abilityLevel != AbilityLevel)
-            {
-                AbilityLevel = abilityLevel;
-                Duration = 10 + ((abilityLevel - 1) * 2);
-                ExtraChance = 3 + abilityLevel;
-            }
+            Duration = 10 + ((AbilityLevel - 1) * 2);
+            ExtraChance = 3 + AbilityLevel;
         }
 
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
-            CalculateProperties(abilityLevel);
             PlayVisuals(plr);
             plr.SetBuff(BuffID.SwordWhipNPCDebuff, Duration * 60, false);
             HyperCritActive.Add((byte)plr.Index, ExtraChance);

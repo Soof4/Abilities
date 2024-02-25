@@ -13,21 +13,12 @@ namespace Abilities
         private int HealAmount;
         private int MaxDistance;
 
-        public TheBound(int abilityLevel)
-        {
-            CalculateProperties(abilityLevel);
-        }
+        public TheBound(int abilityLevel) : base(abilityLevel) { }
 
-        internal override void CalculateProperties(params object[] args)
+        internal override void CalculateProperties()
         {
-            int abilityLevel = (int)args[0];
-
-            if (abilityLevel != AbilityLevel)
-            {
-                AbilityLevel = abilityLevel;
-                HealAmount = abilityLevel;
-                MaxDistance = 100 * 16;
-            }
+            HealAmount = AbilityLevel;
+            MaxDistance = 100 * 16;
         }
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
@@ -50,13 +41,14 @@ namespace Abilities
                 return;
             }
 
-            if (!Pairs.TryAdd(plr, tp)) {
+            if (!Pairs.TryAdd(plr, tp))
+            {
                 Pairs[plr] = tp;
             }
 
             Task.Run(async () =>
             {
-                while (Pairs[plr].Index == tp.Index && 
+                while (Pairs[plr].Index == tp.Index &&
                     plr.Active && tp.Active && !plr.Dead && !tp.Dead && plr.TPlayer.position.WithinRange(tp.TPlayer.position, MaxDistance))
                 {
                     PlayVisuals(plr, tp);

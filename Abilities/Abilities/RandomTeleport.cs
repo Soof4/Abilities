@@ -9,27 +9,17 @@ namespace Abilities
     {
         private int RangeInBlocks;
 
-        public RandomTeleport(int abilityLevel)
+        public RandomTeleport(int abilityLevel) : base(abilityLevel) { }
+
+
+        internal override void CalculateProperties()
         {
-            CalculateProperties(abilityLevel);
-        }
-
-
-        internal override void CalculateProperties(params object[] args)
-        {
-            int abilityLevel = (int)args[0];
-
-            if (abilityLevel != AbilityLevel)
-            {
-                AbilityLevel = abilityLevel;
-                RangeInBlocks = 50 + abilityLevel * 10;
-            }
+            RangeInBlocks = 50 + AbilityLevel * 10;
         }
 
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
-            CalculateProperties(abilityLevel);
             PlayVisuals(plr, 0f, 0f);
 
             float x = 0;

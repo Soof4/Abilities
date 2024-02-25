@@ -8,26 +8,16 @@ namespace Abilities
     public class Paranoia : Ability
     {
         int DurationInSecs, RangeInBlocks;
-        public Paranoia(int abilityLevel)
-        {
-            CalculateProperties(abilityLevel);
-        }
+        public Paranoia(int abilityLevel) : base(abilityLevel) { }
 
-        internal override void CalculateProperties(params object[] args)
+        internal override void CalculateProperties()
         {
-            int abilityLevel = (int)args[0];
-
-            if (abilityLevel != AbilityLevel)
-            {
-                AbilityLevel = abilityLevel;
-                DurationInSecs = 4 + abilityLevel;
-                RangeInBlocks = 25 + abilityLevel * 10;
-            }
+            DurationInSecs = 4 + AbilityLevel;
+            RangeInBlocks = 25 + AbilityLevel * 10;
         }
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
-            CalculateProperties(abilityLevel);
             PlayVisuals(plr);
 
             foreach (TSPlayer p in TShock.Players)
