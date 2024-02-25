@@ -1,8 +1,6 @@
 using Terraria;
-using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using TShockAPI;
-using dw = Terraria.GameContent.Drawing;
 
 namespace Abilities
 {
