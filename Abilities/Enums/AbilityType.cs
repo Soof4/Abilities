@@ -18,6 +18,7 @@ namespace Abilities
         TheBound,
         Alchemist,
         Paranoia,
-        HyperCrit
+        HyperCrit,
+        Pentagram
     }
 }

@@ -130,7 +130,6 @@ namespace Abilities
 
         public static void ExplosiveEffectEffect(Vector2 pos, int HP)
         {
-            if (ExplosiveEffectState <= 0) return;
             SpawnProjectile(pos.X + 16, pos.Y, 5, 0, 950, HP, 8, -1);
             SpawnProjectile(pos.X + 16, pos.Y, 4, 4, 950, HP, 8, -1);
             SpawnProjectile(pos.X + 16, pos.Y, 0, 5, 950, HP, 8, -1);

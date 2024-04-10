@@ -3,6 +3,7 @@ using Terraria;
 using TerrariaApi.Server;
 using TShockAPI;
 using Terraria.GameContent.Drawing;
+using Terraria.ID;
 
 namespace Abilities
 {
@@ -23,7 +24,7 @@ namespace Abilities
 
             TShock.Players[(byte)args.number].SetBuff(307, (int)((Extensions.CooldownLengths[(byte)args.number] - (DateTime.UtcNow - Extensions.Cooldowns[(byte)args.number]).TotalSeconds) * 60), true);
         }
-        
+
         /// <summary>
         /// Register this into ServerApi.Hooks.NpcStrike in order to activate HyperCrit ability.
         /// </summary>
