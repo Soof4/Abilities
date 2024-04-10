@@ -93,3 +93,6 @@ Puts nearby hostile players in a state of paranoia. Causes them to go blind and 
 
 [16] HyperCrit
 Every attack has a small chance to trigger an explosion.
+
+[17] Pentagram
+Summons a pentagram that banishes enemies from existence if they're inside the pentagram.
