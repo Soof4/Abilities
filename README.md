@@ -16,3 +16,4 @@ A dependency for TShock plugins. Adds various abilities:
 14. [Alchemist](https://github.com/Soof4/Abilities/blob/e4992318375c43c6765ffb1b324563f35acb9422/Ability-Descriptions.txt#L77-L84)
 15. [Paranoia](https://github.com/Soof4/Abilities/blob/c025de1ffb1e95b16791d3a617bfb515078aba36/Ability-Descriptions.txt#L91-L92)
 16. [HyperCrit](https://github.com/Soof4/Abilities/blob/ae82b0fd3f4b099b2c044af17f73baf1c2179cd7/Ability-Descriptions.txt#L94-L95)
+17. [Pentagram](https://github.com/Soof4/Abilities/blob/dc789bc0492487916e67ff273ad063fc158a8846/Ability-Descriptions.txt#L97-L98)
