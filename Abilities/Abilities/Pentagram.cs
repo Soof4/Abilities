@@ -22,8 +22,9 @@ namespace Abilities
             
             foreach (NPC npc in Main.npc)
             {
-                if (npc.active && !npc.boss && !npc.friendly && npc.position.WithinRange(plr.TPlayer.position, rangeInPixels))
+                if (npc.active && !npc.boss && !npc.friendly && npc.position.WithinRange(plr.TPlayer.position, rangeInPixels) && !npc.IsABestiaryIconDummy)
                 {
+                    npc.IsABestiaryIconDummy = false;
                     npc.active = false;
                     PlayVisuals(false, npc.position.X, npc.position.Y);
                     TSPlayer.All.SendData(PacketTypes.NpcUpdate, number: npc.whoAmI);
