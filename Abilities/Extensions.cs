@@ -154,6 +154,7 @@ namespace Abilities
         {
             return plr1 != plr2 && plr1.TPlayer.hostile && plr2.TPlayer.hostile && (plr1.Team == 0 && plr2.Team == 0 || plr1.Team != plr2.Team);
         }
+
         public static int GetVelocityXDirection(Player player)
         {
             return (player.velocity.X == 0) ? player.direction : (int)(player.velocity.X / Math.Abs(player.velocity.X));
@@ -176,6 +177,16 @@ namespace Abilities
 
         }
 
+        public static void SendFloatingMessage(string msg, float posX, float posY, byte r, byte g, byte b, int remoteClient = -1, int ignoreClient = -1)
+        {
+            NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended,
+                remoteClient,
+                ignoreClient,
+                Terraria.Localization.NetworkText.FromLiteral(msg),
+                (int)new Color(r, g, b).PackedValue,
+                posX,
+                posY);
+        }
         internal static bool IsInCooldown(byte casterId, int cooldown)
         {
             if (Cooldowns.ContainsKey(casterId))

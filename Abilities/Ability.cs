@@ -73,6 +73,15 @@ namespace Abilities
         /// </example>
         /// <param name="args">Arguments that might be used for the calculations.</param>
         internal abstract void CalculateProperties();
+
+        /// <summary>
+        /// Cycle method for dependents to use for cyclable abilities.
+        /// </summary>
+        /// <param name="plr">The player who wants to cycle their ability.</param>
+        /// <para>
+        /// This method won't do anything for non-cyclable abilities.
+        /// </para>
+        public virtual void Cycle(TSPlayer plr) {}
     }
 
 }
