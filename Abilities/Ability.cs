@@ -81,7 +81,19 @@ namespace Abilities
         /// <para>
         /// This method won't do anything for non-cyclable abilities.
         /// </para>
-        public virtual void Cycle(TSPlayer plr) {}
+        internal virtual void CycleLogic(TSPlayer plr) {}
+
+        /// <summary>
+        /// Cycle method for dependents to use.
+        /// </summary>
+        /// <param name="plr">Caster of the ability.</param>
+        public void Cycle(TSPlayer plr)
+        {
+            if (!Extensions.IsInCycleCooldown((byte)plr.Index))
+            {
+                CycleLogic(plr);
+            }
+        }
     }
 
 }

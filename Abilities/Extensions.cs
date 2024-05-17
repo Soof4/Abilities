@@ -10,9 +10,10 @@ namespace Abilities
     public class Extensions
     {
         private static float hallowedWeaponColor;
+        internal static int CycleCooldown = 5;
         internal static Dictionary<byte, DateTime> Cooldowns = new();
+        internal static Dictionary<byte, DateTime> CycleCooldowns = new();
         internal static Dictionary<byte, int> CooldownLengths = new();    //TODO: Is this actually necessary? Try getting rid of this.
-
         internal static float HallowedWeaponColor
         {
             get
@@ -187,6 +188,7 @@ namespace Abilities
                 posX,
                 posY);
         }
+        
         internal static bool IsInCooldown(byte casterId, int cooldown)
         {
             if (Cooldowns.ContainsKey(casterId))
@@ -206,6 +208,25 @@ namespace Abilities
             }
 
             TShock.Players[casterId].SetBuff(307, cooldown * 60, true);
+            return false;
+        }
+
+        internal static bool IsInCycleCooldown(byte casterId)
+        {
+            if (CycleCooldowns.ContainsKey(casterId))
+            {
+                if ((DateTime.UtcNow - CycleCooldowns[casterId]).TotalSeconds < CycleCooldown)
+                {
+                    return true;
+                }
+
+                CycleCooldowns[casterId] = DateTime.UtcNow;
+            }
+            else
+            {
+                CycleCooldowns.Add(casterId, DateTime.UtcNow);
+            }
+
             return false;
         }
     }

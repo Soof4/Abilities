@@ -132,7 +132,7 @@ namespace Abilities
 
         internal override void PlayVisuals(params object[] args) { }
 
-        public override void Cycle(TSPlayer plr)
+        internal override void CycleLogic(TSPlayer plr)
         {
             FairyOfLightCycles[plr.Name] += FairyOfLightCycles[plr.Name] < 3 ? 1 : -FairyOfLightCycles[plr.Name];
             Extensions.SendFloatingMessage("Cycled the ability!", plr.TPlayer.position.X + 16, plr.TPlayer.position.Y - 16, 255, 40, 255, plr.Index);

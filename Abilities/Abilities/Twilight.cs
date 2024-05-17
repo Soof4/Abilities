@@ -185,7 +185,7 @@ namespace Abilities
             }
         }
 
-        public override void Cycle(TSPlayer plr)
+        internal override void CycleLogic(TSPlayer plr)
         {
             TwilightCycles[plr.Name] += TwilightCycles[plr.Name] < 2 ? 1 : -TwilightCycles[plr.Name]; 
             Extensions.SendFloatingMessage("Cycled the ability!", plr.TPlayer.position.X + 16, plr.TPlayer.position.Y - 16, 115, 10, 115, plr.Index);
