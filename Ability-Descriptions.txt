@@ -91,8 +91,18 @@ Throws different kinds of potions around the player that lasts for a few seconds
 [15] Paranoia
 Puts nearby hostile players in a state of paranoia. Causes them to go blind and debuffs them.
 
+
 [16] HyperCrit
 Every attack has a small chance to trigger an explosion.
 
+
 [17] Pentagram
 Summons a pentagram that banishes enemies from existence if they're inside the pentagram.
+
+
+[18] SilentOrchestra
+Creates sound circular sound waves around you repeatedly. If waves hit the enemies, ability's duration will increase and extra waves will spawn.
+
+
+[19] Shockwave
+Knocks away the enemies aroudn you.
