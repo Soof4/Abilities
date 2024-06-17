@@ -29,41 +29,18 @@ namespace Abilities
         /// Register this into ServerApi.Hooks.NpcStrike in order to activate HyperCrit ability.
         /// </summary>
         /// <param name="args"></param>
-        public static void OnNpcStrike_HyperCrit(NpcStrikeEventArgs args)
+        public static void OnNpcStrike_HyperCrit(NpcStrikeEventArgs args, bool isFactionAbility)
         {
-            if (HyperCrit.HyperCritCooldown.ContainsKey((byte)args.Player.whoAmI) && HyperCrit.HyperCritCooldown[(byte)args.Player.whoAmI])
+            HyperCrit.HyperCritActive[(byte)args.Player.whoAmI] = Math.Max(HyperCrit.HyperCritActive[(byte)args.Player.whoAmI] - 1, 0);
+            if (isFactionAbility)
             {
-                return;
+                if (Extensions.Random.Next(1, 101) > (HyperCrit.HyperCritActive[(byte)args.Player.whoAmI] / 2) + 4) return;
             }
+            else if (Extensions.Random.Next(1, 101) > (HyperCrit.HyperCritActive[(byte)args.Player.whoAmI] / 2) - 5) return;
 
-            if (HyperCrit.HyperCritActive.ContainsKey((byte)args.Player.whoAmI))
-            {
-                if (Extensions.Random.Next(1, 101) > 3 + HyperCrit.HyperCritActive[(byte)args.Player.whoAmI]) return;
-            }
-            else if (Extensions.Random.Next(1, 101) > 3)
-            {
-                return;
-            }
+            int DMG = (int)(args.Damage * 1.25);
 
-            if (!HyperCrit.HyperCritCooldown.ContainsKey((byte)args.Player.whoAmI))
-            {
-                HyperCrit.HyperCritCooldown.Add((byte)args.Player.whoAmI, true);
-            }
-
-            HyperCrit.HyperCritCooldown[(byte)args.Player.whoAmI] = true;
-            int DMG = args.Damage * 3;
-
-            if (args.Npc.type == 14 || args.Npc.type == 135 || args.Npc.type == 267)
-            {
-                DMG = args.Damage * 2;
-            }
-            HyperCrit.HyperCritHit(args.Npc.position + new Vector2(args.Npc.width / 2, args.Npc.height / 2), DMG, args.Player.whoAmI);
-
-            Task.Run(async () =>
-            {
-                await Task.Delay(500);
-                HyperCrit.HyperCritCooldown[(byte)args.Player.whoAmI] = false;
-            });
+            HyperCrit.HyperCritHit(args.Npc.position + new Vector2(args.Npc.width / 2, args.Npc.height / 2), DMG);
         }
     }
 }

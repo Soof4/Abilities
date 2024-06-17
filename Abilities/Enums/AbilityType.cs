@@ -19,6 +19,8 @@ namespace Abilities
         Alchemist,
         Paranoia,
         HyperCrit,
-        Pentagram
+        Pentagram,
+        SilentOrchestra,
+        Shockwave
     }
 }

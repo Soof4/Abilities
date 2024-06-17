@@ -24,6 +24,13 @@ namespace Abilities
         internal static int ExplosiveEffectState = 0;
         internal static Random Random = new Random();
 
+        private static int[] invincible = { 0, 70, 72, 249, 379, 380, 400, 403, 404, 412, 413, 437, 438, 440, 491, 549 };
+
+        public static bool CanDamageThisEnemy(NPC npc)
+        {
+            return npc != null && npc.active && !invincible.Contains(npc.type) && !npc.friendly && !npc.CountsAsACritter;
+        }
+
         internal static bool IsPosTeleportable(int x, int y)
         {
             return x + 1 < Main.maxTilesX && y + 2 < Main.maxTilesY &&
@@ -188,7 +195,7 @@ namespace Abilities
                 posX,
                 posY);
         }
-        
+
         internal static bool IsInCooldown(byte casterId, int cooldown)
         {
             if (Cooldowns.ContainsKey(casterId))
