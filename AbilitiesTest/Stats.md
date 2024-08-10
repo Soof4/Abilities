@@ -109,7 +109,7 @@ This will be written later on.
 | Brilliant Eyes Count | 10 | 14 | 18 | 22 | 26 |
 | Judgement Base Damage | 25 | 50 | 75 | 100 | 125 |
 | Judgement Range | 50 blocks | 65 blocks | 80 blocks | 95 blocks | 110 blocks |
-| Punishment Range | 60 | 105 | 160 | 225 | 300 |
+| Punishment Damage | 60 | 105 | 160 | 225 | 300 |
 | Punishment Knockback | 25 | 35 | 45 | 55 | 65 |
 
 <br></br>

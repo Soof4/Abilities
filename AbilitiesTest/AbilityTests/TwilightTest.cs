@@ -14,7 +14,7 @@ namespace AbilitiesTest.AbilityTests
                 new Property("Brilliant Eyes Count", new List<string>()),
                 new Property("Judgement Base Damage", new List<string>()),
                 new Property("Judgement Range", new List<string>()),
-                new Property("Punishment Range", new List<string>()),
+                new Property("Punishment Damage", new List<string>()),
                 new Property("Punishment Knockback", new List<string>())
             };
 
@@ -44,7 +44,7 @@ namespace AbilitiesTest.AbilityTests
             Console.WriteLine($"Brilliant Eyes Count: {ability.EyesCount}");
             Console.WriteLine($"Judgement Base Damage: {ability.JudgeBaseDmg}");
             Console.WriteLine($"Judgement Range: {ability.JudgeRange} blocks");
-            Console.WriteLine($"Punishment Range: {ability.PunishDmg}");
+            Console.WriteLine($"Punishment Damage: {ability.PunishDmg}");
             Console.WriteLine($"Punishment Knockback: {ability.PunishKB}");
         }
 
