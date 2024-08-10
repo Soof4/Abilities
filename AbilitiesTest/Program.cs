@@ -56,7 +56,7 @@ namespace AbilitiesTest
                 string table = $"### {test.Name.Remove(test.Name.Length - 4)}\n";
                 table += $"{instance.Description}\n";
                 table += instance.GetStatsTableTill(5);
-                table += "<br>";
+                table += "<br></br>";
                 sw.WriteLine(table);
             }
 
