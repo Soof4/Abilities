@@ -18,8 +18,6 @@ namespace AbilitiesTest
                         break;
                 }
             }
-
-
         }
 
         public static void ToConsole()
@@ -55,8 +53,10 @@ namespace AbilitiesTest
             foreach (var test in testTypes)
             {
                 IAbilityTest instance = (IAbilityTest)Activator.CreateInstance(test)!;
-                string table = $"{test.Name.Remove(test.Name.Length - 4)}\n";
+                string table = $"### {test.Name.Remove(test.Name.Length - 4)}\n";
+                table += $"{instance.Description}\n";
                 table += instance.GetStatsTableTill(5);
+                table += "<br>";
                 sw.WriteLine(table);
             }
 
