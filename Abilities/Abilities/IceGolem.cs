@@ -5,7 +5,7 @@ namespace Abilities
 {
     public class IceGolem : Ability
     {
-        private int BuffDurationInTicks;
+        public int BuffDurationInTicks;
 
         public IceGolem(int abilityLevel) : base(abilityLevel) { }
 

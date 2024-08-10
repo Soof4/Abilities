@@ -7,7 +7,7 @@ namespace Abilities
 {
     public class RandomTeleport : Ability
     {
-        private int RangeInBlocks;
+        public int RangeInBlocks;
 
         public RandomTeleport(int abilityLevel) : base(abilityLevel) { }
 

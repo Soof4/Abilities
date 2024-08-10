@@ -14,7 +14,7 @@ namespace Abilities
     public class Twilight : Ability
     {
         private static Dictionary<string, int> TwilightCycles = new Dictionary<string, int>();
-        private int EyesDmg, EyesBuffDuration, EyesCount, JudgeBaseDmg, JudgeRange, PunishDmg, PunishKB;
+        public int EyesDmg, EyesBuffDuration, EyesCount, JudgeBaseDmg, JudgeRange, PunishDmg, PunishKB;
         private int[] ignore = { 8, 9, 11, 12, 14, 15, 40, 41, 68, 70, 72, 88, 89, 90, 91, 92, 96, 97, 99, 100, 114, 118, 119, 135, 136, 249, 263, 267, 328, 379, 380, 400, 403, 404, 412, 413, 437, 440, 438, 455, 456, 457, 458, 459, 491, 511, 512, 514, 515, 549, 622, 623 };
         private int[] evil = { -43, -42, -41, -40, -39, -38, -25, -24, -23, -22, -12, -11, -2, -1, 6, 7, 24, 34, 47, 57, 62, 66, 79, 81, 82, 83, 94, 98, 101, 109, 121, 156, 158, 159, 168, 173, 174, 179, 181, 182, 183, 189, 190, 191, 192, 193, 194, 195, 196, 239, 240, 241, 242, 253, 268, 281, 282, 283, 284, 288, 289, 464, 465, 470, 473, 474, 489, 490, 525, 526, 529, 533, 534, 543, 544, 630 };
         private int[] kindaevil = { -21, -20, -19, -18, 4, 5, 13, 35, 36, 60, 104, 113, 115, 116, 117, 133, 151, 162, 166, 176, 266, 315, 329, 330, 351, 460, 461, 462, 463, 466, 467, 468, 469, 472, 477, 479, 523, 586, 587, 618, 619, 620, 621, 662 };
@@ -187,7 +187,7 @@ namespace Abilities
 
         internal override void CycleLogic(TSPlayer plr)
         {
-            TwilightCycles[plr.Name] += TwilightCycles[plr.Name] < 2 ? 1 : -TwilightCycles[plr.Name]; 
+            TwilightCycles[plr.Name] += TwilightCycles[plr.Name] < 2 ? 1 : -TwilightCycles[plr.Name];
             Extensions.SendFloatingMessage("Cycled the ability!", plr.TPlayer.position.X + 16, plr.TPlayer.position.Y - 16, 115, 10, 115, plr.Index);
         }
     }

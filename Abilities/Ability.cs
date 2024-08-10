@@ -81,7 +81,7 @@ namespace Abilities
         /// <para>
         /// This method won't do anything for non-cyclable abilities.
         /// </para>
-        internal virtual void CycleLogic(TSPlayer plr) {}
+        internal virtual void CycleLogic(TSPlayer plr) { }
 
         /// <summary>
         /// Cycle method for dependents to use.
@@ -95,5 +95,4 @@ namespace Abilities
             }
         }
     }
-
 }

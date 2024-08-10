@@ -8,7 +8,7 @@ namespace Abilities
 {
     public class RingOfDracula : Ability
     {
-
+        public int RangeInBlocks = 24;
         public RingOfDracula(int abilityLevel) : base(abilityLevel) { }
 
 
@@ -24,7 +24,7 @@ namespace Abilities
 
             foreach (NPC npc in Main.npc)
             {
-                if (npc != null && npc.active && npc.type != 0 && npc.type != NPCID.TargetDummy && npc.position.WithinRange(plr.TPlayer.position, 384))
+                if (npc != null && npc.active && npc.type != 0 && npc.type != NPCID.TargetDummy && npc.position.WithinRange(plr.TPlayer.position, RangeInBlocks * 16))
                 {
 
                     int stolenHealth = (int)(600 / (1 + Math.Pow(1.0001, -npc.life)) - 300);

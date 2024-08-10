@@ -7,8 +7,8 @@ namespace Abilities
 {
     public class Witch : Ability
     {
-        private int RangeInBlocks;
-        private List<int> BuffTypes = new List<int>();
+        public int RangeInBlocks;
+        public List<int> BuffTypes = new List<int>();
 
         public Witch(int abilityLevel) : base(abilityLevel) { }
 

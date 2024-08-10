@@ -8,9 +8,9 @@ namespace Abilities
 {
     public class SilentOrchestra : Ability
     {
-        private double RealAbilityTime;
-        private int BaseDamage, RealBaseDamage, Movement4Counter;
-        private bool HitEnemy;
+        public double RealAbilityTime;
+        public int BaseDamage, RealBaseDamage, Movement4Counter;
+        public bool HitEnemy;
 
         public SilentOrchestra(int abilityLevel) : base(abilityLevel) { }
 
@@ -31,7 +31,7 @@ namespace Abilities
             double TimeDecrease = 1;
             RealAbilityTime = 20;
             RealBaseDamage = BaseDamage;
-            Task.Run(async() =>
+            Task.Run(async () =>
             {
                 NetMessage.SendData((int)PacketTypes.CreateCombatTextExtended, -1, -1,
                                        Terraria.Localization.NetworkText.FromLiteral("Movement 1"),
@@ -218,7 +218,7 @@ namespace Abilities
                 {
                     if (Extensions.CanDamageThisEnemy(npc) &&
                     npc.position.WithinRange(Pos - new Vector2(npc.width / 2, npc.height / 2), 250))
-                        {
+                    {
                         if (!npc.SpawnedFromStatue && npc.type != 488 && npc.type != 210 && npc.type != 211) HitEnemy = true;
                         TSPlayer.Server.StrikeNPC(npc.whoAmI, (int)(RealBaseDamage * 1.25) + (npc.defense / 2), 0, 0);
                         ParticleOrchestraSettings settings = new()
@@ -309,7 +309,7 @@ namespace Abilities
                     npc.position.WithinRange(Pos - new Vector2(npc.width / 2, npc.height / 2), 450))
                     {
                         if (!npc.SpawnedFromStatue && npc.type != 488 && npc.type != 210 && npc.type != 211) HitEnemy = true;
-                        TSPlayer.Server.StrikeNPC(npc.whoAmI, (int)(RealBaseDamage * 1.75) + (npc.defense/2), 0, 0);
+                        TSPlayer.Server.StrikeNPC(npc.whoAmI, (int)(RealBaseDamage * 1.75) + (npc.defense / 2), 0, 0);
                         ParticleOrchestraSettings settings = new()
                         {
                             PositionInWorld = new(npc.position.X + npc.width / 2, npc.position.Y + npc.height / 2)
@@ -379,7 +379,7 @@ namespace Abilities
                             {
                                 if (!aplr.Dead && aplr.TPlayer.position.WithinRange(Pos - new Vector2(16, 40), 900) && Extensions.CanDamageThisPlayer(plr, aplr) == true)
                                 {
-                                    aplr.DamagePlayer((RealBaseDamage * 6) + (aplr.TPlayer.statDefense/2));
+                                    aplr.DamagePlayer((RealBaseDamage * 6) + (aplr.TPlayer.statDefense / 2));
                                     ParticleOrchestraSettings settings = new()
                                     {
                                         PositionInWorld = new(aplr.TPlayer.position.X + 8, aplr.TPlayer.position.Y + 24)
@@ -486,7 +486,7 @@ namespace Abilities
                         NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, dumbassflutesound1.Item1, dumbassflutesound1.Item2, 0.4f, -0.2f));
                         break;
                 }
-                
+
             else if (movement == 4)
                 switch (Extensions.Random.Next(6))
                 {

@@ -7,7 +7,7 @@ namespace Abilities
 {
     public class Paranoia : Ability
     {
-        int DurationInSecs, RangeInBlocks;
+        public int DurationInSecs, RangeInBlocks;
         public Paranoia(int abilityLevel) : base(abilityLevel) { }
 
         internal override void CalculateProperties()

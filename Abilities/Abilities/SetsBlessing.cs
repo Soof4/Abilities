@@ -7,7 +7,7 @@ namespace Abilities
 {
     public class SetsBlessing : Ability
     {
-        private double DodgeDurationInSeconds;
+        public double DodgeDurationInSeconds;
 
         public SetsBlessing(int abilityLevel) : base(abilityLevel) { }
 

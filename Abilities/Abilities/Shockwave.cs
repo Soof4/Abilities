@@ -12,13 +12,13 @@ namespace Abilities
     {
         public Shockwave(int abilityLevel) : base(abilityLevel) { }
 
-        int baseDmg, size, kb;
+        public int BaseDmg, Size, Knockback;
 
         internal override void CalculateProperties()
         {
-            baseDmg = (int)((50 + (AbilityLevel - 1) * 20) * (1 + (AbilityLevel - 1) / 5f));
-            size = (int)(100 + (AbilityLevel - 1) * 10);
-            kb = (int)(25 + (AbilityLevel - 1) * 10);
+            BaseDmg = (int)((50 + (AbilityLevel - 1) * 20) * (1 + (AbilityLevel - 1) / 5f));
+            Size = (int)(100 + (AbilityLevel - 1) * 10);
+            Knockback = (int)(25 + (AbilityLevel - 1) * 10);
         }
 
 
@@ -28,11 +28,11 @@ namespace Abilities
             Vector2 plrPos = new Vector2(plr.X, plr.Y) - new Vector2(16, 40);
             foreach (NPC npc in Main.npc)
             {
-                if (Extensions.CanDamageThisEnemy(npc) && npc.position.WithinRange(plrPos, size))
+                if (Extensions.CanDamageThisEnemy(npc) && npc.position.WithinRange(plrPos, Size))
                 {
                     float distance = plrPos.Distance(npc.position);
-                    TSPlayer.Server.StrikeNPC(npc.whoAmI, (int)Math.Max(baseDmg - (distance / 8), baseDmg / 5), 0, 0);
-                    npc.velocity = npc.position.DirectionTo(plrPos) * (Math.Max(kb - (distance / 8), 10) * -1) + new Vector2(0,160);
+                    TSPlayer.Server.StrikeNPC(npc.whoAmI, (int)Math.Max(BaseDmg - (distance / 8), BaseDmg / 5), 0, 0);
+                    npc.velocity = npc.position.DirectionTo(plrPos) * (Math.Max(Knockback - (distance / 8), 10) * -1) + new Vector2(0, 160);
                     NetMessage.SendData((int)PacketTypes.NpcUpdate, -1, -1, null, npc.whoAmI);
                 }
             }
@@ -42,11 +42,11 @@ namespace Abilities
                 {
                     if (aplr.Active)
                     {
-                        if (!aplr.Dead && aplr.TPlayer.position.WithinRange(plrPos, size) && Extensions.CanDamageThisPlayer(plr, aplr) == true)
+                        if (!aplr.Dead && aplr.TPlayer.position.WithinRange(plrPos, Size) && Extensions.CanDamageThisPlayer(plr, aplr) == true)
                         {
                             float distance = plrPos.Distance(aplr.TPlayer.position);
-                            aplr.DamagePlayer((int)Math.Max(baseDmg - (distance / 8), baseDmg / 5));
-                            aplr.TPlayer.velocity = aplr.TPlayer.position.DirectionTo(plrPos) * (Math.Max(kb - (distance / 8), 10) * -1) + new Vector2(0, 160);
+                            aplr.DamagePlayer((int)Math.Max(BaseDmg - (distance / 8), BaseDmg / 5));
+                            aplr.TPlayer.velocity = aplr.TPlayer.position.DirectionTo(plrPos) * (Math.Max(Knockback - (distance / 8), 10) * -1) + new Vector2(0, 160);
                             TSPlayer.All.SendData(PacketTypes.PlayerUpdate, "", plr.Index);
                         }
                     }
@@ -58,7 +58,7 @@ namespace Abilities
                 {
                     if (proj.hostile)
                     {
-                        if (proj.position.WithinRange(plrPos, size))
+                        if (proj.position.WithinRange(plrPos, Size))
                         {
                             int hp = Extensions.Random.Next(0, 4);
                             Extensions.SpawnProjectile(proj.position.X, proj.position.Y, 0, 0, ProjectileID.SpiritHeal, 0, 0, plr.Index, plr.Index, hp);
@@ -83,8 +83,8 @@ namespace Abilities
             for (double i = 0; i < Math.Tau; i += 0.174533)
             {
                 settings.MovementVector = new Vector2(
-                    new Vector2(plr.X, plr.Y).DirectionTo(new Vector2(plr.X + 10 * (float)Math.Cos(i), plr.Y + 10 * (float)Math.Sin(i))).X * (size + 50),
-                    new Vector2(plr.X, plr.Y).DirectionTo(new Vector2(plr.X + 10 * (float)Math.Cos(i), plr.Y + 10 * (float)Math.Sin(i))).Y * (size + 50));
+                    new Vector2(plr.X, plr.Y).DirectionTo(new Vector2(plr.X + 10 * (float)Math.Cos(i), plr.Y + 10 * (float)Math.Sin(i))).X * (Size + 50),
+                    new Vector2(plr.X, plr.Y).DirectionTo(new Vector2(plr.X + 10 * (float)Math.Cos(i), plr.Y + 10 * (float)Math.Sin(i))).Y * (Size + 50));
                 ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ItemTransfer, settings);
             }
         }

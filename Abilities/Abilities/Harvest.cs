@@ -7,7 +7,7 @@ namespace Abilities
 {
     public class Harvest : Ability
     {
-        private int Damage, ProjSpawnInterval;
+        public int Damage, ProjSpawnInterval;
 
         public Harvest(int abilityLevel) : base(abilityLevel) { }
 

@@ -6,7 +6,7 @@ namespace Abilities
 {
     public class Adrenaline : Ability
     {
-        private int BuffDurationInTicks;
+        public int BuffDurationInTicks;
 
 
         public Adrenaline(int abilityLevel) : base(abilityLevel) { }

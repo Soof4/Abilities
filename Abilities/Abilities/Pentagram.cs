@@ -7,7 +7,7 @@ namespace Abilities
 
     public class Pentagram : Ability
     {
-        private int RangeInBlocks;
+        public int RangeInBlocks;
         public Pentagram(int abilityLevel) : base(abilityLevel) { }
 
         internal override void CalculateProperties()
@@ -19,7 +19,7 @@ namespace Abilities
         {
             int rangeInPixels = RangeInBlocks * 16;
             PlayVisuals(true, plr.TPlayer.position.X, plr.TPlayer.position.Y);
-            
+
             foreach (NPC npc in Main.npc)
             {
                 if (npc.active && !npc.boss && !npc.friendly && npc.position.WithinRange(plr.TPlayer.position, rangeInPixels) && !npc.IsABestiaryIconDummy)
@@ -42,7 +42,7 @@ namespace Abilities
             if (drawPentagram)
             {
                 Shapes.DrawCircle(x + 16, y + 16, RangeInBlocks * 16, 0.1963, ParticleOrchestraType.FlameWaders, 0);
-                Shapes.DrawStar(x + 16, y + 16, RangeInBlocks * 16,  32, ParticleOrchestraType.FlameWaders, 0);
+                Shapes.DrawStar(x + 16, y + 16, RangeInBlocks * 16, 32, ParticleOrchestraType.FlameWaders, 0);
             }
             else
             {

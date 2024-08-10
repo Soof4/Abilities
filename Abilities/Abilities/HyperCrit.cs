@@ -11,7 +11,7 @@ namespace Abilities
     {
         public static Dictionary<byte, int> HyperCritActive = new();
 
-        private int Uses;
+        public int Uses;
         public HyperCrit(int abilityLevel) : base(abilityLevel) { }
 
 
@@ -69,7 +69,7 @@ namespace Abilities
                     ParticleOrchestraSettings settings = new()
                     {
                         PositionInWorld = new(npc.position.X + (npc.width / 2), npc.position.Y + (npc.height / 2)),
-                        MovementVector = new Vector2(0,-8)
+                        MovementVector = new Vector2(0, -8)
                     };
                     ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.PaladinsHammer, settings);
                     TSPlayer.Server.StrikeNPC(npc.whoAmI, tickDMG, 0, 0);

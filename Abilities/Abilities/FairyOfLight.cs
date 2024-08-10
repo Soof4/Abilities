@@ -7,8 +7,8 @@ namespace Abilities
 {
     public class FairyOfLight : Ability
     {
-        private static Dictionary<string, int> FairyOfLightCycles = new Dictionary<string, int>();
-        private int LanceDmg, DashDmg, BoltDmg, BoltSpawnInterval, DanceDmg;
+        public static Dictionary<string, int> FairyOfLightCycles = new Dictionary<string, int>();
+        public int LanceDmg, DashDmg, BoltDmg, BoltSpawnInterval, DanceDmg;
 
         public FairyOfLight(int abilityLevel) : base(abilityLevel) { }
 

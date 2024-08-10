@@ -10,11 +10,11 @@ namespace Abilities
     // Author of this ability is @strangelad on Discord
     public class MagicDice : Ability
     {
-        int R1_Dmg, R2_HP, R3_Dmg, R4_HP, R5_Amount, R6_Dmg, R7_Duration, R7_Dmg, R8_Duration, R8_HP, R8_Dmg,
+        public int R1_Dmg, R2_HP, R3_Dmg, R4_HP, R5_Amount, R6_Dmg, R7_Duration, R7_Dmg, R8_Duration, R8_HP, R8_Dmg,
             R9_Count, R9_Dmg, R10_Ticks, R11_Cap, R12_Range, R13_Duration, R14_Duration, R15_Duration, R15_Dmg, R16_Count,
             R16_Dmg, R17_Duration, R17_Dmg, R18_Duration, R18_Dmg, R19_Duration, R19_Dmg, R20_Health, R21_Dmg, R21_Count;
 
-        float R8_Scale, R10_Duration;
+        public float R8_Scale, R10_Duration;
 
         int[] roll4List = { BuffID.Blackout, BuffID.VortexDebuff, BuffID.WitheredArmor, BuffID.WitheredWeapon,
             BuffID.CursedInferno, BuffID.MoonLeech, BuffID.Ichor, BuffID.Lucky, BuffID.RapidHealing, BuffID.Endurance,

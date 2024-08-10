@@ -6,8 +6,8 @@ namespace Abilities
 {
     public class Marthymr : Ability
     {
-        private float SpeedFactor;
-        private int Damage;
+        public float SpeedFactor;
+        public int Damage;
 
         public Marthymr(int abilityLevel) : base(abilityLevel) { }
 

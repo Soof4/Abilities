@@ -9,8 +9,8 @@ namespace Abilities
     // Author of this ability is @strangelad on Discord
     public class Alchemist : Ability
     {
-        private double potionSize, potionLifetime;
-        private int pot1Heal, pot2Dmg, pot3Dmg, pot4Duration;
+        public double potionSize, potionLifetime;
+        public int pot1Heal, pot2Dmg, pot3Dmg, pot4Duration;
 
         public Alchemist(int abilityLevel) : base(abilityLevel) { }
 

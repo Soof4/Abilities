@@ -10,8 +10,8 @@ namespace Abilities
     public class TheBound : Ability
     {
         public static Dictionary<TSPlayer, TSPlayer> Pairs = new Dictionary<TSPlayer, TSPlayer>();
-        private int HealAmount;
-        private int MaxDistance;
+        public int HealAmount;
+        public int MaxDistance;
 
         public TheBound(int abilityLevel) : base(abilityLevel) { }
 

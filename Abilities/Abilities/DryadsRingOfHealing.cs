@@ -8,8 +8,8 @@ namespace Abilities
 {
     public class DryadsRingOfHealing : Ability
     {
-        private int BuffDurationInTicks;
-        private double HealPercentage;
+        public int BuffDurationInTicks { get; set; }
+        public double HealPercentage { get; set; }
 
 
         public DryadsRingOfHealing(int abilityLevel) : base(abilityLevel) { }
