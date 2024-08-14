@@ -96,6 +96,7 @@ namespace Abilities
                         PositionInWorld = new(splashPos.X, splashPos.Y),
                         UniqueInfoPiece = ItemID.SoulofSight
                     };
+
                     for (double i = 0; i < Math.Tau; i += 0.261816841)
                     {
                         settings2.MovementVector = new Vector2(
@@ -104,18 +105,13 @@ namespace Abilities
                         ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ItemTransfer, settings2);
                     }
                     await Task.Delay(300);
+
                     foreach (TSPlayer aplr in TShock.Players)
                     {
-                        if (aplr != null)
+                        if (aplr.IsAlive() && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == false)
                         {
-                            if (aplr.Active)
-                            {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == false)
-                                {
-                                    aplr.Heal(Pot1Heal);
-                                    if (AbilityLevel == 5) aplr.SetBuff(BuffID.Honey, 360);
-                                }
-                            }
+                            aplr.Heal(Pot1Heal);
+                            if (AbilityLevel == 5) aplr.SetBuff(BuffID.Honey, 360);
                         }
                     }
                     await Task.Delay(200);
@@ -138,6 +134,7 @@ namespace Abilities
                 };
                 ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ItemTransfer, settings);
                 await Task.Delay(900);
+
                 while (loops-- > 0)
                 {
                     ParticleOrchestraSettings settings2 = new()
@@ -145,6 +142,7 @@ namespace Abilities
                         PositionInWorld = new(splashPos.X, splashPos.Y),
                         UniqueInfoPiece = ItemID.SoulofFright
                     };
+
                     for (double i = 0; i < Math.Tau; i += 0.261816841)
                     {
                         settings2.MovementVector = new Vector2(
@@ -153,6 +151,7 @@ namespace Abilities
                         ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ItemTransfer, settings2);
                     }
                     await Task.Delay(300);
+
                     foreach (NPC npc in Main.npc)
                     {
                         if (npc != null && npc.active && npc.type != 0 && npc.netID != 400 && npc.netID != 70 && npc.netID != 72 && !npc.friendly && !npc.CountsAsACritter && npc.position.WithinRange(splashPos + new Vector2(npc.width / 2, npc.height / 2), scale))
@@ -160,17 +159,12 @@ namespace Abilities
                             TSPlayer.Server.StrikeNPC(npc.whoAmI, Pot2Dmg, 0, 0);
                         }
                     }
+
                     foreach (TSPlayer aplr in TShock.Players)
                     {
-                        if (aplr != null)
+                        if (aplr.IsAlive() && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == true)
                         {
-                            if (aplr.Active)
-                            {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == true)
-                                {
-                                    aplr.DamagePlayer(Pot2Dmg);
-                                }
-                            }
+                            aplr.DamagePlayer(Pot2Dmg);
                         }
                     }
                     await Task.Delay(200);
@@ -183,6 +177,7 @@ namespace Abilities
             {
                 int loops = (int)Math.Round(9 * PotionLifetime);
                 int scale = (int)(135 * PotionSize);
+
                 Vector2 splashPos = new Vector2(plr.X + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
                 ParticleOrchestraSettings settings = new()
                 {
@@ -192,7 +187,9 @@ namespace Abilities
                     UniqueInfoPiece = ItemID.WormholePotion
                 };
                 ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ItemTransfer, settings);
+
                 await Task.Delay(900);
+
                 while (loops-- > 0)
                 {
                     ParticleOrchestraSettings settings2 = new()
@@ -200,6 +197,7 @@ namespace Abilities
                         PositionInWorld = new(splashPos.X, splashPos.Y),
                         UniqueInfoPiece = ItemID.SoulofFlight
                     };
+
                     for (double i = 0; i < Math.Tau; i += 0.261816841)
                     {
                         settings2.MovementVector = new Vector2(
@@ -208,28 +206,24 @@ namespace Abilities
                         ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ItemTransfer, settings2);
                     }
                     await Task.Delay(300);
+
                     foreach (NPC npc in Main.npc)
                     {
-                        if (npc != null && npc.active && npc.type != 0 && npc.netID != 400 && npc.netID != 70 && npc.netID != 72 && npc.netID != 113 && !npc.friendly && !npc.CountsAsACritter && npc.position.WithinRange(splashPos + new Vector2(npc.width / 2, npc.height / 2), scale))
+                        if (npc.IsAlive() && npc.netID != 400 && npc.netID != 70 && npc.netID != 72 && npc.netID != 113 && !npc.friendly && !npc.CountsAsACritter && npc.position.WithinRange(splashPos + new Vector2(npc.width / 2, npc.height / 2), scale))
                         {
                             TSPlayer.Server.StrikeNPC(npc.whoAmI, Pot3Dmg, 0, 0);
                             npc.velocity = npc.position.DirectionTo(splashPos) * (scale / 25f);
                             NetMessage.SendData((int)PacketTypes.NpcUpdate, -1, -1, null, npc.whoAmI);
                         }
                     }
+
                     foreach (TSPlayer aplr in TShock.Players)
                     {
-                        if (aplr != null)
+                        if (aplr.IsAlive() && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == true)
                         {
-                            if (aplr.Active)
-                            {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == true)
-                                {
-                                    aplr.DamagePlayer(Pot3Dmg);
-                                    aplr.TPlayer.velocity = aplr.TPlayer.position.DirectionTo(splashPos) * (scale / 25f);
-                                    TSPlayer.All.SendData(PacketTypes.PlayerUpdate, "", plr.Index);
-                                }
-                            }
+                            aplr.DamagePlayer(Pot3Dmg);
+                            aplr.TPlayer.velocity = aplr.TPlayer.position.DirectionTo(splashPos) * (scale / 25f);
+                            TSPlayer.All.SendData(PacketTypes.PlayerUpdate, "", plr.Index);
                         }
                     }
                     await Task.Delay(200);
@@ -243,6 +237,7 @@ namespace Abilities
                 int loops = (int)Math.Round(6.5 * PotionLifetime);
                 int scale = (int)(80 * PotionSize);
                 double gameModeBuffFactor = 1;
+
                 if (Main.GameMode == GameModeID.Master)
                 {
                     gameModeBuffFactor = 2.5;
@@ -251,6 +246,7 @@ namespace Abilities
                 {
                     gameModeBuffFactor = 2;
                 }
+
                 Vector2 splashPos = new Vector2(plr.X + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
                 ParticleOrchestraSettings settings = new()
                 {
@@ -260,7 +256,9 @@ namespace Abilities
                     UniqueInfoPiece = ItemID.GravitationPotion
                 };
                 ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ItemTransfer, settings);
+
                 await Task.Delay(900);
+
                 while (loops-- > 0)
                 {
                     ParticleOrchestraSettings settings2 = new()
@@ -278,7 +276,7 @@ namespace Abilities
                     await Task.Delay(300);
                     foreach (NPC npc in Main.npc)
                     {
-                        if (npc != null && npc.active && npc.type != 0 && npc.netID != 400 && npc.netID != 70 && npc.netID != 72 && !npc.friendly && !npc.CountsAsACritter && npc.position.WithinRange(splashPos + new Vector2(npc.width / 2, npc.height / 2), scale))
+                        if (npc.IsAlive() && npc.netID != 400 && npc.netID != 70 && npc.netID != 72 && !npc.friendly && !npc.CountsAsACritter && npc.position.WithinRange(splashPos + new Vector2(npc.width / 2, npc.height / 2), scale))
                         {
                             npc.AddBuff(BuffID.CursedInferno, Pot4Duration);
                             npc.AddBuff(BuffID.Ichor, Pot4Duration);
@@ -292,20 +290,14 @@ namespace Abilities
                     }
                     foreach (TSPlayer aplr in TShock.Players)
                     {
-                        if (aplr != null)
+                        if (aplr.IsAlive() && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == true)
                         {
-                            if (aplr.Active)
+                            aplr.SetBuff(BuffID.CursedInferno, (int)(Pot4Duration / gameModeBuffFactor));
+                            aplr.SetBuff(BuffID.Ichor, (int)(Pot4Duration / gameModeBuffFactor));
+                            if (AbilityLevel == 5)
                             {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == true)
-                                {
-                                    aplr.SetBuff(BuffID.CursedInferno, (int)(Pot4Duration / gameModeBuffFactor));
-                                    aplr.SetBuff(BuffID.Ichor, (int)(Pot4Duration / gameModeBuffFactor));
-                                    if (AbilityLevel == 5)
-                                    {
-                                        aplr.SetBuff(BuffID.Oiled, Pot4Duration);
-                                        aplr.SetBuff(BuffID.BetsysCurse, Pot4Duration);
-                                    }
-                                }
+                                aplr.SetBuff(BuffID.Oiled, Pot4Duration);
+                                aplr.SetBuff(BuffID.BetsysCurse, Pot4Duration);
                             }
                         }
                     }
@@ -320,6 +312,7 @@ namespace Abilities
                 int loops = (int)Math.Round(2.75 * PotionLifetime);
                 int scale = (int)(40 * PotionSize);
                 Vector2 splashPos = new Vector2(plr.X + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
+
                 ParticleOrchestraSettings settings = new()
                 {
                     IndexOfPlayerWhoInvokedThis = (byte)plr.Index,
@@ -328,6 +321,7 @@ namespace Abilities
                     UniqueInfoPiece = ItemID.CalmingPotion
                 };
                 ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ItemTransfer, settings);
+
                 await Task.Delay(900);
                 while (loops-- > 0)
                 {
@@ -336,6 +330,7 @@ namespace Abilities
                         PositionInWorld = new(splashPos.X, splashPos.Y),
                         UniqueInfoPiece = ItemID.SoulofMight
                     };
+
                     for (double i = 0; i < Math.Tau; i += 0.261816841)
                     {
                         settings2.MovementVector = new Vector2(
@@ -344,17 +339,12 @@ namespace Abilities
                         ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ItemTransfer, settings2);
                     }
                     await Task.Delay(300);
+
                     foreach (TSPlayer aplr in TShock.Players)
                     {
-                        if (aplr != null)
+                        if (aplr.IsAlive() && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == false)
                         {
-                            if (aplr.Active)
-                            {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == false)
-                                {
-                                    aplr.SendData(PacketTypes.PlayerDodge, number: plr.Index, number2: 2);
-                                }
-                            }
+                            aplr.SendData(PacketTypes.PlayerDodge, number: plr.Index, number2: 2);
                         }
                     }
                     await Task.Delay(200);
@@ -368,6 +358,7 @@ namespace Abilities
                 int loops = (int)Math.Round(4.5 * PotionLifetime);
                 int scale = (int)(80 * PotionSize);
                 Vector2 splashPos = new Vector2(plr.X + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
+
                 ParticleOrchestraSettings settings = new()
                 {
                     IndexOfPlayerWhoInvokedThis = (byte)plr.Index,
@@ -376,7 +367,9 @@ namespace Abilities
                     UniqueInfoPiece = ItemID.BiomeSightPotion
                 };
                 ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ItemTransfer, settings);
+
                 await Task.Delay(900);
+
                 while (loops-- > 0)
                 {
                     ParticleOrchestraSettings settings2 = new()
@@ -384,6 +377,7 @@ namespace Abilities
                         PositionInWorld = new(splashPos.X, splashPos.Y),
                         UniqueInfoPiece = ItemID.SoulofLight
                     };
+
                     for (double i = 0; i < Math.Tau; i += 0.261816841)
                     {
                         settings2.MovementVector = new Vector2(
@@ -392,18 +386,13 @@ namespace Abilities
                         ParticleOrchestrator.BroadcastParticleSpawn(ParticleOrchestraType.ItemTransfer, settings2);
                     }
                     await Task.Delay(300);
+
                     foreach (TSPlayer aplr in TShock.Players)
                     {
-                        if (aplr != null)
+                        if (aplr.IsAlive() && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == false)
                         {
-                            if (aplr.Active)
-                            {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == false)
-                                {
-                                    if (AbilityLevel < 5) aplr.SetBuff(BuffID.NebulaUpDmg2, 90);
-                                    else aplr.SetBuff(BuffID.NebulaUpDmg3, 90);
-                                }
-                            }
+                            if (AbilityLevel < 5) aplr.SetBuff(BuffID.NebulaUpDmg2, 90);
+                            else aplr.SetBuff(BuffID.NebulaUpDmg3, 90);
                         }
                     }
                     await Task.Delay(200);

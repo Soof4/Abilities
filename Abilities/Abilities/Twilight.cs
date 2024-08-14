@@ -82,7 +82,7 @@ namespace Abilities
                         foreach (NPC npc in Main.npc)
                         {
                             int judgeActualDmg = JudgeBaseDmg;
-                            if (npc != null && npc.active && npc.type != 0 && !npc.friendly && !ignore.Contains(npc.type) && !npc.CountsAsACritter && npc.position.WithinRange(plr.TPlayer.position, JudgeRange * 16))
+                            if (npc.IsAlive() && !npc.friendly && !ignore.Contains(npc.type) && !npc.CountsAsACritter && npc.position.WithinRange(plr.TPlayer.position, JudgeRange * 16))
                             {
                                 judgeActualDmg += npc.lifeMax / 5;
                                 if (judgeActualDmg > JudgeBaseDmg * 10) judgeActualDmg = JudgeBaseDmg * 10;

@@ -26,7 +26,7 @@ namespace Abilities
 
             foreach (TSPlayer p in TShock.Players)
             {
-                if (p != null && p.Active && !p.Dead && p.TPlayer.position.WithinRange(plr.TPlayer.position, 384))
+                if (p.IsAlive() && p.TPlayer.position.WithinRange(plr.TPlayer.position, 384))
                 {
                     p.SetBuff(BuffID.DryadsWard, BuffDurationInTicks, true);
                     p.Heal((int)(p.PlayerData.maxHealth * HealPercentage));

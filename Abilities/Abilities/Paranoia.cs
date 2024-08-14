@@ -24,7 +24,7 @@ namespace Abilities
 
             foreach (TSPlayer p in TShock.Players)
             {
-                if (p != null && p.Active && !p.Dead && p.TPlayer.hostile && p.Index != plr.Index && p.TPlayer.WithinRange(plr.TPlayer.position, 16 * RangeInBlocks))
+                if (p.IsAlive() && p.TPlayer.hostile && p.Index != plr.Index && p.TPlayer.WithinRange(plr.TPlayer.position, 16 * RangeInBlocks))
                 {
                     double gameModeBuffFactor = 1;
                     if (Main.GameMode == GameModeID.Master)

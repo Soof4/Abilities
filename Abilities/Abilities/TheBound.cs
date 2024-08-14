@@ -30,7 +30,7 @@ namespace Abilities
             // Find the target
             foreach (TSPlayer p in TShock.Players)
             {
-                if (p != null && p != plr && p.Active && !p.Dead && (tp == null || Utils.GetDistance(plr.TPlayer, p.TPlayer) < distance))
+                if (p.IsAlive() && p != plr && (tp == null || Utils.GetDistance(plr.TPlayer, p.TPlayer) < distance))
                 {
                     tp = p;
                     distance = Utils.GetDistance(plr.TPlayer, p.TPlayer);
@@ -50,7 +50,8 @@ namespace Abilities
             Task.Run(async () =>
             {
                 while (Pairs[plr].Index == tp.Index &&
-                    plr.Active && tp.Active && !plr.Dead && !tp.Dead && plr.TPlayer.position.WithinRange(tp.TPlayer.position, MaxDistance))
+                    plr.IsAlive() && tp.IsAlive() &&
+                    plr.TPlayer.position.WithinRange(tp.TPlayer.position, MaxDistance))
                 {
                     PlayVisuals(plr, tp);
                     plr.Heal(HealAmount);

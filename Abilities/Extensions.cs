@@ -14,5 +14,15 @@ namespace Abilities
 
             TSPlayer.All.SendData(PacketTypes.NpcUpdateBuff, number: npc.whoAmI);
         }
+
+        public static bool IsAlive(this TSPlayer? player)
+        {
+            return player != null && player.Active && !player.Dead;
+        }
+
+        public static bool IsAlive(this NPC? npc)
+        {
+            return npc != null && npc.active && npc.type != 0;
+        }
     }
 }

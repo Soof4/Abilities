@@ -32,7 +32,7 @@ namespace Abilities
                     {
                         foreach (NPC npc in Main.npc)
                         {
-                            if (npc != null && npc.active && npc.position.WithinRange(plr.TPlayer.position, 16 * 16))
+                            if (npc.IsAlive() && npc.position.WithinRange(plr.TPlayer.position, 16 * 16))
                             {
                                 npc.AddBuff(BuffID.ScytheWhipEnemyDebuff, 10);
                                 TSPlayer.All.SendData(PacketTypes.NpcUpdateBuff, number: npc.whoAmI);

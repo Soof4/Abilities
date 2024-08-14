@@ -25,15 +25,9 @@ namespace Abilities
             PlayVisuals(plr);
             foreach (TSPlayer aplr in TShock.Players)
             {
-                if (aplr != null)
+                if (aplr.IsAlive() && aplr.TPlayer.position.WithinRange(plr.LastNetPosition - new Vector2(16, 40), 250))
                 {
-                    if (aplr.Active)
-                    {
-                        if (!aplr.Dead && aplr.TPlayer.position.WithinRange(plr.LastNetPosition - new Vector2(16, 40), 250))
-                        {
-                            HyperCritActive[(byte)aplr.TPlayer.whoAmI] = Math.Min(HyperCritActive[(byte)aplr.TPlayer.whoAmI] + Uses, 200);
-                        }
-                    }
+                    HyperCritActive[(byte)aplr.TPlayer.whoAmI] = Math.Min(HyperCritActive[(byte)aplr.TPlayer.whoAmI] + Uses, 200);
                 }
             }
         }

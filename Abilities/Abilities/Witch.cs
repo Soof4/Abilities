@@ -46,7 +46,7 @@ namespace Abilities
 
             foreach (NPC npc in Main.npc)
             {
-                if (npc != null && npc.active && npc.type != 0 && npc.position.WithinRange(plr.TPlayer.position, RangeInBlocks * 16))
+                if (npc.IsAlive() && npc.position.WithinRange(plr.TPlayer.position, RangeInBlocks * 16))
                 {
                     foreach (int buffType in BuffTypes)
                     {

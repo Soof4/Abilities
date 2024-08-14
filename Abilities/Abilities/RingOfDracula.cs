@@ -21,7 +21,7 @@ namespace Abilities
 
             foreach (NPC npc in Main.npc)
             {
-                if (npc != null && npc.active && npc.type != 0 && npc.type != NPCID.TargetDummy && npc.position.WithinRange(plr.TPlayer.position, RangeInBlocks * 16))
+                if (npc.IsAlive() && npc.type != NPCID.TargetDummy && npc.position.WithinRange(plr.TPlayer.position, RangeInBlocks * 16))
                 {
 
                     int stolenHealth = (int)(600 / (1 + Math.Pow(1.0001, -npc.life)) - 300);
