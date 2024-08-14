@@ -5,6 +5,20 @@ This will be written later on.
 | Buffs Duration | 10.00s | 11.00s | 13.00s | 14.00s | 16.00s |
 
 <br></br>
+### Alchemist
+This will be written later on.
+| Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
+|-|-|-|-|-|-|
+| Thrown Potion Types | Heal, Damage, Vortex | Heal, Damage, Vortex, Curse | Heal, Damage, Vortex, Curse, Shield | Heal, Damage, Vortex, Curse, Shield, Power | Heal, Damage, Vortex, Curse, Shield, Power |
+| Potion Size | 1.5 | 2 | 2.5 | 3 | 3.5 |
+| Potion Lifetime | 1.4s | 1.8s | 2.2s | 2.6s | 3s |
+| Heal Pot. Heal | 12 | 16 | 20 | 24 | 28 |
+| Damage Pot. Damage | 24 | 39 | 58 | 81 | 108 |
+| Vortex Pot. Damage | 12 | 17 | 24 | 31 | 39 |
+| Curse Pot. Debuff Types | Cursed Inferno, Ichor | Cursed Inferno, Ichor | Cursed Inferno, Ichor | Cursed Inferno, Ichor, Oiled, Betsy's Curse | Cursed Inferno, Ichor, Oiled, Betsy's Curse |
+| Curse Pot. Debuffs Duration | 4.00s | 5.00s | 6.00s | 7.00s | 8.00s |
+
+<br></br>
 ### DryadsRingOfHealing
 This will be written later on.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
