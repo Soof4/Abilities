@@ -17,7 +17,7 @@ namespace Abilities
             };
         }
 
-        internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
+        protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
             int rangeInPixels = RangeInBlocks * 16;
             PlayVisuals(true, plr.TPlayer.position.X, plr.TPlayer.position.Y);
@@ -34,7 +34,7 @@ namespace Abilities
             }
         }
 
-        internal override void PlayVisuals(params object[] args)
+        protected override void PlayVisuals(params object[] args)
         {
             bool drawPentagram = (bool)args[0];
             float x = (float)args[1];

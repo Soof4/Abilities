@@ -22,7 +22,7 @@ namespace Abilities
             };
         }
 
-        internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
+        protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
             PlayVisuals(plr);
             Vector2 plrPos = new Vector2(plr.X, plr.Y) - new Vector2(16, 40);
@@ -61,7 +61,7 @@ namespace Abilities
             }
         }
 
-        internal override void PlayVisuals(params object[] args)
+        protected override void PlayVisuals(params object[] args)
         {
             TSPlayer plr = (TSPlayer)args[0];
             ParticleOrchestraSettings settings = new()

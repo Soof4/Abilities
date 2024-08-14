@@ -7,7 +7,7 @@ using TShockAPI;
 namespace Abilities
 {
 
-    public class Utils
+    public static class Utils
     {
         private static float hallowedWeaponColor;
         internal static int CycleCooldown = 5;

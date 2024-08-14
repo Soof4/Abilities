@@ -20,7 +20,7 @@ namespace Abilities
             };
         }
 
-        internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
+        protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
             PlayVisuals(plr);
             foreach (TSPlayer aplr in TShock.Players)
@@ -32,7 +32,7 @@ namespace Abilities
             }
         }
 
-        internal override void PlayVisuals(params object[] args)
+        protected override void PlayVisuals(params object[] args)
         {
             TSPlayer plr = (TSPlayer)args[0];
             makeCircle2(plr.X, plr.Y, 20, 0.785415617, 0, (byte)plr.Index, ParticleOrchestraType.PaladinsHammer);

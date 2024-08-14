@@ -34,7 +34,7 @@ namespace Abilities
             };
         }
 
-        internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
+        protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
             PlayVisuals(plr, 0);
 
@@ -126,7 +126,7 @@ namespace Abilities
             TwilightCycles[plr.Name] += TwilightCycles[plr.Name] < 2 ? 1 : -TwilightCycles[plr.Name];    // Loop sub-ability
         }
 
-        internal override void PlayVisuals(params object[] args)
+        protected override void PlayVisuals(params object[] args)
         {
             TSPlayer plr = (TSPlayer)args[0];
             int num = (int)args[1];
@@ -184,7 +184,7 @@ namespace Abilities
             }
         }
 
-        internal override void CycleLogic(TSPlayer plr)
+        protected override void CycleLogic(TSPlayer plr)
         {
             TwilightCycles[plr.Name] += TwilightCycles[plr.Name] < 2 ? 1 : -TwilightCycles[plr.Name];
             Utils.SendFloatingMessage("Cycled the ability!", plr.TPlayer.position.X + 16, plr.TPlayer.position.Y - 16, 115, 10, 115, plr.Index);

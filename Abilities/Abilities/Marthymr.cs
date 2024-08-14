@@ -18,7 +18,7 @@ namespace Abilities
             };
         }
 
-        internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
+        protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
             for (double i = 0; i < Math.Tau; i += 0.3926)
             {
@@ -37,6 +37,6 @@ namespace Abilities
             plr.KillPlayer();
         }
 
-        internal override void PlayVisuals(params object[] args) { }
+        protected override void PlayVisuals(params object[] args) { }
     }
 }

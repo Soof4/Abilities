@@ -4,7 +4,7 @@ using Terraria.GameContent.Drawing;
 
 namespace Abilities
 {
-    public class Shapes
+    public static class Shapes
     {
         /// <summary>
         /// Draws a circle.

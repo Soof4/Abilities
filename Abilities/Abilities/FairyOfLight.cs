@@ -22,7 +22,7 @@ namespace Abilities
             };
         }
 
-        internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
+        protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
             if (!FairyOfLightCycles.ContainsKey(plr.Name))
             {
@@ -131,9 +131,9 @@ namespace Abilities
             FairyOfLightCycles[plr.Name] += FairyOfLightCycles[plr.Name] < 3 ? 1 : -FairyOfLightCycles[plr.Name];    // Loop sub-ability
         }
 
-        internal override void PlayVisuals(params object[] args) { }
+        protected override void PlayVisuals(params object[] args) { }
 
-        internal override void CycleLogic(TSPlayer plr)
+        protected override void CycleLogic(TSPlayer plr)
         {
             FairyOfLightCycles[plr.Name] += FairyOfLightCycles[plr.Name] < 3 ? 1 : -FairyOfLightCycles[plr.Name];
             Utils.SendFloatingMessage("Cycled the ability!", plr.TPlayer.position.X + 16, plr.TPlayer.position.Y - 16, 255, 40, 255, plr.Index);

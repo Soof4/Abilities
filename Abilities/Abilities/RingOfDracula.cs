@@ -12,7 +12,7 @@ namespace Abilities
 
         public RingOfDracula(int abilityLevel) : base(abilityLevel) { }
 
-        internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
+        protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
             PlayVisuals(plr, false);
 
@@ -45,7 +45,7 @@ namespace Abilities
             }
         }
 
-        internal override void PlayVisuals(params object[] args)
+        protected override void PlayVisuals(params object[] args)
         {
             TSPlayer plr = (TSPlayer)args[0];
             bool spawnSkull = (bool)args[1];

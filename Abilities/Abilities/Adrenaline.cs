@@ -16,7 +16,7 @@ namespace Abilities
             };
         }
 
-        internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
+        protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
             PlayVisuals(plr);
 
@@ -27,7 +27,7 @@ namespace Abilities
             plr.SetBuff(BuffID.NebulaUpDmg1, BuffDurationInTicks, true);
         }
 
-        internal override void PlayVisuals(params object[] args)
+        protected override void PlayVisuals(params object[] args)
         {
             TSPlayer plr = (TSPlayer)args[0];
 

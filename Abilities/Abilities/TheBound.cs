@@ -22,7 +22,7 @@ namespace Abilities
             };
         }
 
-        internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
+        protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
             TSPlayer? tp = null;
             float distance = MaxDistance;
@@ -63,7 +63,7 @@ namespace Abilities
             });
         }
 
-        internal override void PlayVisuals(params object[] args)
+        protected override void PlayVisuals(params object[] args)
         {
             TSPlayer p1 = (TSPlayer)args[0];
             TSPlayer p2 = (TSPlayer)args[1];

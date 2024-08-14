@@ -6,7 +6,7 @@ using TShockAPI;
 namespace Abilities
 {
 
-    public class Hooks
+    public static class Hooks
     {
         /// <summary>
         /// Register this into ServerApi.Hooks.NetSendData in order to have respawn buff timers.

@@ -7,14 +7,14 @@ namespace Abilities
     {
         public delegate void StatsCalculator();
 
-        internal protected int AbilityLevel = 0;
+        protected int AbilityLevel = 0;
 
         /// <summary>
         /// Calculates the ability's stats for it's current level.
         /// </summary>
         public StatsCalculator UpdateStats = () => { };
 
-        internal protected Ability(int abilityLevel)
+        protected Ability(int abilityLevel)
         {
             AbilityLevel = abilityLevel;
             UpdateStats();
@@ -56,13 +56,13 @@ namespace Abilities
         /// Casting an ability with higher or lower values than [1, 5], can result in buggy behavior.
         /// </para>
         /// </param>
-        internal abstract void Function(TSPlayer plr, int cooldown, int abilityLevel = 1);
+        protected abstract void Function(TSPlayer plr, int cooldown, int abilityLevel = 1);
 
         /// <summary>
         /// Ability's visuals.
         /// </summary>
         /// <param name="args">Arguments that might be used for visualization.</param>
-        internal abstract void PlayVisuals(params object[] args);
+        protected abstract void PlayVisuals(params object[] args);
 
         /// <summary>
         /// Cycle method for dependents to use for cyclable abilities.
@@ -71,7 +71,7 @@ namespace Abilities
         /// <para>
         /// This method won't do anything for non-cyclable abilities.
         /// </para>
-        internal virtual void CycleLogic(TSPlayer plr) { }
+        protected virtual void CycleLogic(TSPlayer plr) { }
 
         /// <summary>
         /// Cycle method for dependents to use.
