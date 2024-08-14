@@ -12,14 +12,13 @@ namespace Abilities
         public static Dictionary<byte, int> HyperCritActive = new();
 
         public int Uses;
-        public HyperCrit(int abilityLevel) : base(abilityLevel) { }
-
-
-        internal override void CalculateProperties()
+        public HyperCrit(int abilityLevel) : base(abilityLevel)
         {
-            Uses = 50 + ((AbilityLevel - 1) * 10);
+            UpdateStats = () =>
+            {
+                Uses = 50 + ((AbilityLevel - 1) * 10);
+            };
         }
-
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
@@ -48,10 +47,10 @@ namespace Abilities
         public static void HyperCritHit(Vector2 pos, int DMG)
         {
             makeCircle2(pos.X, pos.Y, 17, 0.785415617, 0, 0, ParticleOrchestraType.PaladinsHammer);
-            Extensions.MakeSound(pos, 105, 68, 1.5f, 0f);
+            Utils.MakeSound(pos, 105, 68, 1.5f, 0f);
             foreach (NPC npc in Main.npc)
             {
-                if (Extensions.CanDamageThisEnemy(npc) &&
+                if (Utils.CanDamageThisEnemy(npc) &&
                 npc.position.WithinRange(pos - new Vector2(npc.width / 2, npc.height / 2), 150))
                 {
                     BurnDebuff(DMG, npc);

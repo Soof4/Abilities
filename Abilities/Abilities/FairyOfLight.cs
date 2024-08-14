@@ -10,15 +10,16 @@ namespace Abilities
         public static Dictionary<string, int> FairyOfLightCycles = new Dictionary<string, int>();
         public int LanceDmg, DashDmg, BoltDmg, BoltSpawnInterval, DanceDmg;
 
-        public FairyOfLight(int abilityLevel) : base(abilityLevel) { }
-
-        internal override void CalculateProperties()
+        public FairyOfLight(int abilityLevel) : base(abilityLevel)
         {
-            LanceDmg = (int)((50 + (AbilityLevel - 1) * 15) * (1 + AbilityLevel / 10f));
-            DashDmg = (int)((100 + (AbilityLevel - 1) * 30) * (1 + AbilityLevel / 10f));
-            BoltDmg = (int)((10 + (AbilityLevel - 1) * 10) * (1 + AbilityLevel / 10));
-            BoltSpawnInterval = 400 * (10 - AbilityLevel) / 10;
-            DanceDmg = (int)((55 + (AbilityLevel - 1) * 20) * (1 + AbilityLevel / 10f));
+            UpdateStats = () =>
+            {
+                LanceDmg = (int)((50 + (AbilityLevel - 1) * 15) * (1 + AbilityLevel / 10f));
+                DashDmg = (int)((100 + (AbilityLevel - 1) * 30) * (1 + AbilityLevel / 10f));
+                BoltDmg = (int)((10 + (AbilityLevel - 1) * 10) * (1 + AbilityLevel / 10));
+                BoltSpawnInterval = 400 * (10 - AbilityLevel) / 10;
+                DanceDmg = (int)((55 + (AbilityLevel - 1) * 20) * (1 + AbilityLevel / 10f));
+            };
         }
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
@@ -34,7 +35,7 @@ namespace Abilities
                     float startingYPos = plr.Y - 8 * 16;
                     for (int i = 0; i < 19; i += 3)
                     {
-                        Extensions.SpawnProjectile(
+                        Utils.SpawnProjectile(
                             posX: plr.X + (i % 2 * 60 - 30) * 16,
                             posY: startingYPos + i * 16,
                             speedX: i % 2 * 60 * -1 + 30,
@@ -43,14 +44,14 @@ namespace Abilities
                             damage: LanceDmg,
                             knockback: 5,
                             owner: plr.Index,
-                            ai_1: Extensions.HallowedWeaponColor
+                            ai_1: Utils.HallowedWeaponColor
                             );
                     }
                     break;
                 case 1:    // Dash
                     plr.SendData(PacketTypes.PlayerDodge, number: (byte)plr.Index, number2: 2);
 
-                    int direction = Extensions.GetVelocityXDirection(plr.TPlayer);
+                    int direction = Utils.GetVelocityXDirection(plr.TPlayer);
 
                     Task.Run(async () =>
                     {
@@ -60,7 +61,7 @@ namespace Abilities
                         float startY = plr.Y;
                         float xVelocity = plr.TPlayer.velocity.X;
 
-                        Extensions.SpawnProjectile(
+                        Utils.SpawnProjectile(
                             posX: plr.X + 16,
                             posY: plr.Y + 16,
                             speedX: 0,
@@ -84,16 +85,16 @@ namespace Abilities
                         int ms = 0;
                         while (ms < 2500)
                         {
-                            Extensions.SpawnProjectile(
-                                posX: plr.X + Extensions.Random.Next(33),
-                                posY: plr.Y + Extensions.Random.Next(-8, 33),
-                                speedX: Extensions.Random.Next(-4, 5),
-                                speedY: Extensions.Random.Next(-4, 5),
+                            Utils.SpawnProjectile(
+                                posX: plr.X + Utils.Random.Next(33),
+                                posY: plr.Y + Utils.Random.Next(-8, 33),
+                                speedX: Utils.Random.Next(-4, 5),
+                                speedY: Utils.Random.Next(-4, 5),
                                 type: ProjectileID.FairyQueenMagicItemShot,
                                 damage: BoltDmg,
                                 knockback: 6,
                                 owner: plr.Index,
-                                ai_1: Extensions.HallowedWeaponColor
+                                ai_1: Utils.HallowedWeaponColor
                                 );
 
                             ms += BoltSpawnInterval;
@@ -110,7 +111,7 @@ namespace Abilities
                         {    // TODO: Rewrite this without trigonometric functions.
                             for (double j = i % 2 == 0 ? 0.7853 : 1.5707; j < Math.Tau; j += 1.5707)
                             {
-                                Extensions.SpawnProjectile(
+                                Utils.SpawnProjectile(
                                 posX: plr.X + 16 + 64 * (float)Math.Cos(j),
                                 posY: plr.Y + 16 + 64 * (float)Math.Sin(j),
                                 speedX: 2 * (float)Math.Cos(j),
@@ -135,7 +136,7 @@ namespace Abilities
         internal override void CycleLogic(TSPlayer plr)
         {
             FairyOfLightCycles[plr.Name] += FairyOfLightCycles[plr.Name] < 3 ? 1 : -FairyOfLightCycles[plr.Name];
-            Extensions.SendFloatingMessage("Cycled the ability!", plr.TPlayer.position.X + 16, plr.TPlayer.position.Y - 16, 255, 40, 255, plr.Index);
+            Utils.SendFloatingMessage("Cycled the ability!", plr.TPlayer.position.X + 16, plr.TPlayer.position.Y - 16, 255, 40, 255, plr.Index);
         }
     }
 }

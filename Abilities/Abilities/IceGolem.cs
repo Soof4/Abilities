@@ -7,14 +7,13 @@ namespace Abilities
     {
         public int BuffDurationInTicks;
 
-        public IceGolem(int abilityLevel) : base(abilityLevel) { }
-
-
-        internal override void CalculateProperties()
+        public IceGolem(int abilityLevel) : base(abilityLevel)
         {
-            BuffDurationInTicks = 540 + 120 * AbilityLevel;
+            UpdateStats = () =>
+            {
+                BuffDurationInTicks = 540 + 120 * AbilityLevel;
+            };
         }
-
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
@@ -31,7 +30,7 @@ namespace Abilities
         internal override void PlayVisuals(params object[] args)
         {
             TSPlayer plr = (TSPlayer)args[0];
-            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, 0, 0, ProjectileID.StardustGuardianExplosion, 0, 0);
+            Utils.SpawnProjectile(plr.X + 16, plr.Y + 16, 0, 0, ProjectileID.StardustGuardianExplosion, 0, 0);
         }
     }
 }

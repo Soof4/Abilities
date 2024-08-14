@@ -12,14 +12,13 @@ namespace Abilities
         public int BaseDamage, RealBaseDamage, Movement4Counter;
         public bool HitEnemy;
 
-        public SilentOrchestra(int abilityLevel) : base(abilityLevel) { }
-
-
-        internal override void CalculateProperties()
+        public SilentOrchestra(int abilityLevel) : base(abilityLevel)
         {
-            BaseDamage = 7 + ((AbilityLevel - 1) * 3);
+            UpdateStats = () =>
+            {
+                BaseDamage = 7 + ((AbilityLevel - 1) * 3);
+            };
         }
-
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
@@ -172,7 +171,7 @@ namespace Abilities
                 await Task.Delay(375);
                 foreach (NPC npc in Main.npc)
                 {
-                    if (Extensions.CanDamageThisEnemy(npc) &&
+                    if (Utils.CanDamageThisEnemy(npc) &&
                     npc.position.WithinRange(Pos - new Vector2(npc.width / 2, npc.height / 2), 150))
                     {
                         if (!npc.SpawnedFromStatue && npc.type != 488 && npc.type != 210 && npc.type != 211) HitEnemy = true;
@@ -190,7 +189,7 @@ namespace Abilities
                     {
                         if (aplr.Active)
                         {
-                            if (!aplr.Dead && aplr.TPlayer.position.WithinRange(Pos - new Vector2(16, 40), 150) && Extensions.CanDamageThisPlayer(plr, aplr) == true)
+                            if (!aplr.Dead && aplr.TPlayer.position.WithinRange(Pos - new Vector2(16, 40), 150) && Utils.CanDamageThisPlayer(plr, aplr) == true)
                             {
                                 aplr.DamagePlayer((int)(RealBaseDamage * 1.5) + (aplr.TPlayer.statDefense / 2));
                                 HitEnemy = true;
@@ -216,7 +215,7 @@ namespace Abilities
                 await Task.Delay(375);
                 foreach (NPC npc in Main.npc)
                 {
-                    if (Extensions.CanDamageThisEnemy(npc) &&
+                    if (Utils.CanDamageThisEnemy(npc) &&
                     npc.position.WithinRange(Pos - new Vector2(npc.width / 2, npc.height / 2), 250))
                     {
                         if (!npc.SpawnedFromStatue && npc.type != 488 && npc.type != 210 && npc.type != 211) HitEnemy = true;
@@ -234,7 +233,7 @@ namespace Abilities
                     {
                         if (aplr.Active)
                         {
-                            if (!aplr.Dead && aplr.TPlayer.position.WithinRange(Pos - new Vector2(16, 40), 250) && Extensions.CanDamageThisPlayer(plr, aplr) == true)
+                            if (!aplr.Dead && aplr.TPlayer.position.WithinRange(Pos - new Vector2(16, 40), 250) && Utils.CanDamageThisPlayer(plr, aplr) == true)
                             {
                                 aplr.DamagePlayer((int)(RealBaseDamage * 2) + (aplr.TPlayer.statDefense / 2));
                                 HitEnemy = true;
@@ -260,7 +259,7 @@ namespace Abilities
                 await Task.Delay(375);
                 foreach (NPC npc in Main.npc)
                 {
-                    if (Extensions.CanDamageThisEnemy(npc) &&
+                    if (Utils.CanDamageThisEnemy(npc) &&
                     npc.position.WithinRange(Pos - new Vector2(npc.width / 2, npc.height / 2), 350))
                     {
                         if (!npc.SpawnedFromStatue && npc.type != 488 && npc.type != 210 && npc.type != 211) HitEnemy = true;
@@ -278,7 +277,7 @@ namespace Abilities
                     {
                         if (aplr.Active)
                         {
-                            if (!aplr.Dead && aplr.TPlayer.position.WithinRange(Pos - new Vector2(16, 40), 350) && Extensions.CanDamageThisPlayer(plr, aplr) == true)
+                            if (!aplr.Dead && aplr.TPlayer.position.WithinRange(Pos - new Vector2(16, 40), 350) && Utils.CanDamageThisPlayer(plr, aplr) == true)
                             {
                                 aplr.DamagePlayer((int)(RealBaseDamage * 2.5) + (aplr.TPlayer.statDefense / 2));
                                 HitEnemy = true;
@@ -305,7 +304,7 @@ namespace Abilities
                 await Task.Delay(375);
                 foreach (NPC npc in Main.npc)
                 {
-                    if (Extensions.CanDamageThisEnemy(npc) &&
+                    if (Utils.CanDamageThisEnemy(npc) &&
                     npc.position.WithinRange(Pos - new Vector2(npc.width / 2, npc.height / 2), 450))
                     {
                         if (!npc.SpawnedFromStatue && npc.type != 488 && npc.type != 210 && npc.type != 211) HitEnemy = true;
@@ -323,7 +322,7 @@ namespace Abilities
                     {
                         if (aplr.Active)
                         {
-                            if (!aplr.Dead && aplr.TPlayer.position.WithinRange(Pos - new Vector2(16, 40), 450) && Extensions.CanDamageThisPlayer(plr, aplr) == true)
+                            if (!aplr.Dead && aplr.TPlayer.position.WithinRange(Pos - new Vector2(16, 40), 450) && Utils.CanDamageThisPlayer(plr, aplr) == true)
                             {
                                 aplr.DamagePlayer((int)(RealBaseDamage * 3) + (aplr.TPlayer.statDefense / 2));
                                 HitEnemy = true;
@@ -340,8 +339,8 @@ namespace Abilities
         }
         private void Finale(TSPlayer plr, int count)
         {
-            (ushort, int) sound1 = Extensions.GetSoundIndexAndId(2, 159);
-            (ushort, int) sound2 = Extensions.GetSoundIndexAndId(2, 145);
+            (ushort, int) sound1 = Utils.GetSoundIndexAndId(2, 159);
+            (ushort, int) sound2 = Utils.GetSoundIndexAndId(2, 145);
             int loopCount = count;
             plr.SetBuff(BuffID.Webbed, 180, true);
             Vector2 Pos = plr.TPlayer.position;
@@ -360,7 +359,7 @@ namespace Abilities
                 {
                     foreach (NPC npc in Main.npc)
                     {
-                        if (Extensions.CanDamageThisEnemy(npc) &&
+                        if (Utils.CanDamageThisEnemy(npc) &&
                     npc.position.WithinRange(Pos - new Vector2(npc.width / 2, npc.height / 2), 900))
                         {
                             TSPlayer.Server.StrikeNPC(npc.whoAmI, (RealBaseDamage * 3) + (npc.defense / 2), 0, 0);
@@ -377,7 +376,7 @@ namespace Abilities
                         {
                             if (aplr.Active)
                             {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(Pos - new Vector2(16, 40), 900) && Extensions.CanDamageThisPlayer(plr, aplr) == true)
+                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(Pos - new Vector2(16, 40), 900) && Utils.CanDamageThisPlayer(plr, aplr) == true)
                                 {
                                     aplr.DamagePlayer((RealBaseDamage * 6) + (aplr.TPlayer.statDefense / 2));
                                     ParticleOrchestraSettings settings = new()
@@ -415,17 +414,17 @@ namespace Abilities
 
         private void HitSound(TSPlayer plr, int movement)
         {
-            (ushort, int) sound1 = Extensions.GetSoundIndexAndId(2, 133);
-            (ushort, int) sound2 = Extensions.GetSoundIndexAndId(2, 134);
-            (ushort, int) sound3 = Extensions.GetSoundIndexAndId(2, 135);
-            (ushort, int) sound4 = Extensions.GetSoundIndexAndId(2, 136);
-            (ushort, int) sound5 = Extensions.GetSoundIndexAndId(2, 137);
-            (ushort, int) sound6 = Extensions.GetSoundIndexAndId(2, 138);
-            (ushort, int) dumbassflutesound1 = Extensions.GetSoundIndexAndId(42, 268);
-            (ushort, int) dumbassflutesound2 = Extensions.GetSoundIndexAndId(42, 269);
-            (ushort, int) dumbassflutesound3 = Extensions.GetSoundIndexAndId(42, 270);
+            (ushort, int) sound1 = Utils.GetSoundIndexAndId(2, 133);
+            (ushort, int) sound2 = Utils.GetSoundIndexAndId(2, 134);
+            (ushort, int) sound3 = Utils.GetSoundIndexAndId(2, 135);
+            (ushort, int) sound4 = Utils.GetSoundIndexAndId(2, 136);
+            (ushort, int) sound5 = Utils.GetSoundIndexAndId(2, 137);
+            (ushort, int) sound6 = Utils.GetSoundIndexAndId(2, 138);
+            (ushort, int) dumbassflutesound1 = Utils.GetSoundIndexAndId(42, 268);
+            (ushort, int) dumbassflutesound2 = Utils.GetSoundIndexAndId(42, 269);
+            (ushort, int) dumbassflutesound3 = Utils.GetSoundIndexAndId(42, 270);
             if (movement == 1)
-                switch (Extensions.Random.Next(6))
+                switch (Utils.Random.Next(6))
                 {
                     case 0:
                         NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, sound1.Item1, sound1.Item2, 0.3f));
@@ -447,7 +446,7 @@ namespace Abilities
                         break;
                 }
             else if (movement == 2)
-                switch (Extensions.Random.Next(6))
+                switch (Utils.Random.Next(6))
                 {
                     case 0:
                         NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, sound1.Item1, sound1.Item2, 0.3f));
@@ -475,7 +474,7 @@ namespace Abilities
                         break;
                 }
             else if (movement == 3)
-                switch (Extensions.Random.Next(2))
+                switch (Utils.Random.Next(2))
                 {
                     case 0:
                         NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, dumbassflutesound2.Item1, dumbassflutesound2.Item2, 0.4f));
@@ -488,7 +487,7 @@ namespace Abilities
                 }
 
             else if (movement == 4)
-                switch (Extensions.Random.Next(6))
+                switch (Utils.Random.Next(6))
                 {
                     case 0:
                         NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(plr.TPlayer.position, sound1.Item1, sound1.Item2, 0.3f));

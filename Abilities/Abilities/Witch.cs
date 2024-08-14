@@ -10,33 +10,34 @@ namespace Abilities
         public int RangeInBlocks;
         public List<int> BuffTypes = new List<int>();
 
-        public Witch(int abilityLevel) : base(abilityLevel) { }
-
-        internal override void CalculateProperties()
+        public Witch(int abilityLevel) : base(abilityLevel)
         {
-            RangeInBlocks = 16 + (AbilityLevel - 1) * 2;
-            BuffTypes = new List<int>();
-
-            switch (AbilityLevel)
+            UpdateStats = () =>
             {
-                case 1:
-                    BuffTypes.Add(BuffID.Frostburn);
-                    break;
-                case 2:
-                    BuffTypes.Add(BuffID.Frostburn);
-                    BuffTypes.Add(BuffID.Bleeding);
-                    break;
-                case 3:
-                    BuffTypes.Add(BuffID.ShadowFlame);
-                    break;
-                case 4:
-                    BuffTypes.Add(BuffID.Venom);
-                    break;
-                default:
-                    BuffTypes.Add(BuffID.ShadowFlame);
-                    BuffTypes.Add(BuffID.Venom);
-                    break;
-            }
+                RangeInBlocks = 16 + (AbilityLevel - 1) * 2;
+                BuffTypes = new List<int>();
+
+                switch (AbilityLevel)
+                {
+                    case 1:
+                        BuffTypes.Add(BuffID.Frostburn);
+                        break;
+                    case 2:
+                        BuffTypes.Add(BuffID.Frostburn);
+                        BuffTypes.Add(BuffID.Bleeding);
+                        break;
+                    case 3:
+                        BuffTypes.Add(BuffID.ShadowFlame);
+                        break;
+                    case 4:
+                        BuffTypes.Add(BuffID.Venom);
+                        break;
+                    default:
+                        BuffTypes.Add(BuffID.ShadowFlame);
+                        BuffTypes.Add(BuffID.Venom);
+                        break;
+                }
+            };
         }
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)

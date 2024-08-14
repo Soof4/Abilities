@@ -8,11 +8,13 @@ namespace Abilities
     public class Pentagram : Ability
     {
         public int RangeInBlocks;
-        public Pentagram(int abilityLevel) : base(abilityLevel) { }
 
-        internal override void CalculateProperties()
+        public Pentagram(int abilityLevel) : base(abilityLevel)
         {
-            RangeInBlocks = 15 + AbilityLevel * 5;
+            UpdateStats = () =>
+            {
+                RangeInBlocks = 15 + AbilityLevel * 5;
+            };
         }
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)

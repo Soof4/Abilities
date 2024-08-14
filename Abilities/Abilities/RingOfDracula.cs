@@ -9,11 +9,8 @@ namespace Abilities
     public class RingOfDracula : Ability
     {
         public int RangeInBlocks = 24;
+
         public RingOfDracula(int abilityLevel) : base(abilityLevel) { }
-
-
-        internal override void CalculateProperties() { }
-
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {

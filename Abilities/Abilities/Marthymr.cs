@@ -9,21 +9,20 @@ namespace Abilities
         public float SpeedFactor;
         public int Damage;
 
-        public Marthymr(int abilityLevel) : base(abilityLevel) { }
-
-
-        internal override void CalculateProperties()
+        public Marthymr(int abilityLevel) : base(abilityLevel)
         {
-            SpeedFactor = 9 + AbilityLevel;
-            Damage = 75 + 100 * AbilityLevel;
+            UpdateStats = () =>
+            {
+                SpeedFactor = 9 + AbilityLevel;
+                Damage = 75 + 100 * AbilityLevel;
+            };
         }
-
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
             for (double i = 0; i < Math.Tau; i += 0.3926)
             {
-                Extensions.SpawnProjectile(
+                Utils.SpawnProjectile(
                     posX: plr.X + 16 * (float)Math.Cos(i),
                     posY: plr.Y + 16 * (float)Math.Sin(i),
                     speedX: SpeedFactor * (float)Math.Cos(i),

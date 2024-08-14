@@ -9,14 +9,13 @@ namespace Abilities
     {
         public int RangeInBlocks;
 
-        public RandomTeleport(int abilityLevel) : base(abilityLevel) { }
-
-
-        internal override void CalculateProperties()
+        public RandomTeleport(int abilityLevel) : base(abilityLevel)
         {
-            RangeInBlocks = 50 + AbilityLevel * 10;
+            UpdateStats = () =>
+            {
+                RangeInBlocks = 50 + AbilityLevel * 10;
+            };
         }
-
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
@@ -27,12 +26,12 @@ namespace Abilities
 
             for (int i = 0; i < 100; i++)
             {
-                int d = Extensions.Random.Next(160, RangeInBlocks * 16);
-                double tetha = Extensions.Random.NextDouble() * Math.Tau;
+                int d = Utils.Random.Next(160, RangeInBlocks * 16);
+                double tetha = Utils.Random.NextDouble() * Math.Tau;
                 x = d * (float)Math.Cos(tetha);
                 y = d * (float)Math.Sin(tetha);
 
-                if (Extensions.IsPosTeleportable((int)((x + plr.X) / 16), (int)((y + plr.Y) / 16)))
+                if (Utils.IsPosTeleportable((int)((x + plr.X) / 16), (int)((y + plr.Y) / 16)))
                 {
                     break;
                 }

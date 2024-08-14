@@ -10,17 +10,17 @@ namespace Abilities
     // Author of this ability is @strangelad on Discord
     public class Shockwave : Ability
     {
-        public Shockwave(int abilityLevel) : base(abilityLevel) { }
-
         public int BaseDmg, Size, Knockback;
 
-        internal override void CalculateProperties()
+        public Shockwave(int abilityLevel) : base(abilityLevel)
         {
-            BaseDmg = (int)((50 + (AbilityLevel - 1) * 20) * (1 + (AbilityLevel - 1) / 5f));
-            Size = (int)(100 + (AbilityLevel - 1) * 10);
-            Knockback = (int)(25 + (AbilityLevel - 1) * 10);
+            UpdateStats = () =>
+            {
+                BaseDmg = (int)((50 + (AbilityLevel - 1) * 20) * (1 + (AbilityLevel - 1) / 5f));
+                Size = (int)(100 + (AbilityLevel - 1) * 10);
+                Knockback = (int)(25 + (AbilityLevel - 1) * 10);
+            };
         }
-
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
@@ -28,7 +28,7 @@ namespace Abilities
             Vector2 plrPos = new Vector2(plr.X, plr.Y) - new Vector2(16, 40);
             foreach (NPC npc in Main.npc)
             {
-                if (Extensions.CanDamageThisEnemy(npc) && npc.position.WithinRange(plrPos, Size))
+                if (Utils.CanDamageThisEnemy(npc) && npc.position.WithinRange(plrPos, Size))
                 {
                     float distance = plrPos.Distance(npc.position);
                     TSPlayer.Server.StrikeNPC(npc.whoAmI, (int)Math.Max(BaseDmg - (distance / 8), BaseDmg / 5), 0, 0);
@@ -42,7 +42,7 @@ namespace Abilities
                 {
                     if (aplr.Active)
                     {
-                        if (!aplr.Dead && aplr.TPlayer.position.WithinRange(plrPos, Size) && Extensions.CanDamageThisPlayer(plr, aplr) == true)
+                        if (!aplr.Dead && aplr.TPlayer.position.WithinRange(plrPos, Size) && Utils.CanDamageThisPlayer(plr, aplr) == true)
                         {
                             float distance = plrPos.Distance(aplr.TPlayer.position);
                             aplr.DamagePlayer((int)Math.Max(BaseDmg - (distance / 8), BaseDmg / 5));
@@ -60,8 +60,8 @@ namespace Abilities
                     {
                         if (proj.position.WithinRange(plrPos, Size))
                         {
-                            int hp = Extensions.Random.Next(0, 4);
-                            Extensions.SpawnProjectile(proj.position.X, proj.position.Y, 0, 0, ProjectileID.SpiritHeal, 0, 0, plr.Index, plr.Index, hp);
+                            int hp = Utils.Random.Next(0, 4);
+                            Utils.SpawnProjectile(proj.position.X, proj.position.Y, 0, 0, ProjectileID.SpiritHeal, 0, 0, plr.Index, plr.Index, hp);
                             proj.type = 0;
                             NetMessage.SendData((int)PacketTypes.ProjectileNew, -1, -1, null, proj.whoAmI);
                         }

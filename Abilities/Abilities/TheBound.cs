@@ -13,12 +13,13 @@ namespace Abilities
         public int HealAmount;
         public int MaxDistance;
 
-        public TheBound(int abilityLevel) : base(abilityLevel) { }
-
-        internal override void CalculateProperties()
+        public TheBound(int abilityLevel) : base(abilityLevel)
         {
-            HealAmount = AbilityLevel;
-            MaxDistance = 100 * 16;
+            UpdateStats = () =>
+            {
+                HealAmount = AbilityLevel;
+                MaxDistance = 100 * 16;
+            };
         }
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
@@ -29,10 +30,10 @@ namespace Abilities
             // Find the target
             foreach (TSPlayer p in TShock.Players)
             {
-                if (p != null && p != plr && p.Active && !p.Dead && (tp == null || Extensions.GetDistance(plr.TPlayer, p.TPlayer) < distance))
+                if (p != null && p != plr && p.Active && !p.Dead && (tp == null || Utils.GetDistance(plr.TPlayer, p.TPlayer) < distance))
                 {
                     tp = p;
-                    distance = Extensions.GetDistance(plr.TPlayer, p.TPlayer);
+                    distance = Utils.GetDistance(plr.TPlayer, p.TPlayer);
                 }
             }
 

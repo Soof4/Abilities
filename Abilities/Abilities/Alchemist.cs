@@ -12,19 +12,18 @@ namespace Abilities
         public double PotionSize, PotionLifetime;
         public int Pot1Heal, Pot2Dmg, Pot3Dmg, Pot4Duration;
 
-        public Alchemist(int abilityLevel) : base(abilityLevel) { }
-
-
-        internal override void CalculateProperties()
+        public Alchemist(int abilityLevel) : base(abilityLevel)
         {
-            PotionSize = (double)1 + (AbilityLevel / 2.0);
-            PotionLifetime = (double)1 + (AbilityLevel / 2.5);
-            Pot1Heal = (int)8 + (AbilityLevel * 4);
-            Pot2Dmg = (int)((15 + (AbilityLevel * 9)) * (1 + (AbilityLevel - 1) / 5f));
-            Pot3Dmg = (int)((8 + (AbilityLevel * 4)) * (1 + (AbilityLevel - 1) / 10f));
-            Pot4Duration = (int)180 + (AbilityLevel * 60);
+            UpdateStats = () =>
+            {
+                PotionSize = (double)1 + (AbilityLevel / 2.0);
+                PotionLifetime = (double)1 + (AbilityLevel / 2.5);
+                Pot1Heal = (int)8 + (AbilityLevel * 4);
+                Pot2Dmg = (int)((15 + (AbilityLevel * 9)) * (1 + (AbilityLevel - 1) / 5f));
+                Pot3Dmg = (int)((8 + (AbilityLevel * 4)) * (1 + (AbilityLevel - 1) / 10f));
+                Pot4Duration = (int)180 + (AbilityLevel * 60);
+            };
         }
-
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
@@ -80,7 +79,7 @@ namespace Abilities
             {
                 int loops = (int)Math.Round(7 * PotionLifetime);
                 int scale = (int)(85 * PotionSize);
-                Vector2 splashPos = new Vector2(plr.X + Extensions.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Extensions.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
+                Vector2 splashPos = new Vector2(plr.X + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
                 ParticleOrchestraSettings settings = new()
                 {
                     IndexOfPlayerWhoInvokedThis = (byte)plr.Index,
@@ -111,7 +110,7 @@ namespace Abilities
                         {
                             if (aplr.Active)
                             {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Extensions.CanDamageThisPlayer(plr, aplr) == false)
+                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == false)
                                 {
                                     aplr.Heal(Pot1Heal);
                                     if (AbilityLevel == 5) aplr.SetBuff(BuffID.Honey, 360);
@@ -129,7 +128,7 @@ namespace Abilities
             {
                 int loops = (int)Math.Round(8 * PotionLifetime);
                 int scale = (int)(105 * PotionSize);
-                Vector2 splashPos = new Vector2(plr.X + Extensions.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Extensions.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
+                Vector2 splashPos = new Vector2(plr.X + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
                 ParticleOrchestraSettings settings = new()
                 {
                     IndexOfPlayerWhoInvokedThis = (byte)plr.Index,
@@ -167,7 +166,7 @@ namespace Abilities
                         {
                             if (aplr.Active)
                             {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Extensions.CanDamageThisPlayer(plr, aplr) == true)
+                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == true)
                                 {
                                     aplr.DamagePlayer(Pot2Dmg);
                                 }
@@ -184,7 +183,7 @@ namespace Abilities
             {
                 int loops = (int)Math.Round(9 * PotionLifetime);
                 int scale = (int)(135 * PotionSize);
-                Vector2 splashPos = new Vector2(plr.X + Extensions.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Extensions.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
+                Vector2 splashPos = new Vector2(plr.X + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
                 ParticleOrchestraSettings settings = new()
                 {
                     IndexOfPlayerWhoInvokedThis = (byte)plr.Index,
@@ -224,7 +223,7 @@ namespace Abilities
                         {
                             if (aplr.Active)
                             {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Extensions.CanDamageThisPlayer(plr, aplr) == true)
+                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == true)
                                 {
                                     aplr.DamagePlayer(Pot3Dmg);
                                     aplr.TPlayer.velocity = aplr.TPlayer.position.DirectionTo(splashPos) * (scale / 25f);
@@ -252,7 +251,7 @@ namespace Abilities
                 {
                     gameModeBuffFactor = 2;
                 }
-                Vector2 splashPos = new Vector2(plr.X + Extensions.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Extensions.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
+                Vector2 splashPos = new Vector2(plr.X + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
                 ParticleOrchestraSettings settings = new()
                 {
                     IndexOfPlayerWhoInvokedThis = (byte)plr.Index,
@@ -297,7 +296,7 @@ namespace Abilities
                         {
                             if (aplr.Active)
                             {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Extensions.CanDamageThisPlayer(plr, aplr) == true)
+                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == true)
                                 {
                                     aplr.SetBuff(BuffID.CursedInferno, (int)(Pot4Duration / gameModeBuffFactor));
                                     aplr.SetBuff(BuffID.Ichor, (int)(Pot4Duration / gameModeBuffFactor));
@@ -320,7 +319,7 @@ namespace Abilities
             {
                 int loops = (int)Math.Round(2.75 * PotionLifetime);
                 int scale = (int)(40 * PotionSize);
-                Vector2 splashPos = new Vector2(plr.X + Extensions.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Extensions.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
+                Vector2 splashPos = new Vector2(plr.X + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
                 ParticleOrchestraSettings settings = new()
                 {
                     IndexOfPlayerWhoInvokedThis = (byte)plr.Index,
@@ -351,7 +350,7 @@ namespace Abilities
                         {
                             if (aplr.Active)
                             {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Extensions.CanDamageThisPlayer(plr, aplr) == false)
+                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == false)
                                 {
                                     aplr.SendData(PacketTypes.PlayerDodge, number: plr.Index, number2: 2);
                                 }
@@ -368,7 +367,7 @@ namespace Abilities
             {
                 int loops = (int)Math.Round(4.5 * PotionLifetime);
                 int scale = (int)(80 * PotionSize);
-                Vector2 splashPos = new Vector2(plr.X + Extensions.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Extensions.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
+                Vector2 splashPos = new Vector2(plr.X + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1), plr.Y + Utils.Random.Next((int)(scale * -1.6f), (int)(scale * 1.6) + 1));
                 ParticleOrchestraSettings settings = new()
                 {
                     IndexOfPlayerWhoInvokedThis = (byte)plr.Index,
@@ -399,7 +398,7 @@ namespace Abilities
                         {
                             if (aplr.Active)
                             {
-                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Extensions.CanDamageThisPlayer(plr, aplr) == false)
+                                if (!aplr.Dead && aplr.TPlayer.position.WithinRange(splashPos + new Vector2(16, 40), scale) && Utils.CanDamageThisPlayer(plr, aplr) == false)
                                 {
                                     if (AbilityLevel < 5) aplr.SetBuff(BuffID.NebulaUpDmg2, 90);
                                     else aplr.SetBuff(BuffID.NebulaUpDmg3, 90);

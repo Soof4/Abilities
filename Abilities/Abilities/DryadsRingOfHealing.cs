@@ -11,16 +11,14 @@ namespace Abilities
         public int BuffDurationInTicks { get; set; }
         public double HealPercentage { get; set; }
 
-
-        public DryadsRingOfHealing(int abilityLevel) : base(abilityLevel) { }
-
-
-        internal override void CalculateProperties()
+        public DryadsRingOfHealing(int abilityLevel) : base(abilityLevel)
         {
-            BuffDurationInTicks = 400 + 20 * AbilityLevel;
-            HealPercentage = 0.04 + AbilityLevel * 0.01;
+            UpdateStats = () =>
+            {
+                BuffDurationInTicks = 400 + 20 * AbilityLevel;
+                HealPercentage = 0.04 + AbilityLevel * 0.01;
+            };
         }
-
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {

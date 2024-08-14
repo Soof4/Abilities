@@ -9,14 +9,13 @@ namespace Abilities
     {
         public double DodgeDurationInSeconds;
 
-        public SetsBlessing(int abilityLevel) : base(abilityLevel) { }
-
-
-        internal override void CalculateProperties()
+        public SetsBlessing(int abilityLevel) : base(abilityLevel)
         {
-            DodgeDurationInSeconds = 3 + AbilityLevel * 0.2;
+            UpdateStats = () =>
+            {
+                DodgeDurationInSeconds = 3 + AbilityLevel * 0.2;
+            };
         }
-
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {

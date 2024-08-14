@@ -8,15 +8,13 @@ namespace Abilities
     {
         public int BuffDurationInTicks;
 
-
-        public Adrenaline(int abilityLevel) : base(abilityLevel) { }
-
-
-        internal override void CalculateProperties()
+        public Adrenaline(int abilityLevel) : base(abilityLevel)
         {
-            BuffDurationInTicks = (int)(10 + 1.5 * (AbilityLevel - 1)) * 60;
+            UpdateStats = () =>
+            {
+                BuffDurationInTicks = (int)(10 + 1.5 * (AbilityLevel - 1)) * 60;
+            };
         }
-
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {

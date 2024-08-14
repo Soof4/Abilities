@@ -20,20 +20,19 @@ namespace Abilities
         private int[] kindaevil = { -21, -20, -19, -18, 4, 5, 13, 35, 36, 60, 104, 113, 115, 116, 117, 133, 151, 162, 166, 176, 266, 315, 329, 330, 351, 460, 461, 462, 463, 466, 467, 468, 469, 472, 477, 479, 523, 586, 587, 618, 619, 620, 621, 662 };
         private int[] notevil = { 75, 80, 84, 86, 120, 122, 137, 138, 475, 527, 545, 636, 657, 658, 659, 660 };
 
-
-        public Twilight(int abilityLevel) : base(abilityLevel) { }
-
-        internal override void CalculateProperties()
+        public Twilight(int abilityLevel) : base(abilityLevel)
         {
-            EyesDmg = (int)((10 + (AbilityLevel - 1) * 5) * (1 + AbilityLevel / 10f));
-            EyesBuffDuration = 720 + (AbilityLevel - 1) * 240;
-            EyesCount = 10 + (AbilityLevel - 1) * 4;
-            JudgeBaseDmg = (int)(25 + (AbilityLevel - 1) * 25);
-            JudgeRange = 50 + (AbilityLevel - 1) * 15;
-            PunishDmg = (int)((50 + (AbilityLevel - 1) * 25) * (1 + AbilityLevel / 5f));
-            PunishKB = 25 + (AbilityLevel - 1) * 10;
+            UpdateStats = () =>
+            {
+                EyesDmg = (int)((10 + (AbilityLevel - 1) * 5) * (1 + AbilityLevel / 10f));
+                EyesBuffDuration = 720 + (AbilityLevel - 1) * 240;
+                EyesCount = 10 + (AbilityLevel - 1) * 4;
+                JudgeBaseDmg = (int)(25 + (AbilityLevel - 1) * 25);
+                JudgeRange = 50 + (AbilityLevel - 1) * 15;
+                PunishDmg = (int)((50 + (AbilityLevel - 1) * 25) * (1 + AbilityLevel / 5f));
+                PunishKB = 25 + (AbilityLevel - 1) * 10;
+            };
         }
-
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
@@ -50,15 +49,15 @@ namespace Abilities
                     plr.SetBuff(BuffID.Shine, EyesBuffDuration, false);
                     plr.SetBuff(BuffID.NightOwl, EyesBuffDuration, false);
                     plr.SetBuff(BuffID.Hunter, EyesBuffDuration, false);
-                    Extensions.MakeSound(plr.TPlayer.position, 105, 164, 0.6f, -0.2f);
+                    Utils.MakeSound(plr.TPlayer.position, 105, 164, 0.6f, -0.2f);
                     int i = EyesCount;
                     Task.Run(async () =>
                     {
                         while (i > 0 && !plr.Dead)
                         {
-                            float random = Extensions.Random.Next(-30, 31) / 10f;
-                            Extensions.SpawnProjectile(plr.X + 16, plr.Y + 16, plr.TPlayer.direction * -6, random, ProjectileID.FairyQueenMagicItemShot, EyesDmg, 2, plr.Index, 0f, 0.67f);
-                            Extensions.SpawnProjectile(plr.X + 16 + (plr.TPlayer.direction * -25), plr.Y + 16, plr.TPlayer.direction * -3f, random / 2f, ProjectileID.LightsBane, 0, 0, -1, 0.67f);
+                            float random = Utils.Random.Next(-30, 31) / 10f;
+                            Utils.SpawnProjectile(plr.X + 16, plr.Y + 16, plr.TPlayer.direction * -6, random, ProjectileID.FairyQueenMagicItemShot, EyesDmg, 2, plr.Index, 0f, 0.67f);
+                            Utils.SpawnProjectile(plr.X + 16 + (plr.TPlayer.direction * -25), plr.Y + 16, plr.TPlayer.direction * -3f, random / 2f, ProjectileID.LightsBane, 0, 0, -1, 0.67f);
                             PlayVisuals(plr, 0);
                             await Task.Delay(125);
                             i--;
@@ -79,7 +78,7 @@ namespace Abilities
                         }
                         if (plr.Dead) return;
                         PlayVisuals(plr, 2);
-                        Extensions.MakeSound(plr.TPlayer.position, 105, 35, 2f, 0f);
+                        Utils.MakeSound(plr.TPlayer.position, 105, 35, 2f, 0f);
                         foreach (NPC npc in Main.npc)
                         {
                             int judgeActualDmg = JudgeBaseDmg;
@@ -113,13 +112,13 @@ namespace Abilities
                     });
                     break;
                 case 2:    //Punishment
-                    Extensions.MakeSound(plr.TPlayer.position, 288, 62, 1f, -0.4f);
-                    Extensions.MakeSound(plr.TPlayer.position, 105, 105, 1f, -0.15f);
-                    Extensions.SpawnProjectile(plr.X + 16 + (plr.TPlayer.direction * 32), plr.Y + 16, plr.TPlayer.direction * 1, 0, ProjectileID.SharpTears, PunishDmg, PunishKB, plr.Index, 0f, 3f);
-                    Extensions.SpawnProjectile(plr.X + 16 + (plr.TPlayer.direction * 32), plr.Y + 16, plr.TPlayer.direction * 1, -0.3f, ProjectileID.SharpTears, (int)(PunishDmg * 0.80), PunishKB, plr.Index, 0f, 2f);
-                    Extensions.SpawnProjectile(plr.X + 16 + (plr.TPlayer.direction * 32), plr.Y + 16, plr.TPlayer.direction * 1, 0.3f, ProjectileID.SharpTears, (int)(PunishDmg * 0.80), PunishKB, plr.Index, 0f, 2f);
-                    Extensions.SpawnProjectile(plr.X + 16 + (plr.TPlayer.direction * 32), plr.Y + 16, plr.TPlayer.direction * 1, -0.9f, ProjectileID.SharpTears, (int)(PunishDmg * 0.60), PunishKB, plr.Index, 0f, 1f);
-                    Extensions.SpawnProjectile(plr.X + 16 + (plr.TPlayer.direction * 32), plr.Y + 16, plr.TPlayer.direction * 1, 0.9f, ProjectileID.SharpTears, (int)(PunishDmg * 0.60), PunishKB, plr.Index, 0f, 1f);
+                    Utils.MakeSound(plr.TPlayer.position, 288, 62, 1f, -0.4f);
+                    Utils.MakeSound(plr.TPlayer.position, 105, 105, 1f, -0.15f);
+                    Utils.SpawnProjectile(plr.X + 16 + (plr.TPlayer.direction * 32), plr.Y + 16, plr.TPlayer.direction * 1, 0, ProjectileID.SharpTears, PunishDmg, PunishKB, plr.Index, 0f, 3f);
+                    Utils.SpawnProjectile(plr.X + 16 + (plr.TPlayer.direction * 32), plr.Y + 16, plr.TPlayer.direction * 1, -0.3f, ProjectileID.SharpTears, (int)(PunishDmg * 0.80), PunishKB, plr.Index, 0f, 2f);
+                    Utils.SpawnProjectile(plr.X + 16 + (plr.TPlayer.direction * 32), plr.Y + 16, plr.TPlayer.direction * 1, 0.3f, ProjectileID.SharpTears, (int)(PunishDmg * 0.80), PunishKB, plr.Index, 0f, 2f);
+                    Utils.SpawnProjectile(plr.X + 16 + (plr.TPlayer.direction * 32), plr.Y + 16, plr.TPlayer.direction * 1, -0.9f, ProjectileID.SharpTears, (int)(PunishDmg * 0.60), PunishKB, plr.Index, 0f, 1f);
+                    Utils.SpawnProjectile(plr.X + 16 + (plr.TPlayer.direction * 32), plr.Y + 16, plr.TPlayer.direction * 1, 0.9f, ProjectileID.SharpTears, (int)(PunishDmg * 0.60), PunishKB, plr.Index, 0f, 1f);
                     break;
 
             }
@@ -188,7 +187,7 @@ namespace Abilities
         internal override void CycleLogic(TSPlayer plr)
         {
             TwilightCycles[plr.Name] += TwilightCycles[plr.Name] < 2 ? 1 : -TwilightCycles[plr.Name];
-            Extensions.SendFloatingMessage("Cycled the ability!", plr.TPlayer.position.X + 16, plr.TPlayer.position.Y - 16, 115, 10, 115, plr.Index);
+            Utils.SendFloatingMessage("Cycled the ability!", plr.TPlayer.position.X + 16, plr.TPlayer.position.Y - 16, 115, 10, 115, plr.Index);
         }
     }
 }

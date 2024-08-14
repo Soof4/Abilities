@@ -2,8 +2,6 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using TerrariaApi.Server;
 using TShockAPI;
-using Terraria.GameContent.Drawing;
-using Terraria.ID;
 
 namespace Abilities
 {
@@ -16,13 +14,13 @@ namespace Abilities
         public static void RespawnCooldownBuffAdder(SendDataEventArgs args)
         {
             if (args.MsgId != PacketTypes.PlayerSpawn ||
-                !Extensions.Cooldowns.ContainsKey((byte)args.number) ||
-                (DateTime.UtcNow - Extensions.Cooldowns[(byte)args.number]).TotalSeconds < 0)
+                !Utils.Cooldowns.ContainsKey((byte)args.number) ||
+                (DateTime.UtcNow - Utils.Cooldowns[(byte)args.number]).TotalSeconds < 0)
             {
                 return;
             }
 
-            TShock.Players[(byte)args.number].SetBuff(307, (int)((Extensions.CooldownLengths[(byte)args.number] - (DateTime.UtcNow - Extensions.Cooldowns[(byte)args.number]).TotalSeconds) * 60), true);
+            TShock.Players[(byte)args.number].SetBuff(307, (int)((Utils.CooldownLengths[(byte)args.number] - (DateTime.UtcNow - Utils.Cooldowns[(byte)args.number]).TotalSeconds) * 60), true);
         }
 
         /// <summary>
@@ -34,9 +32,9 @@ namespace Abilities
             HyperCrit.HyperCritActive[(byte)args.Player.whoAmI] = Math.Max(HyperCrit.HyperCritActive[(byte)args.Player.whoAmI] - 1, 0);
             if (isFactionAbility)
             {
-                if (Extensions.Random.Next(1, 101) > (HyperCrit.HyperCritActive[(byte)args.Player.whoAmI] / 2) + 4) return;
+                if (Utils.Random.Next(1, 101) > (HyperCrit.HyperCritActive[(byte)args.Player.whoAmI] / 2) + 4) return;
             }
-            else if (Extensions.Random.Next(1, 101) > (HyperCrit.HyperCritActive[(byte)args.Player.whoAmI] / 2) - 5) return;
+            else if (Utils.Random.Next(1, 101) > (HyperCrit.HyperCritActive[(byte)args.Player.whoAmI] / 2) - 5) return;
 
             int DMG = (int)(args.Damage * 1.25);
 

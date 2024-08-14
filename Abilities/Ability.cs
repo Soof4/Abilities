@@ -5,12 +5,19 @@ namespace Abilities
 {
     public abstract class Ability
     {
+        public delegate void StatsCalculator();
+
         internal protected int AbilityLevel = 0;
+
+        /// <summary>
+        /// Calculates the ability's stats for it's current level.
+        /// </summary>
+        public StatsCalculator UpdateStats = () => { };
 
         internal protected Ability(int abilityLevel)
         {
             AbilityLevel = abilityLevel;
-            CalculateProperties();
+            UpdateStats();
         }
 
         /// <summary>
@@ -24,16 +31,17 @@ namespace Abilities
         /// Casting an ability with higher or lower values than [1, 5], can result in buggy behavior.
         /// </para>
         /// </param>
-        public void Cast(TSPlayer plr, int cooldown, int abilityLevel = 1)
+        public void Cast(TSPlayer plr, int cooldown, int? abilityLevel = null)
         {
-            if (!Extensions.IsInCooldown((byte)plr.Index, cooldown))
+            if (!Utils.IsInCooldown((byte)plr.Index, cooldown))
             {
-                if (abilityLevel != AbilityLevel)
+                if (abilityLevel != null && abilityLevel != AbilityLevel)
                 {
-                    AbilityLevel = abilityLevel;
-                    CalculateProperties();
+                    AbilityLevel = (int)abilityLevel;
+                    UpdateStats();
                 }
-                Function(plr, cooldown, abilityLevel);
+
+                Function(plr, cooldown, AbilityLevel);
             }
         }
 
@@ -57,24 +65,6 @@ namespace Abilities
         internal abstract void PlayVisuals(params object[] args);
 
         /// <summary>
-        /// Ability's property calculations.
-        /// <para>
-        /// Since instances of abilities are kept and Cast method is called over and over for that instance.<br></br>
-        /// It is suggested to check if the abilityLevel argument of Cast method is the same as AbilityLevel of the instance.
-        /// </para>
-        /// </summary>
-        /// <example>
-        /// <code>
-        /// int abilityLevel = (int)args[0];
-        /// if (abilityLevel == AbilityLevel) {
-        ///     // modify the properties here
-        /// }
-        /// </code>
-        /// </example>
-        /// <param name="args">Arguments that might be used for the calculations.</param>
-        internal abstract void CalculateProperties();
-
-        /// <summary>
         /// Cycle method for dependents to use for cyclable abilities.
         /// </summary>
         /// <param name="plr">The player who wants to cycle their ability.</param>
@@ -89,10 +79,20 @@ namespace Abilities
         /// <param name="plr">Caster of the ability.</param>
         public void Cycle(TSPlayer plr)
         {
-            if (!Extensions.IsInCycleCooldown((byte)plr.Index))
+            if (!Utils.IsInCycleCooldown((byte)plr.Index))
             {
                 CycleLogic(plr);
             }
+        }
+
+        /// <summary>
+        /// Upgrades the ability to specified level and calls UpdateStats method.
+        /// </summary>
+        /// <param name="level">New level of the ability.</param>
+        public void Upgrade(int level)
+        {
+            AbilityLevel = level;
+            UpdateStats();
         }
     }
 }

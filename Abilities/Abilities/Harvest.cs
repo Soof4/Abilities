@@ -9,15 +9,14 @@ namespace Abilities
     {
         public int Damage, ProjSpawnInterval;
 
-        public Harvest(int abilityLevel) : base(abilityLevel) { }
-
-
-        internal override void CalculateProperties()
+        public Harvest(int abilityLevel) : base(abilityLevel)
         {
-            Damage = (int)(5 * AbilityLevel * (3 + Math.Pow(AbilityLevel, 5 / 2f) / 10f));
-            ProjSpawnInterval = (int)(1000 / Math.Sqrt(AbilityLevel + 1));
+            UpdateStats = () =>
+            {
+                Damage = (int)(5 * AbilityLevel * (3 + Math.Pow(AbilityLevel, 5 / 2f) / 10f));
+                ProjSpawnInterval = (int)(1000 / Math.Sqrt(AbilityLevel + 1));
+            };
         }
-
 
         internal override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {
@@ -41,9 +40,9 @@ namespace Abilities
                         }
                         loopsTillBuffLoop = 6;
                     }
-                    float randX = plr.X + 16 + Extensions.Random.Next(-64, 64);
-                    float randY = plr.Y + 16 + Extensions.Random.Next(-64, 64);
-                    Extensions.SpawnProjectile(randX, randY, 0, 0, ProjectileID.ScytheWhipProj, Damage, 4, plr.Index);
+                    float randX = plr.X + 16 + Utils.Random.Next(-64, 64);
+                    float randY = plr.Y + 16 + Utils.Random.Next(-64, 64);
+                    Utils.SpawnProjectile(randX, randY, 0, 0, ProjectileID.ScytheWhipProj, Damage, 4, plr.Index);
                     ms += ProjSpawnInterval;
                     loopsTillBuffLoop--;
                     await Task.Delay(ProjSpawnInterval);
