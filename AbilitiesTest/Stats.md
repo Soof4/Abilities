@@ -46,6 +46,13 @@ This will be written later on.
 | Spawn Interval | 0.71s | 0.58s | 0.50s | 0.45s | 0.41s |
 
 <br></br>
+### HyperCrit
+This will be written later on.
+| Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
+|-|-|-|-|-|-|
+| Uses | 50 | 60 | 70 | 80 | 90 |
+
+<br></br>
 ### IceGolem
 This will be written later on.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
@@ -104,6 +111,14 @@ This will be written later on.
 | Base Damage: | 50 | 84 | 126 | 176 | 234 |
 | Range: | 6.00 blocks | 6.00 blocks | 7.00 blocks | 8.00 blocks | 8.00 blocks |
 | Knockback: | 25 | 35 | 45 | 55 | 65 |
+
+<br></br>
+### SilentOrchestra
+This will be written later on.
+| Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
+|-|-|-|-|-|-|
+| Base Damage | 7 | 10 | 13 | 16 | 19 |
+| Base Ability Duration | 20s | 20s | 20s | 20s | 20s |
 
 <br></br>
 ### TheBound
