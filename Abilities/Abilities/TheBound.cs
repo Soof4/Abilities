@@ -20,6 +20,8 @@ namespace Abilities
                 HealAmount = AbilityLevel;
                 MaxDistance = 100 * 16;
             };
+
+            UpdateStats();
         }
 
         protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)

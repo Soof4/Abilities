@@ -20,6 +20,8 @@ namespace Abilities
                 Size = (int)(100 + (AbilityLevel - 1) * 10);
                 Knockback = (int)(25 + (AbilityLevel - 1) * 10);
             };
+
+            UpdateStats();
         }
 
         protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)

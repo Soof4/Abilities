@@ -15,6 +15,8 @@ namespace Abilities
             {
                 RangeInBlocks = 50 + AbilityLevel * 10;
             };
+
+            UpdateStats();
         }
 
         protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)

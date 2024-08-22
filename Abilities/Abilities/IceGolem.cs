@@ -13,6 +13,8 @@ namespace Abilities
             {
                 BuffDurationInTicks = 540 + 120 * AbilityLevel;
             };
+
+            UpdateStats();
         }
 
         protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)

@@ -38,6 +38,8 @@ namespace Abilities
                         break;
                 }
             };
+
+            UpdateStats();
         }
 
         protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)

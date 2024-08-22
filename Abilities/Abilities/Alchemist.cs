@@ -23,6 +23,9 @@ namespace Abilities
                 Pot3Dmg = (int)((8 + (AbilityLevel * 4)) * (1 + (AbilityLevel - 1) / 10f));
                 Pot4Duration = (int)180 + (AbilityLevel * 60);
             };
+
+            UpdateStats();
+
         }
 
         protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)

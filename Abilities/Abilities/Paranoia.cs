@@ -16,6 +16,8 @@ namespace Abilities
                 DurationInSecs = 4 + AbilityLevel;
                 RangeInBlocks = 25 + AbilityLevel * 10;
             };
+
+            UpdateStats();
         }
 
         protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)

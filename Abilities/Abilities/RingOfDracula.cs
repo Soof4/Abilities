@@ -10,7 +10,10 @@ namespace Abilities
     {
         public int RangeInBlocks = 24;
 
-        public RingOfDracula(int abilityLevel) : base(abilityLevel) { }
+        public RingOfDracula(int abilityLevel) : base(abilityLevel)
+        {
+            UpdateStats();
+        }
 
         protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
         {

@@ -58,6 +58,8 @@ namespace Abilities
                 R21_Dmg = (int)((60 + (AbilityLevel - 1) * 30) * (1 + (AbilityLevel - 1) / 5f));
                 R21_Count = (int)(3 + (AbilityLevel - 1) * 2);
             };
+
+            UpdateStats();
         }
 
         protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)

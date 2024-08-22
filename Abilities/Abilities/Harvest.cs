@@ -16,6 +16,8 @@ namespace Abilities
                 Damage = (int)(5 * AbilityLevel * (3 + Math.Pow(AbilityLevel, 5 / 2f) / 10f));
                 ProjSpawnInterval = (int)(1000 / Math.Sqrt(AbilityLevel + 1));
             };
+
+            UpdateStats();
         }
 
         protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)

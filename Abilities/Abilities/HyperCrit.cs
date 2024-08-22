@@ -18,6 +18,8 @@ namespace Abilities
             {
                 Uses = 50 + ((AbilityLevel - 1) * 10);
             };
+
+            UpdateStats();
         }
 
         protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)

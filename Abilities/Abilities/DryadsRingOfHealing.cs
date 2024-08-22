@@ -18,6 +18,8 @@ namespace Abilities
                 BuffDurationInTicks = 400 + 20 * AbilityLevel;
                 HealPercentage = 0.04 + AbilityLevel * 0.01;
             };
+
+            UpdateStats();
         }
 
         protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)

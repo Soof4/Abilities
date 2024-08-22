@@ -16,6 +16,8 @@ namespace Abilities
                 SpeedFactor = 9 + AbilityLevel;
                 Damage = 75 + 100 * AbilityLevel;
             };
+
+            UpdateStats();
         }
 
         protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)

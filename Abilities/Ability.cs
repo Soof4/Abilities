@@ -17,7 +17,6 @@ namespace Abilities
         protected Ability(int abilityLevel)
         {
             AbilityLevel = abilityLevel;
-            UpdateStats();
         }
 
         /// <summary>

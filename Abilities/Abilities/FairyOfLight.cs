@@ -20,6 +20,8 @@ namespace Abilities
                 BoltSpawnInterval = 400 * (10 - AbilityLevel) / 10;
                 DanceDmg = (int)((55 + (AbilityLevel - 1) * 20) * (1 + AbilityLevel / 10f));
             };
+
+            UpdateStats();
         }
 
         protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)

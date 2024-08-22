@@ -15,6 +15,8 @@ namespace Abilities
             {
                 DodgeDurationInSeconds = 3 + AbilityLevel * 0.2;
             };
+
+            UpdateStats();
         }
 
         protected override void Function(TSPlayer plr, int cooldown, int abilityLevel = 1)
