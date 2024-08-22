@@ -57,7 +57,7 @@ namespace AbilitiesTest
             {
                 IAbilityTest instance = (IAbilityTest)Activator.CreateInstance(test)!;
                 string table = $"### {test.Name.Remove(test.Name.Length - 4)}\n";
-                table += $"{instance.Description}\n";
+                table += $"{instance.Description.Replace("\n", "<br></br>")}\n";
                 table += Utils.GetPropertiesAsMarkupTable(instance.GetStatsAsListTill(5));
                 table += "\n<br></br>";
                 sw.WriteLine(table);

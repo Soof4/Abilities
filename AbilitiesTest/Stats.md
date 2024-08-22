@@ -6,13 +6,7 @@ Pumps adrenaline into your blood. Increases movement speed and damage of the pla
 
 <br></br>
 ### Alchemist
-Throws different kinds of potions around the player that lasts for a few seconds in their location:
-1: Heal Potion
-2: Harm Potion
-3: Vortex Potion
-4: Curse Potion
-5: Shield Potion
-6: Power Potion
+Throws different kinds of potions around the player that lasts for a few seconds in their location:<br></br>1: Heal Potion<br></br>2: Harm Potion<br></br>3: Vortex Potion<br></br>4: Curse Potion<br></br>5: Shield Potion<br></br>6: Power Potion
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
 | Thrown Potion Types | Heal, Damage, Vortex | Heal, Damage, Vortex, Curse | Heal, Damage, Vortex, Curse, Shield | Heal, Damage, Vortex, Curse, Shield, Power | Heal, Damage, Vortex, Curse, Shield, Power |
@@ -34,11 +28,7 @@ Summons a healing circle around the player. The circle heals everyone inside it 
 
 <br></br>
 ### FairyOfLight
-Cycles through 4 different sub-abilities:
-1: Ethereal Lance   -> Spawns horizontal ethereal lances near the player.
-2: Dash             -> Dashes towards the direction player is looking at, and creates projectiles behind the player which can damage enemies.
-3: Prismatic Bolts  -> Periodically spawns prismatic bolts around the player that target the nearby enemies.
-4: Sundance         -> Webs the player in the location and spawns projectiles that resemble Empress of Light's sundance attack.
+Cycles through 4 different sub-abilities:<br></br>1: Ethereal Lance   -> Spawns horizontal ethereal lances near the player.<br></br>2: Dash             -> Dashes towards the direction player is looking at, and creates projectiles behind the player which can damage enemies.<br></br>3: Prismatic Bolts  -> Periodically spawns prismatic bolts around the player that target the nearby enemies.<br></br>4: Sundance         -> Webs the player in the location and spawns projectiles that resemble Empress of Light's sundance attack.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
 | Ethereal Lance Damage | 55 | 78 | 104 | 133 | 165 |
@@ -140,10 +130,7 @@ Bound with the nearest player and get healed every second as long as the bound i
 
 <br></br>
 ### Twilight
-Cycles through 3 different sub-abilities:
-1: Brilliant Eyes   -> Get vision buffs and spawn projectiles around the player that target the nearby enemies.
-2: Judgement        -> Dazes the player for a bit and attacks enemies within a range. If an enemy dies after the attack, they'll spawn a projectile which will attack other enemies.
-3: Punishment       -> Creates an explosion near the player that damages enemies nearby and buffs the player for a few seconds.
+Cycles through 3 different sub-abilities:<br></br>1: Brilliant Eyes   -> Get vision buffs and spawn projectiles around the player that target the nearby enemies.<br></br>2: Judgement        -> Dazes the player for a bit and attacks enemies within a range. If an enemy dies after the attack, they'll spawn a projectile which will attack other enemies.<br></br>3: Punishment       -> Creates an explosion near the player that damages enemies nearby and buffs the player for a few seconds.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
 | Brilliant Eyes Damage | 11 | 18 | 26 | 35 | 45 |
