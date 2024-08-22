@@ -9,8 +9,7 @@
     "build": "vite build --outDir ../docs",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d ../docs"
+    "predeploy": "npm run build"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
