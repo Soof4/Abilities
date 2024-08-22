@@ -4,7 +4,11 @@ namespace AbilitiesTest.AbilityTests
 {
     public class FairyOfLightTest : IAbilityTest
     {
-        public string Description => "This will be written later on.";
+        public string Description => "Cycles through 4 different sub-abilities:" +
+            "\n1: Ethereal Lance   -> Spawns horizontal ethereal lances near the player." +
+            "\n2: Dash             -> Dashes towards the direction player is looking at, and creates projectiles behind the player which can damage enemies." +
+            "\n3: Prismatic Bolts  -> Periodically spawns prismatic bolts around the player that target the nearby enemies." +
+            "\n4: Sundance         -> Webs the player in the location and spawns projectiles that resemble Empress of Light's sundance attack.";
 
         public List<Property> GetStatsAsListTill(int level = 5)
         {

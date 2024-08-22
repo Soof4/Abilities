@@ -4,7 +4,7 @@ namespace AbilitiesTest.AbilityTests
 {
     public class MarthymrTest : IAbilityTest
     {
-        public string Description => "This will be written later on.";
+        public string Description => "Blow yourself up to damage enemies nearby with shockwave.";
 
         public List<Property> GetStatsAsListTill(int level = 5)
         {

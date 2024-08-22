@@ -4,7 +4,7 @@ namespace AbilitiesTest.AbilityTests
 {
     public class DryadsRingOfHealingTest : IAbilityTest
     {
-        public string Description => "This will be written later on.";
+        public string Description => "Summons a healing circle around the player. The circle heals everyone inside it and gives them Dryad's Blessing buff.";
         public List<Property> GetStatsAsListTill(int level = 5)
         {
             List<Property> ls = new List<Property>() {

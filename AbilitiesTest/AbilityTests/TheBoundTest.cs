@@ -4,7 +4,7 @@ namespace AbilitiesTest.AbilityTests
 {
     public class TheBoundTest : IAbilityTest
     {
-        public string Description => "This will be written later on.";
+        public string Description => "Bound with the nearest player and get healed every second as long as the bound is not broken.";
 
         public List<Property> GetStatsAsListTill(int level = 5)
         {

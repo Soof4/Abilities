@@ -3,7 +3,7 @@ namespace AbilitiesTest.AbilityTests
 {
     public class SetsBlessingTest : IAbilityTest
     {
-        public string Description => "This will be written later on.";
+        public string Description => "Turns you into sand which gives you immunity-frames for some amount of time.";
 
         public List<Property> GetStatsAsListTill(int level = 5)
         {

@@ -4,7 +4,7 @@ namespace AbilitiesTest.AbilityTests
 {
     public class RandomTeleportTest : IAbilityTest
     {
-        public string Description => "This will be written later on.";
+        public string Description => "Opens a teleportation portal to a random location for everyone around the caster.";
 
         public List<Property> GetStatsAsListTill(int level = 5)
         {

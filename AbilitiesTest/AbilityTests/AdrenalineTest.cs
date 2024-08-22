@@ -4,7 +4,7 @@ namespace AbilitiesTest.AbilityTests
 {
     public class AdrenalineTest : IAbilityTest
     {
-        public string Description => "This will be written later on.";
+        public string Description => "Pumps adrenaline into your blood. Increases movement speed and damage of the player.";
 
         public List<Property> GetStatsAsListTill(int level = 5)
         {

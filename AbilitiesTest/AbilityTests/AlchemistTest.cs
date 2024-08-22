@@ -4,7 +4,13 @@ namespace AbilitiesTest.AbilityTests
 {
     public class AlchemistTest : IAbilityTest
     {
-        public string Description => "This will be written later on.";
+        public string Description => "Throws different kinds of potions around the player that lasts for a few seconds in their location:" +
+        "\n1: Heal Potion" +
+        "\n2: Harm Potion" +
+        "\n3: Vortex Potion" +
+        "\n4: Curse Potion" +
+        "\n5: Shield Potion" +
+        "\n6: Power Potion";
 
         public List<Property> GetStatsAsListTill(int level = 5)
         {

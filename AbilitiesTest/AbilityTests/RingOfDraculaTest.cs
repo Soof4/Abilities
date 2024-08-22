@@ -4,7 +4,7 @@ namespace AbilitiesTest.AbilityTests
 {
     public class RingOfDraculaTest : IAbilityTest
     {
-        public string Description => "This will be written later on.";
+        public string Description => "Summons a circle around the player that chooses the enemy with highest hp and steals some health from it.";
 
         public List<Property> GetStatsAsListTill(int level = 5)
         {

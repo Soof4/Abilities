@@ -5,7 +5,7 @@ namespace AbilitiesTest.AbilityTests
 {
     public class WitchTest : IAbilityTest
     {
-        public string Description => "This will be written later on.";
+        public string Description => "Curse your enemies with debuffs by summoning an ancient magical circle.";
 
         public List<Property> GetStatsAsListTill(int level = 5)
         {

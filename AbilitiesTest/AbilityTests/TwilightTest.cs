@@ -4,7 +4,10 @@ namespace AbilitiesTest.AbilityTests
 {
     public class TwilightTest : IAbilityTest
     {
-        public string Description => "This will be written later on.";
+        public string Description => "Cycles through 3 different sub-abilities:" +
+            "\n1: Brilliant Eyes   -> Get vision buffs and spawn projectiles around the player that target the nearby enemies." +
+            "\n2: Judgement        -> Dazes the player for a bit and attacks enemies within a range. If an enemy dies after the attack, they'll spawn a projectile which will attack other enemies." +
+            "\n3: Punishment       -> Creates an explosion near the player that damages enemies nearby and buffs the player for a few seconds.";
 
         public List<Property> GetStatsAsListTill(int level = 5)
         {

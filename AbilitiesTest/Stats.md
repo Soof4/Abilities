@@ -1,12 +1,18 @@
 ### Adrenaline
-This will be written later on.
+Pumps adrenaline into your blood. Increases movement speed and damage of the player.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
 | Buffs Duration | 10.00s | 11.00s | 13.00s | 14.00s | 16.00s |
 
 <br></br>
 ### Alchemist
-This will be written later on.
+Throws different kinds of potions around the player that lasts for a few seconds in their location:
+1: Heal Potion
+2: Harm Potion
+3: Vortex Potion
+4: Curse Potion
+5: Shield Potion
+6: Power Potion
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
 | Thrown Potion Types | Heal, Damage, Vortex | Heal, Damage, Vortex, Curse | Heal, Damage, Vortex, Curse, Shield | Heal, Damage, Vortex, Curse, Shield, Power | Heal, Damage, Vortex, Curse, Shield, Power |
@@ -20,7 +26,7 @@ This will be written later on.
 
 <br></br>
 ### DryadsRingOfHealing
-This will be written later on.
+Summons a healing circle around the player. The circle heals everyone inside it and gives them Dryad's Blessing buff.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
 | Healing Percentage | 5.00% | 6.00% | 7.00% | 8.00% | 9.00% |
@@ -28,7 +34,11 @@ This will be written later on.
 
 <br></br>
 ### FairyOfLight
-This will be written later on.
+Cycles through 4 different sub-abilities:
+1: Ethereal Lance   -> Spawns horizontal ethereal lances near the player.
+2: Dash             -> Dashes towards the direction player is looking at, and creates projectiles behind the player which can damage enemies.
+3: Prismatic Bolts  -> Periodically spawns prismatic bolts around the player that target the nearby enemies.
+4: Sundance         -> Webs the player in the location and spawns projectiles that resemble Empress of Light's sundance attack.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
 | Ethereal Lance Damage | 55 | 78 | 104 | 133 | 165 |
@@ -39,7 +49,7 @@ This will be written later on.
 
 <br></br>
 ### Harvest
-This will be written later on.
+Harvest the enemies nearby the player with Reaper's dark magic.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
 | Damage | 15 | 35 | 68 | 124 | 214 |
@@ -61,7 +71,7 @@ This will be written later on.
 
 <br></br>
 ### Marthymr
-This will be written later on.
+Blow yourself up to damage enemies nearby with shockwave.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
 | Damage | 175 | 275 | 375 | 475 | 575 |
@@ -84,21 +94,21 @@ This will be written later on.
 
 <br></br>
 ### RandomTeleport
-This will be written later on.
+Opens a teleportation portal to a random location for everyone around the caster.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
 | Range | 60 blocks | 70 blocks | 80 blocks | 90 blocks | 100 blocks |
 
 <br></br>
 ### RingOfDracula
-This will be written later on.
+Summons a circle around the player that chooses the enemy with highest hp and steals some health from it.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
 | Range | 24 blocks | 24 blocks | 24 blocks | 24 blocks | 24 blocks |
 
 <br></br>
 ### SetsBlessing
-This will be written later on.
+Turns you into sand which gives you immunity-frames for some amount of time.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
 | Duration | 3.20s | 3.40s | 3.60s | 3.80s | 4.00s |
@@ -122,7 +132,7 @@ This will be written later on.
 
 <br></br>
 ### TheBound
-This will be written later on.
+Bound with the nearest player and get healed every second as long as the bound is not broken.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
 | Heal Amount | 1 | 2 | 3 | 4 | 5 |
@@ -130,7 +140,10 @@ This will be written later on.
 
 <br></br>
 ### Twilight
-This will be written later on.
+Cycles through 3 different sub-abilities:
+1: Brilliant Eyes   -> Get vision buffs and spawn projectiles around the player that target the nearby enemies.
+2: Judgement        -> Dazes the player for a bit and attacks enemies within a range. If an enemy dies after the attack, they'll spawn a projectile which will attack other enemies.
+3: Punishment       -> Creates an explosion near the player that damages enemies nearby and buffs the player for a few seconds.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
 | Brilliant Eyes Damage | 11 | 18 | 26 | 35 | 45 |
@@ -143,7 +156,7 @@ This will be written later on.
 
 <br></br>
 ### Witch
-This will be written later on.
+Curse your enemies with debuffs by summoning an ancient magical circle.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
 | Range | 16 blocks | 18 blocks | 20 blocks | 22 blocks | 24 blocks |

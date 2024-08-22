@@ -4,7 +4,7 @@ namespace AbilitiesTest.AbilityTests
 {
     public class HarvestTest : IAbilityTest
     {
-        public string Description => "This will be written later on.";
+        public string Description => "Harvest the enemies nearby the player with Reaper's dark magic.";
 
         public List<Property> GetStatsAsListTill(int level = 5)
         {
