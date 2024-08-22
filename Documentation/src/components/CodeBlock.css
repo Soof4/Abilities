@@ -1,0 +1,12 @@
+.rounded-div {
+    background-color: #eef5fc;
+    border: 2px solid #979da2;
+    border-radius: 0.375rem; 
+    overflow: auto; 
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+pre {
+  margin: 0 !important;
+}

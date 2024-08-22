@@ -1,0 +1,37 @@
+.statsName {
+    font-size: x-large;
+}
+
+.statsDescription {
+
+}
+
+.statTable {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #707070;
+}
+
+.statsHead {
+    background-color: #f4f4f4;
+}
+
+.statsHeadCell {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.statsCell {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.statsBody {
+    border: 1px;
+}
+
+.statsRow {
+}
+
