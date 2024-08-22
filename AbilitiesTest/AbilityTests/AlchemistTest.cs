@@ -6,7 +6,7 @@ namespace AbilitiesTest.AbilityTests
     {
         public string Description => "This will be written later on.";
 
-        public string GetStatsTableTill(int level = 5)
+        public List<Property> GetStatsAsListTill(int level = 5)
         {
             List<Property> ls = new List<Property>() {
                 new Property("Thrown Potion Types", new List<string>()),
@@ -50,7 +50,7 @@ namespace AbilitiesTest.AbilityTests
                 }
             }
 
-            return Utils.GetPropertiesAsMarkupTable(ls);
+            return ls;
         }
 
         public void Run(int level)

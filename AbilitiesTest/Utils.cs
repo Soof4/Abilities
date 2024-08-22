@@ -54,12 +54,57 @@ namespace AbilitiesTest
 
             return table;
         }
+
+        public static string GetPropertiesAsHTMLTable(List<Property> ls)
+        {
+            string table = "<table class=\"statTable\">";
+
+            // Find the property with highest number of levels
+            int maxLevelNum = 0;
+            foreach (Property p in ls)
+            {
+                if (p.Values.Count > maxLevelNum)
+                {
+                    maxLevelNum = p.Values.Count;
+                }
+            }
+
+            // Concat the levels row
+            table += "\n  <thead class=\"statsHead\">";
+            table += "\n    <th class=\"statsHeadCell\">Propeties</th>";
+            for (int i = 1; i <= maxLevelNum; i++)
+            {
+                table += $"\n    <th class=\"statsHeadCell\">Level {i}</th>";
+            }
+            table += "\n  </thead>";
+
+            // Concat the property rows
+            table += "\n  <tbody class=\"statsBody\">";
+            foreach (Property p in ls)
+            {
+                table += "\n    <tr class=\"statsRow\">";
+                table += $"\n    <td class=\"statsCell\">{p.Name}</td>";
+
+                int i = 1;
+
+                foreach (string v in p.Values)
+                {
+                    table += $"\n      <td class=\"statsCell\">{v}</td>";
+                    i++;
+                }
+
+                for (; i <= maxLevelNum; i++)
+                {
+                    table += $"\n      <td class=\"statsCell\">N/A</td>";
+                }
+
+                table += "\n    </tr>";
+            }
+
+            table += "\n  </tbody>";
+            table += "\n</table>";
+
+            return table;
+        }
     }
 }
-
-
-/*
-                  lvl 1 : lvl 2 : lvl 3 : lvl 4 : lvl 5 : ...
-Heal Percentage : 0.05% : 0.06% : 0.07% : 0.08% : 0.09% : ...
-Buff duration   : 2s    : 3s    : 4s    : 5s    : 6s    : ...
-*/

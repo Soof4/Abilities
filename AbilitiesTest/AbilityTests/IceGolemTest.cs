@@ -6,7 +6,7 @@ namespace AbilitiesTest.AbilityTests
     {
         public string Description => "This will be written later on.";
 
-        public string GetStatsTableTill(int level = 5)
+        public List<Property> GetStatsAsListTill(int level = 5)
         {
             List<Property> ls = new List<Property>() {
                 new Property("Buffs Duration", new List<string>()),
@@ -19,7 +19,7 @@ namespace AbilitiesTest.AbilityTests
                 ls[0].Values.Add($"{ability.BuffDurationInTicks / 60.0:F2}s");
             }
 
-            return Utils.GetPropertiesAsMarkupTable(ls);
+            return ls;
         }
 
         public void Run(int level)

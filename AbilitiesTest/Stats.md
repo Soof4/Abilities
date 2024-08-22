@@ -108,9 +108,9 @@ This will be written later on.
 This will be written later on.
 | Properties | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |-|-|-|-|-|-|
-| Base Damage: | 50 | 84 | 126 | 176 | 234 |
-| Range: | 6.00 blocks | 6.00 blocks | 7.00 blocks | 8.00 blocks | 8.00 blocks |
-| Knockback: | 25 | 35 | 45 | 55 | 65 |
+| Base Damage | 50 | 84 | 126 | 176 | 234 |
+| Range | 6.00 blocks | 6.00 blocks | 7.00 blocks | 8.00 blocks | 8.00 blocks |
+| Knockback | 25 | 35 | 45 | 55 | 65 |
 
 <br></br>
 ### SilentOrchestra

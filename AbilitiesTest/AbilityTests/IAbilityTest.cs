@@ -5,6 +5,6 @@ namespace AbilitiesTest.AbilityTests
         public string Description { get; }
         public void Run(int level);
         public void RunTill(int level = 5);
-        public string GetStatsTableTill(int level = 5);
+        public List<Property> GetStatsAsListTill(int level = 5);
     }
 }
