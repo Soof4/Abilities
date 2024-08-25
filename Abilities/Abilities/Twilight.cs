@@ -3,12 +3,8 @@ using TShockAPI;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Microsoft.Xna.Framework;
-using Newtonsoft.Json;
-using Terraria.Audio;
-using Org.BouncyCastle.Asn1.X509;
-//using System.Drawing;
 
-namespace Abilities
+namespace Abilities.Abilities
 {
     // Author of this ability is @strangelad on Discord
     public class Twilight : Ability

@@ -1,4 +1,4 @@
-namespace Abilities
+namespace Abilities.Enums
 {
 
     public enum AbilityType

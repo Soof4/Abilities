@@ -2,7 +2,7 @@ using Terraria;
 using Terraria.GameContent.Drawing;
 using TShockAPI;
 
-namespace Abilities
+namespace Abilities.Abilities
 {
 
     public class Pentagram : Ability

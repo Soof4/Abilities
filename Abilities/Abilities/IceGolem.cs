@@ -1,7 +1,7 @@
 using Terraria.ID;
 using TShockAPI;
 
-namespace Abilities
+namespace Abilities.Abilities
 {
     public class IceGolem : Ability
     {

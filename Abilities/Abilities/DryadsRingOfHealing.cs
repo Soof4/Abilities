@@ -4,7 +4,7 @@ using Terraria.ID;
 using TShockAPI;
 using dw = Terraria.GameContent.Drawing;
 
-namespace Abilities
+namespace Abilities.Abilities
 {
     public class DryadsRingOfHealing : Ability
     {

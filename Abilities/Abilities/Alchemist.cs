@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.GameContent.Drawing;
 using Microsoft.Xna.Framework;
 
-namespace Abilities
+namespace Abilities.Abilities
 {
     // Author of this ability is @strangelad on Discord
     public class Alchemist : Ability
@@ -16,12 +16,12 @@ namespace Abilities
         {
             UpdateStats = () =>
             {
-                PotionSize = (double)1 + (AbilityLevel / 2.0);
-                PotionLifetime = (double)1 + (AbilityLevel / 2.5);
-                Pot1Heal = (int)8 + (AbilityLevel * 4);
-                Pot2Dmg = (int)((15 + (AbilityLevel * 9)) * (1 + (AbilityLevel - 1) / 5f));
-                Pot3Dmg = (int)((8 + (AbilityLevel * 4)) * (1 + (AbilityLevel - 1) / 10f));
-                Pot4Duration = (int)180 + (AbilityLevel * 60);
+                PotionSize = 1 + AbilityLevel / 2.0;
+                PotionLifetime = 1 + AbilityLevel / 2.5;
+                Pot1Heal = 8 + AbilityLevel * 4;
+                Pot2Dmg = (int)((15 + AbilityLevel * 9) * (1 + (AbilityLevel - 1) / 5f));
+                Pot3Dmg = (int)((8 + AbilityLevel * 4) * (1 + (AbilityLevel - 1) / 10f));
+                Pot4Duration = 180 + AbilityLevel * 60;
             };
 
             UpdateStats();

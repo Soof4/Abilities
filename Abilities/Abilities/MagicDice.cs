@@ -3,9 +3,8 @@ using TShockAPI;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Microsoft.Xna.Framework;
-using Org.BouncyCastle.Asn1.X509;
 
-namespace Abilities
+namespace Abilities.Abilities
 {
     // Author of this ability is @strangelad on Discord
     public class MagicDice : Ability

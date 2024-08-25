@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.GameContent.Drawing;
 using Microsoft.Xna.Framework;
 
-namespace Abilities
+namespace Abilities.Abilities
 {
     public class RingOfDracula : Ability
     {

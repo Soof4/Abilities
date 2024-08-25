@@ -1,11 +1,8 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
-using IL.Terraria.GameContent.UI.ResourceSets;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using TShockAPI;
 
-namespace Abilities
+namespace Abilities.Abilities
 {
     public class TheBound : Ability
     {

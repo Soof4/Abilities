@@ -3,7 +3,7 @@ using TShockAPI;
 using Terraria;
 using Terraria.GameContent.Drawing;
 
-namespace Abilities
+namespace Abilities.Abilities
 {
     public class Paranoia : Ability
     {
