@@ -1,4 +1,7 @@
 # Abilities
+
+If you want to read this in another language: [Spanish](https://github.com/Soof4/Abilities/blob/main/README_SPANISH.md)
+
 A dependency for TShock plugins. Adds various abilities:
 1. [DryadsRingOfHealing](https://github.com/Soof4/Abilities/blob/e4992318375c43c6765ffb1b324563f35acb9422/Ability-Descriptions.txt#L1-L2)
 2. [RingOfDracula](https://github.com/Soof4/Abilities/blob/e4992318375c43c6765ffb1b324563f35acb9422/Ability-Descriptions.txt#L5-L6)
