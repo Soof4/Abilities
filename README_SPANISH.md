@@ -1,4 +1,4 @@
-# Abilidades
+# Abilities
 
 Idioma: [English](https://github.com/Soof4/Abilities/blob/main/README.md), Spanish
 
