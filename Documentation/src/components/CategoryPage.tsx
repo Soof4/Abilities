@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const CategoryPage = () => {
   return (
     <div
@@ -6,11 +8,15 @@ const CategoryPage = () => {
     >
       <p className="fs-5 fw-medium navbar-nav">Getting Started</p>
       <ul className="list-group list-group-flush navbar-nav">
-        <li className="list-group-item">What is this?</li>
-        <li className="list-group-item">Example project</li>
-        <li className="list-group-item">A third item</li>
-        <li className="list-group-item">A fourth item</li>
-        <li className="list-group-item">And a fifth one</li>
+        <Link to="/" className="list-group-item">
+          What is this?
+        </Link>
+        <Link to="/ExampleProject" className="list-group-item">
+          Example project
+        </Link>
+        <Link to="/Stats" className="list-group-item">
+          Stats
+        </Link>
       </ul>
     </div>
   );
