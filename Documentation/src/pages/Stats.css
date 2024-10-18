@@ -10,8 +10,13 @@
     border-collapse: separate;
     border-spacing: 0;
     border-radius: 10px;
-    overflow: hidden;
     border: 2px solid #707070;
+    white-space: wrap;
+  }
+
+.statsTableWrapper {
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 .statsHead {
