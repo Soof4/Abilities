@@ -42,6 +42,11 @@ namespace Abilities
                    Main.tile[x + 1, y + 2].collisionType == 0;
         }
 
+        public static int TurnHitboxIntoACircleSortOf(int width, int height)
+        {
+            return (width + height) / 4;
+        }
+
         public static int SpawnProjectile(float posX, float posY, float speedX, float speedY, int type,
             int damage, float knockback, int owner = -1, float ai_0 = 0, float ai_1 = 0, float ai_2 = 0)
         {
